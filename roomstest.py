@@ -6,4 +6,4 @@ print rooms
 print
 print rooms['Entry']['features'][0]
 print 
-print rooms['Entry'][north_room]
+print rooms['Entry']['north_room']
