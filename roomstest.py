@@ -7,3 +7,9 @@ print
 print rooms['Entry']['features'][0]
 print 
 print rooms['Entry']['north_room']
+print
+print rooms['Main Passage']['features']
+print
+print rooms['Entry']['features']
+print
+print rooms['Entry']['features'][1]['desc']
