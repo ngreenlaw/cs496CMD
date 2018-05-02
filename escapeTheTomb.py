@@ -1,7 +1,9 @@
 #This is the main file for running the game
+from __future__ import print_function
+import json
+from watson_developer_cloud import ConversationV1
 import sys
 import egyptclass as ec
-import json
 
 #Variables to hold things such that they are easier to edit
 ITEM_FILES_VAR = ["item1.txt", "item2.txt"]; #would like to change this to reading off of a file that contains the names of all the files
@@ -107,10 +109,10 @@ def createRoom(files_list):
 		
 		#create the object HERE IS WHERE TO EDIT
 		object_created = ec.Room(fj['name'], fj['descL'], fj['descS'], fj['descAdd'], fj['items'], fj['features'], fj['locked']);
-		object_created.setNorthRoom(fj['north_room'];
-		object_created.setSouthRoom(fj['south_room'];
-		object_created.setEastRoom(fj['east_room'];
-		object_created.setWestRoom(fj['west_room'];
+		object_created.setNorthRoom(fj['north_room']);
+		object_created.setSouthRoom(fj['south_room']);
+		object_created.setEastRoom(fj['east_room']);
+		object_created.setWestRoom(fj['west_room']);
 		list_of_objects.append(object_created);
 		
 	return list_of_objects;
@@ -132,15 +134,48 @@ def createPlayer(gm, items):
 	return gm;
 
 #functions to get the input and parse it
+class DictQuery(dict):
+    def get(self, path, default = None):
+        keys = path.split("/")
+        val = None
+        
+        for key in keys:
+            if val:
+                if isinstance(val, list):
+                    val = [ v.get(key, default) if v else None for v in val]
+                else:
+                    val = val.get(key, default)
+            else:
+                val = dict.get(self, key, default)
+            
+            if not val:
+                break;
+        return val
+
+conversation = ConversationV1(
+    username='57db025b-2f83-45b6-90e9-4890d0d3e616',
+    password='COcz1TPoSKQD',
+    version='2018-04-25')
+workspace_id = '2c730ca5-72d1-44d0-a1d9-a12327957f18'
+
 def getInput():
 	#FILL IN THE FUNCTIONS WITH THE NATURAL LANGUAGE PARSER OR IMPORT THE MODULE
 	#RETURNS THE TAG TO BE PROCESSED
-        print("input");
+    text = ''
+    response = ''
+    while text != 'quit':
+        text = raw_input('>> ')
+        response = conversation.message(
+                                    workspace_id=workspace_id, input={
+                                    'text': text
+                                    })
+        data = json.dumps(response)
+        return(", ".join(DictQuery(response).get('intents/intent')))    
 
 #functions to resolve the action and update necessary variables
 def processTag(returned_tag, player):
 	#Set up the needed variables
-	cr = player.getCurrentRoom();
+	'''cr = player.getCurrentRoom();
 	
 	#set up the items list
 	items_in_room = cr.getItems();
@@ -149,22 +184,23 @@ def processTag(returned_tag, player):
 		items_in_room.append(i);
 	all_items = [];
 	for it in items_in_room:
-		all_items.append("Look " + it.getName());
-	
+		all_items.append("look " + it.getName());
+	'''
 	#Set up the variables that will execute certain functions
-	direction = ["North", "South", "East", "West"];
-	look = "Look";
-	look_at_item = all_items;
+	direction = ["north", "south", "east", "west"];
+	look = "look";
+	'''look_at_item = all_items;'''
 	
 	
 	#Process the tag based on what is returned, includes the verbs used in the game
 	
 	#Move Room if the returned Tag is a direction
 	if returned_tag in direction:
-		player.moveRoom(returned_tag);
-	
+		#player.moveRoom(returned_tag);
+		print("Move Room "+ returned_tag);
+		exit();
 	#Display the description if the returned tag is look
-	elif returned_tag == look:
+	'''elif returned_tag == look:
 		cr.displayDescription();
 		
 	#Display the description if the returned tag is look item
@@ -180,7 +216,7 @@ def processTag(returned_tag, player):
 	#...
 	
 	else:
-		print("You cannot do that");
+		print("You cannot do that");'''
 def main():
 	
 	#Start Main Menu, until a result of save, load or exit is given, repeat asking for input
@@ -214,6 +250,10 @@ def main():
 	elif get_main_menu_result == 1:
 		#BEGIN GAME LOADING
 		print("Loading Game");
+		#TESTING THE PARSER, WILL REMOVE
+		player = ec.Player(90,None);
+		input_given = getInput();
+		processTag(input_given,player);
                 
 	else:
 		print("DEBUG - SOMETHING WENT WRONG IN THE MAIN MENU, THIS SHOULD NOT HAPPEN");
