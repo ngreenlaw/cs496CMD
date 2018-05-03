@@ -170,7 +170,7 @@ def getInput():
                                     'text': text
                                     })
         data = json.dumps(response)
-        return(", ".join(DictQuery(response).get('intents/intent')))    
+        return(", ".join(DictQuery(response).get('output/text')))    
 
 #functions to resolve the action and update necessary variables
 def processTag(returned_tag, player):
