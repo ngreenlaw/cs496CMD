@@ -6,8 +6,8 @@ import sys
 import egyptclass as ec
 
 #Variables to hold things such that they are easier to edit
-ITEM_FILES_VAR = ["item1.txt", "item2.txt"]; #would like to change this to reading off of a file that contains the names of all the files
-FEATURE_FILES_VAR = ["feature1.txt", "feature2.txt"];
+ITEM_FILES_VAR = ["items.json"]; #would like to change this to reading off of a file that contains the names of all the files
+FEATURE_FILES_VAR = ["features.json"];
 ROOM_FILES_VAR = ["room1.txt", "room2.txt"];
 GAME_MANAGER_FILE_VAR = "gm.txt";
 PLAYER_FILE_VAR = "player.txt";
@@ -26,6 +26,23 @@ def mainMenu():
 		return 2;
 
 #----------------------------------------CREATE GET ITEM/FEATURE/ROOM FROM NAME FUNCTIONS AND UPDATE THE OTEHR FUNCTIONS
+def getItemFromName(list, item):
+	for i in range(0, len(list)):
+		if item == i.name:
+			return i;
+	return 1;
+	
+def getFeatureFromName(list, feature):
+	for i in range(0, len(list)):
+		if feature == i.name:
+			return i;
+	return 1;
+	
+def getRoomFromName(list, room):
+	for i in range(0, len(list)):
+		if item == i.room:
+			return i;
+	return 1;
 		
 #function to create the items
 def createItem(files_list):
@@ -36,10 +53,11 @@ def createItem(files_list):
 	for fi in files_list:
 		f = open(fi, "r");
 		rf = f.read();
-		fj = json.loads(s);
+		fj = json.loads(rf);
 		
 		#create the object HERE IS WHERE TO EDIT
-		object_created = ec.Item(fj['name'], fj['desc']);
+	for f_item in fj:
+		object_created = ec.Item(f_item['name'], f_item['desc']);
 		list_of_objects.append(object_created);
 		
 	return list_of_objects;
@@ -49,14 +67,16 @@ def createFeature(files_list):
 	#FIX BASED ON WHAT THE JSON FILE IS
 	object_created = None;
 	list_of_objects = [];
+	
 	#read the files
 	for fi in files_list:
 		f = open(fi, "r");
 		rf = f.read();
-		fj = json.loads(s);
+		fj = json.loads(rf);
 		
-		#create the object HERE IS WHERE TO EDIT
-		object_created = ec.Feature(fj['name'], fj['desc'], fj['descMod'], fj['usage']);
+	#create the object HERE IS WHERE TO EDIT
+	for f_feature in fj:
+		object_created = ec.Feature(f_feature['name'], f_feature['desc'], f_feature['descMod'], f_feature['usage']);
 		list_of_objects.append(object_created);
 		
 	return list_of_objects;
@@ -105,7 +125,7 @@ def createRoom(files_list):
 	for fi in files_list:
 		f = open(fi, "r");
 		rf = f.read();
-		fj = json.loads(s);
+		fj = json.loads(rf);
 		
 		#create the object HERE IS WHERE TO EDIT
 		object_created = ec.Room(fj['name'], fj['descL'], fj['descS'], fj['descAdd'], fj['items'], fj['features'], fj['locked']);
@@ -170,27 +190,23 @@ def getInput():
                                     'text': text
                                     })
         data = json.dumps(response)
-        return(", ".join(DictQuery(response).get('output/text')))    
+        return(", ".join(DictQuery(response).get('output/text')))     
 
 #functions to resolve the action and update necessary variables
 def processTag(returned_tag, player):
 	#Set up the needed variables
-	'''cr = player.getCurrentRoom();
+	cr = player.getCurrentRoom();
 	
 	#set up the items list
 	items_in_room = cr.getItems();
 	items_in_inventory = player.getInventory();
 	for i in items_in_inventory:
-		items_in_room.append(i);
-	all_items = [];
-	for it in items_in_room:
-		all_items.append("look " + it.getName());
-	'''
+		items_in_room.append(i.getName());
+	
 	#Set up the variables that will execute certain functions
 	direction = ["north", "south", "east", "west"];
 	look = "look";
-	'''look_at_item = all_items;'''
-	
+	look_at_item = items_in_room;
 	
 	#Process the tag based on what is returned, includes the verbs used in the game
 	
@@ -200,7 +216,7 @@ def processTag(returned_tag, player):
 		print("Move Room "+ returned_tag);
 		exit();
 	#Display the description if the returned tag is look
-	'''elif returned_tag == look:
+	elif returned_tag == look:
 		cr.displayDescription();
 		
 	#Display the description if the returned tag is look item
@@ -216,7 +232,7 @@ def processTag(returned_tag, player):
 	#...
 	
 	else:
-		print("You cannot do that");'''
+		print("You cannot do that");
 def main():
 	
 	#Start Main Menu, until a result of save, load or exit is given, repeat asking for input
@@ -232,7 +248,7 @@ def main():
 		#Create items for the whole game
 		items = createItem(ITEM_FILES_VAR);
 		
-		#Create features for the whole game
+		#Create items for the whole game
 		features = createFeature(FEATURE_FILES_VAR);
 		
 		#Create rooms for the whole game

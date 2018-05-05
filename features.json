@@ -1,0 +1,90 @@
+[
+	{
+		"name": "Left hieroglyphs", 
+		"desc": "On the left side of the room the hieroglyphs says, 'Intruders beware crushing death and grief, soaked with blood of the trespassing thief'",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Right hieroglyphs", 
+		"desc": "On the right side of the room the hieroglyphs says 'The key to my return lies within the heart of the underworld'",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Exit", 
+		"desc": "There is a large stone wheel blocking the exit.",
+		"descMod": "The large stone wheel seems to be moved out of the way.",
+		"usage": ""
+	},
+	{
+		"name": "Puzzle", 
+		"desc": "Upon further investigation of the wall you notice that it's a sequence of pictures that proceed a recessed cylinder in the wall. The sequence is 3 Bulls, 1 Eagle, 4 Lions, 1 Sun.", 
+		"descMod": "The cylinder - consists of 0 to 9 Ox",
+		"usage": ""
+	},
+	{
+		"name": "Stone door", 
+		"desc": "A small stone door that is set in the middle of the wall.",
+		"descMod": "The small stone door seems to be open now.",
+		"usage": ""
+	},
+	{
+		"name": "Door 1",
+		"descTrue": "The giant stone door to your left is closed." ,
+		"descFalse":  "The giant stone door to your left is open.",
+		"closed": False,
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Door 2",
+		"descTrue": "The giant stone door to your right is closed.",
+		"descFalse": "The giant stone door to your right is open.",
+		"closed": False,
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Odd hole", 
+		"desc": "As you look at the wall more closely, you notice the odd placement of the holes on the wall",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Door switches", 
+		"desc": "The door has 4 switches located on it, all set in the up position.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Falcon carving", 
+		"desc": "An ornate wall with the carving of a falcon on it.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Lettered floor", 
+		"desc": "A floor layed out in a grid like pattern with different letters on it. ",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Statue of Osiris", 
+		"desc": "Looks like small pressure plates on the head, chest and stomach of the statue.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Statue of Horus", 
+		"desc": "Looks like small pressure plates on the head, chest and stomach of the statue.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Statue of Anubis", 
+		"desc": "Looks like small pressure plates on the head, chest and stomach of the statue.",
+		"descMod": "",
+		"usage": ""
+	}
+]

@@ -168,6 +168,10 @@ class Room:
 	#Function that returns the features of the room
 	def getFeatures(self):
 		return self.features;
+		
+	def setFeatures(self, feat):
+		self.features = feat;
+		return 0;
 	
 	#Function that removes a feature from the room using its' id, returns 0 if successful and 1 if there is no feature
 	def removeFeature(self, feature_to_remove):
@@ -248,7 +252,7 @@ class Room:
 				return self.getModifiedDescription();
 	
 	#Function to initialize a Room object, takes id, long desc, short desc, additional desc, items, and features 
-	def __init__(self, na, ld, sd, ad, it, fe, lk):
+	def __init__(self, na, ld, sd, ad, it, lk):
 		self.setName(na);
 		self.long_description = ld;
 		self.short_description = sd;
