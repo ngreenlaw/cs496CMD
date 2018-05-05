@@ -37,10 +37,6 @@ room1["Entry"] = {
 		"descMod": "",
 		"usage": ""
 	}],
-	#"features": "hi", "there",
-	#features['1'] = {"hieroglyphs sefsef"} features['2'] = {"soaked with"}, 
-	 
-	#"features": "On the left side of the room the hieroglyphs says 'Intruders beware crushing death and grief, soaked with blood of the trespassing thief'", "On the right side of the room the hieroglyphs says 'The key to my return lies within the heart of the underworld'",
 	"visited": False,
 	"north_room": "Main Passage",
 	"south_room": "",
