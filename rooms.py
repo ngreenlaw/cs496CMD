@@ -16,27 +16,6 @@ room1["Entry"] = {
 	"descMod": "",
 	"descS": "You are in the entry of the tomb. There is a doorway in front of you.",
 	"items": "",
-	"features": [
-	{
-		"name": "Left hieroglyphs", 
-		"desc": "On the left side of the room the hieroglyphs says, 'Intruders beware crushing death and grief, soaked with blood of the trespassing thief'",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Right hieroglyphs", 
-		"desc": "On the right side of the room the hieroglyphs says, 'The key to my return lies within the heart of the underworld'",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Exit",
-		"descFalse": "There is a large stone wheel blocking the exit.",
-		"descTrue": "The large stone wheel seems to be moved out of the way.",
-		"blocking": False,
-		"descMod": "",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "Main Passage",
 	"south_room": "",
@@ -50,37 +29,6 @@ room2["Main Passage"] =	{
 	"descMod": "",
 	"descS": "On the wall in front of you there is what looks like a large cylinder with different markings on it.",
 	"items": "",
-	"features": [
-	{
-		"name": "Puzzle", 
-		"desc": "Upon further investigation of the wall you notice that it's a sequence of pictures that proceed a recessed cylinder in the wall. The sequence is 3 Bulls, 1 Eagle, 4 Lions, 1 Sun.",
-		"descCyl": "The cylinder - consists of 0 to 9 Ox", 
-		"descMod": "",
-		"usage": ""
-	}, 
-	{
-		"name": "Stone door", 
-		"desc": "A small stone door that is set in the middle of the wall.",
-		"descOpen": "The small stone door seems to be open now.",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Door 1",
-		"descTrue": "The giant stone door to your left is closed." ,
-		"descFalse":  "The giant stone door to your left is open.",
-		"closed": False,
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Door 2",
-		"descTrue": "The giant stone door to your right is closed.",
-		"descFalse": "The giant stone door to your right is open.",
-		"closed": False,
-		"descMod": "",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "",
 	"south_room": "Entry",
@@ -95,19 +43,6 @@ room3["Antechamber 1"] = {
 	"descMod": "",
 	"descS": "Upon entering the chamber you notice a door right in front of you, there is nothing in the chamber except that the walls are covered in hieroglyphs.",
 	"items": "",
-	"features": [
-	{
-		"name": "Odd hole", 
-		"desc": "As you look at the wall more closely, you notice the odd placement of the holes on the wall",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Door switches", 
-		"desc": "The door has 4 switches located on it, all set in the up position.",
-		"descMod": "",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "Antechamber 2",
 	"south_room": "",
@@ -121,19 +56,6 @@ room4["Antechamber 2"] = {
 	"descMod": "",
 	"descS":"",
 	"items": "",
-	"features": [
-	{
-		"name": "Falcon carving", 
-		"desc": "An ornate wall with the carving of a falcon on it.",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Lettered floor", 
-		"desc": "A floor layed out in a grid like pattern with different letters on it. ",
-		"descMod": "",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "",
 	"south_room": "Antechamber 2",
@@ -147,25 +69,6 @@ room5["Treasure Room"] = {
 	"descMod": "",
 	"descS": "A room that was once full of gold to make sure the sorcerer could pay his way into the afterlife. However, this room must have been raided millenia ago, all that remains are that of bones around three large statues.",
 	"items": "",
-	"features": [
-	{
-		"name": "Statue of Osiris", 
-		"desc": "Looks like small pressure plates on the head, chest and stomach of the statue.",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Statue of Horus", 
-		"desc": "Looks like small pressure plates on the head, chest and stomach of the statue.",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Statue of Anubis", 
-		"desc": "Looks like small pressure plates on the head, chest and stomach of the statue.",
-		"descMod": "",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "",
 	"south_room": "",
@@ -179,19 +82,6 @@ room6["Pharaoh Mummy Room"] = {
 	"descMod": "",
 	"descS": "",
 	"items": "",
-	"features": [
-	{
-		"name": "Noisy Sarcophagus", 
-		"desc": "Upon closer inspection, the strange noises coming from the sarcophagus get louder and louder",
-		"descMod": "Upon opening the sarcophagus, a mythical pharaoh mummy jumps out, makes a loud screech, and then kills you",
-		"usage": "Kills the player"
-	},
-	{
-		"name": "Urn", 
-		"desc": "There is a plain looking urn in the corner of the room.",
-		"descMod": "Upon breaking open the urn, you see that it contains a yellow jeweled scarab necklace",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "Mirror Room",
 	"south_room": "",
@@ -205,19 +95,6 @@ room7["Mirror Room"] = {
 	"descMod": "",
 	"descS": "",
 	"items": "",
-	"features": [
-	{
-		"name": "Sculpture of Cat", 
-		"desc": "There is a small stone sculpture of an egyptian cat next to a mirror in the corner.",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Spider", 
-		"desc": "There is something rustling around in the room by one of the mirrors.",
-		"descMod": "The rustling turns out to be a gigantic spider.  The spider bites you and causes pain and injury.  Lose 1 turn.",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "",
 	"south_room": "Pharaoh Mummy Room",
@@ -231,19 +108,6 @@ room8["Skeleton Room"] = {
 	"descMod": "",
 	"descS": "",
 	"items": "",
-	"features": [
-	{
-		"name": "Spider", 
-		"desc": "There is something rustling around in the room by one of the sacks of food.",
-		"descMod": "The rustling turns out to be a gigantic spider.  The spider bites you and causes pain and injury.  Lose 1 turn.",
-		"usage": ""
-	},
-	{
-		"name": "Sculpture of Scarab", 
-		"desc": "There is a small stone sculpture of a scarab that looks like it was left as a gift for the great dead Pharaohs",
-		"descMod": "",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "Food Room",
 	"south_room": "",
@@ -257,19 +121,6 @@ room9["Food Room"] = {
 	"descMod": "",
 	"descS": "",
 	"items": "",
-	"features": [
-	{
-		"name": "Book", 
-		"desc": "There is a book laying next to a skull in the room, and it appears to be a previous explorer's journal.",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "Elephant Tusk", 
-		"desc": "There is an elephant tusk in the corner that looks untouched by time and geology",
-		"descMod": "",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "",
 	"south_room": "Skeleton Room",
@@ -283,19 +134,6 @@ room10["Mummified Animals Room"] = {
 	"descMod": "",
 	"descS": "",
 	"items": "",
-	"features": [
-	{
-		"name": "Shaky Mummy", 
-		"desc": "As you walk toward the shaking mummy, the shaking gets stronger and it appears that the mummy might still be alive.",
-		"descMod": "Upon closer inspection, the mummy turns out to be a mythical crocodile. It bites your arm causing great pain before scampering off into the dark. Lose 1 turn.",
-		"usage": ""
-	},
-	{
-		"name": "Hieroglyphs", 
-		"desc": "Upon closer inspection, the hieroglyphs say, 'Here lies the end of this branch of the tomb. You must turn around.'",
-		"descMod": "",
-		"usage": ""
-	}],
 	"visited": False,
 	"north_room": "",
 	"south_room": "",
