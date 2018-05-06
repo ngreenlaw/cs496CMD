@@ -86,5 +86,65 @@
 		"desc": "Looks like small pressure plates on the head, chest and stomach of the statue.",
 		"descMod": "",
 		"usage": ""
-	}
+	},
+	{
+		"name": "Noisy Sarcophagus", 
+		"desc": "Upon closer inspection, the strange noises coming from the sarcophagus get louder and louder",
+		"descMod": "Upon opening the sarcophagus, a mythical pharaoh mummy jumps out, makes a loud screech, and then kills you",
+		"usage": "Kills the player"
+	},
+	{
+		"name": "Urn", 
+		"desc": "There is a plain looking urn in the corner of the room.",
+		"descMod": "Upon breaking open the urn, you see that it contains a yellow jeweled scarab necklace",
+		"usage": ""
+	},
+	{
+		"name": "Sculpture of Cat", 
+		"desc": "There is a small stone sculpture of an egyptian cat next to a mirror in the corner.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Spider", 
+		"desc": "There is something rustling around in the room by one of the mirrors.",
+		"descMod": "The rustling turns out to be a gigantic spider.  The spider bites you and causes pain and injury.  Lose 1 turn.",
+		"usage": ""
+	},
+	{
+		"name": "Spider", 
+		"desc": "There is something rustling around in the room by one of the sacks of food.",
+		"descMod": "The rustling turns out to be a gigantic spider.  The spider bites you and causes pain and injury.  Lose 1 turn.",
+		"usage": ""
+	},
+	{
+		"name": "Sculpture of Scarab", 
+		"desc": "There is a small stone sculpture of a scarab that looks like it was left as a gift for the great dead Pharaohs",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Book", 
+		"desc": "There is a book laying next to a skull in the room, and it appears to be a previous explorer's journal.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Elephant Tusk", 
+		"desc": "There is an elephant tusk in the corner that looks untouched by time and geology",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "Shaky Mummy", 
+		"desc": "As you walk toward the shaking mummy, the shaking gets stronger and it appears that the mummy might still be alive.",
+		"descMod": "Upon closer inspection, the mummy turns out to be a mythical crocodile. It bites your arm causing great pain before scampering off into the dark. Lose 1 turn.",
+		"usage": ""
+	},
+	{
+		"name": "Hieroglyphs", 
+		"desc": "Upon closer inspection, the hieroglyphs say, 'Here lies the end of this branch of the tomb. You must turn around.'",
+		"descMod": "",
+		"usage": ""
+	},
 ]
