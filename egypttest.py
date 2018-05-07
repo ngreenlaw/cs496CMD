@@ -76,7 +76,7 @@ def main():
 	test_room_2.setSouthRoom(test_room_1);
 	
 	#set up game manager
-	test_gameManager = ec.GameManager(50, test_room_1);
+	test_gameManager = ec.GameManager(50, test_room_1, test_room_1);
 	
 	#set up player
 	test_player = ec.Player(emptyList, test_gameManager);

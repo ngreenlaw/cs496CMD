@@ -268,6 +268,7 @@ class Room:
 class GameManager:
 	turn_count = -1; # turn count remaining
 	current_room = None; # current room the game is in
+	previous_room = None; # Previous room
 		
 	def getTurnCount(self):
 		return self.turn_count;
@@ -282,10 +283,18 @@ class GameManager:
 	def setCurrentRoom(self, current_room_value):
 		self.current_room = current_room_value;
 		return 0;
+		
+	def getPreviousRoom(self):
+		return self.current_room;
 	
-	def __init__(self, tc, cr):
+	def setPreviousRoom(self, current_room_value):
+		self.current_room = current_room_value;
+		return 0;
+	
+	def __init__(self, tc, cr, pr):
 		self.turn_count = tc;
 		self.current_room = cr;
+		self.previous_room = pr;
 		
 #This is the player class in the game
 class Player:
@@ -317,16 +326,16 @@ class Player:
 	def addToInventory(self, item_to_add):
 		rItems = self.getCurrentRoom().getItems(); 
 		for it in rItems:
-			if item_to_remove.getId() == it.getId():
-				self.getInventory().remove(it);
-				self.getCurrentRoom().addItemToRoom(it);
+			if item_to_add == it:
+				self.getInventory().append(it);
+				self.getCurrentRoom().removeItemFromRoom(it);
 				return 0;
 		return 1;
 		
 	def removeFromInventory(self, item_to_remove):
 		inven = self.getInventory();
 		for it in inven:
-			if item_to_remove.getId() == it.getId():
+			if item_to_remove == it:
 				self.getInventory().remove(it);
 				self.getCurrentRoom().addItemToRoom(it);
 				return 0;
@@ -350,32 +359,33 @@ class Player:
 		is_room = False;
 		room_to_move_to = None;
 		
-		if room_to_move_to_string == "North":
+		if room_to_move_to_string == "north":
 			if room_to_north != None:
 				is_room = True;
 				room_to_move_to = room_to_north;
 		
-		if room_to_move_to_string == "South":
+		if room_to_move_to_string == "south":
 			if room_to_south != None:
 				is_room = True;
 				room_to_move_to = room_to_south;
 		
-		if room_to_move_to_string == "East":
+		if room_to_move_to_string == "east":
 			if room_to_east != None:
 				is_room = True;
 				room_to_move_to = room_to_east;		
 		
-		if room_to_move_to_string == "West":
+		if room_to_move_to_string == "west":
 			if room_to_west != None:
 				is_room = True;
 				room_to_move_to = room_to_west;		
 		
 		if is_room == True:
+			gm = self.getGameManager();
+			gm.setPreviousRoom(cr);
 			self.setCurrentRoom(room_to_move_to);
 			cr = self.getCurrentRoom()
 			print(cr.displayDescription());
 			cr.setVisited(True);
-			gm = self.getGameManager()
 			gm.setCurrentRoom(room_to_move_to)
 		
 		else:
