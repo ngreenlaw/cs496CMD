@@ -1,7 +1,7 @@
 #This is the main file for running the game
 from __future__ import print_function
 import json
-from watson_developer_cloud import ConversationV1
+import watson_developer_cloud
 import sys
 import egyptclass as ec
 
@@ -169,11 +169,11 @@ class DictQuery(dict):
                 break;
         return val
 
-conversation = ConversationV1(
-    username='57db025b-2f83-45b6-90e9-4890d0d3e616',
-    password='COcz1TPoSKQD',
-    version='2018-04-25')
-workspace_id = '2c730ca5-72d1-44d0-a1d9-a12327957f18'
+assistant = watson_developer_cloud.AssistantV1(
+                                               username='171ad7e1-fd51-4399-ba54-87fd88b8775f',
+                                               password='EZ22BDDwOTao',
+                                               version='2018-05-01'
+                                               )
 
 def getInput():
 	#FILL IN THE FUNCTIONS WITH THE NATURAL LANGUAGE PARSER OR IMPORT THE MODULE
@@ -182,10 +182,12 @@ def getInput():
     response = ''
     while text != 'quit':
         text = raw_input('>> ')
-        response = conversation.message(
-                                    workspace_id=workspace_id, input={
-                                    'text': text
-                                    })
+        response = = assistant.message(
+                                     workspace_id='6e437ce3-3817-47ba-971c-c39142841f73',
+                                     input={
+                                     'text': text
+                                     }
+                                     )
         data = json.dumps(response)
         return(", ".join(DictQuery(response).get('output/text')))     
 
