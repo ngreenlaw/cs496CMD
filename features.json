@@ -31,18 +31,16 @@
 	},
 	{
 		"name": "Door 1",
-		"descTrue": "The giant stone door to your left is closed." ,
-		"descFalse":  "The giant stone door to your left is open.",
-		"closed": False,
-		"descMod": "",
+		"desc": "The giant stone door to your left is closed." ,
+		"descMod":  "The giant stone door to your left is open.",
+		"closed": "False",
 		"usage": ""
 	},
 	{
 		"name": "Door 2",
-		"descTrue": "The giant stone door to your right is closed.",
-		"descFalse": "The giant stone door to your right is open.",
-		"closed": False,
-		"descMod": "",
+		"desc": "The giant stone door to your right is closed.",
+		"descMod": "The giant stone door to your right is open.",
+		"closed": "False",
 		"usage": ""
 	},
 	{
@@ -146,5 +144,5 @@
 		"desc": "Upon closer inspection, the hieroglyphs say, 'Here lies the end of this branch of the tomb. You must turn around.'",
 		"descMod": "",
 		"usage": ""
-	},
+	}
 ]

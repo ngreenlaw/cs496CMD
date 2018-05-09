@@ -102,10 +102,11 @@ class Feature:
 			return 0;
 		return 1;
 		
-	def __init__(self, na, desc, md):
+	def __init__(self, na, desc, md, us):
 		self.setDescription(desc);
 		self.setName(na);
 		self.setModifiedDescription(md);
+		self.setUsage(us);
 
 #This is the Room class in the game, it is the basis of the game, fix to match the rest of the classes with set/get functions
 class Room:
@@ -252,12 +253,11 @@ class Room:
 				return self.getModifiedDescription();
 	
 	#Function to initialize a Room object, takes id, long desc, short desc, additional desc, items, and features 
-	def __init__(self, na, ld, sd, ad, it, lk):
+	def __init__(self, na, ld, sd, it, fe, lk):
 		self.setName(na);
 		self.long_description = ld;
 		self.short_description = sd;
 		self.modified_description = sd;
-		self.additional_descriptions = ad;
 		self.modified_description_bool = False;
 		self.items = it;
 		self.features = fe;

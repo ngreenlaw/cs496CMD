@@ -4,13 +4,14 @@ import json
 import watson_developer_cloud
 import sys
 import egyptclass as ec
+#import simplejson
 
 #Variables to hold things such that they are easier to edit
 ITEM_FILES_VAR = ["items.json"]; #would like to change this to reading off of a file that contains the names of all the files
 FEATURE_FILES_VAR = ["features.json"];
-ROOM_FILES_VAR = ["room1.txt", "room2.txt"];
-GAME_MANAGER_FILE_VAR = "gm.txt";
-PLAYER_FILE_VAR = "player.txt";
+ROOM_FILES_VAR = ["room1.json", "room2.json", "room3.json", "room4.json", "room5.json", "room6.json", "room7.json", "room8.json", "room9.json", "room10.json"];
+#GAME_MANAGER_FILE_VAR = "gm.json";
+#PLAYER_FILE_VAR = "player.json";
 
 #function for main menu, returns 0 if new game and 1 if load game, exits if exit is entered or returns 2 if it doesn't understand
 def mainMenu():
@@ -128,18 +129,20 @@ def createRoom(files_list):
 		rf = f.read();
 		fj = json.loads(rf);
 		
+		tf_lock = True;
 		#create the object HERE IS WHERE TO EDIT
-		object_created = ec.Room(fj['name'], fj['descL'], fj['descS'], fj['descAdd'], fj['items'], fj['features'], fj['locked']);
+		if fj['locked'] == "False":
+			tf_lock = False;
+		object_created = ec.Room(fj['name'], fj['descL'], fj['descS'], fj['items'], fj['features'], tf_lock);
 		object_created.setNorthRoom(fj['north_room']);
 		object_created.setSouthRoom(fj['south_room']);
 		object_created.setEastRoom(fj['east_room']);
 		object_created.setWestRoom(fj['west_room']);
 		list_of_objects.append(object_created);
-		
 	return list_of_objects;
 	
 #function to create the game manager
-def createGameManager(tc, oom, pr):
+def createGameManager(tc, room, pr):
 	gm = ec.GameManager(tc, room, pr);
 	return gm;
 
@@ -182,7 +185,7 @@ def getInput():
     response = ''
     while text != 'quit':
         text = raw_input('>> ')
-        response = = assistant.message(
+        response = assistant.message(
                                      workspace_id='6e437ce3-3817-47ba-971c-c39142841f73',
                                      input={
                                      'text': text
@@ -194,6 +197,12 @@ def getInput():
 #functions to resolve the action and update necessary variables
 #Returns if a turn should be used up is 1, 0 if not
 def processTag(returned_tag, player):
+	
+	nu = "I didn\'t understand. You can try rephrasing.";
+
+	while(returned_tag == nu):
+		returned_tag = getInput();
+		print(returned_tag);
 	#Set up the needed variables
 	cr = player.getCurrentRoom();
 	
@@ -316,13 +325,16 @@ def main():
 		#Begin creating game
 		
 		#Create items for the whole game
-		items = createItem(global ITEM_FILES_VAR);
+		global ITEM_FILES_VAR;
+		items = createItem(ITEM_FILES_VAR);
 		
 		#Create items for the whole game
-		features = createFeature(global FEATURE_FILES_VAR);
+		global FEATURE_FILES_VAR;
+		features = createFeature(FEATURE_FILES_VAR);
 		
 		#Create rooms for the whole game
-		rooms = createRoom(global ROOM_FILES_VAR);
+		global ROOM_FILES_VAR
+		rooms = createRoom(ROOM_FILES_VAR);
 		createRoomNSEW(rooms);
 		
 		#Create game manager
@@ -349,11 +361,11 @@ def main():
 	
 		#Display description
 		cr = player.getCurrentRoom();
-		cr.displayDescription();
+		print(cr.displayDescription());
 		
 		#Get input and resolve actions
 		input_given = getInput();
-		
+		print(input_given);
 		#Display result / if error then do not print result
 		turn = processTag(input_given, player);
 		

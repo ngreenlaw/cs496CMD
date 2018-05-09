@@ -52,9 +52,9 @@ def main():
 	test_item_3 = ec.Item("Scarab Brooch", "Brooch shaped like a scarab");
 	
 	#Set up features
-	test_feature_1 = ec.Feature("Door", "An object that separates rooms", "The door is now unlocked");
-	test_feature_2 = ec.Feature("Jackal Statue","A sculpture of a jackal", "The statue is now broken");
-	test_feature_3 = ec.Feature("Ra Tapestry", "A tapestry featuring the god Ra", "The tapestry is ripped up");
+	test_feature_1 = ec.Feature("Door", "An object that separates rooms", "The door is now unlocked",["Scarab Brooch"]);
+	test_feature_2 = ec.Feature("Jackal Statue","A sculpture of a jackal", "The statue is now broken", [""]);
+	test_feature_3 = ec.Feature("Ra Tapestry", "A tapestry featuring the god Ra", "The tapestry is ripped up", ["Sword"]);
 	
 	#Set up item list
 	test_item_list_1 = [test_item_1.name, test_item_2.name];
@@ -69,8 +69,8 @@ def main():
 	test_feature_3.setUsage(["Sword"]);
 	
 	#Set up rooms
-	test_room_1 = ec.Room("Test Room 1", "This is the long description", "Short", ["add"," this"], test_item_list_1, test_feature_list_2, False)
-	test_room_2 = ec.Room("Test Room 2", "Long desc", "Sh", ["this", "to add"], test_item_list_2, test_feature_list_1, False);
+	test_room_1 = ec.Room("Test Room 1", "This is the long description", "Short", test_item_list_1, test_feature_list_2, False)
+	test_room_2 = ec.Room("Test Room 2", "Long desc", "Sh",test_item_list_2, test_feature_list_1, False);
 	
 	test_room_1.setNorthRoom(test_room_2);
 	test_room_2.setSouthRoom(test_room_1);
@@ -94,7 +94,7 @@ def main():
 	test_player.setCurrentRoom(test_room_1);
 	test_room_1.setVisited(True);
 	assertCorrect("Attempt to Move to South Room", test_player.moveRoom("South"), 1);
-	test_player.moveRoom("North");
+	test_player.moveRoom("north");
 	assertIsCorrect("Move to Room 2", test_player.getCurrentRoom(), test_room_2);
 		
 	#Test the Room
@@ -102,8 +102,6 @@ def main():
 	assertCorrect("Long Desc", test_room_1.getLongDescription(), "This is the long description");
 	assertCorrect("Short Desc", test_room_1.getShortDescription(), "Short");
 	assertCorrect("Modified Desc", test_room_1.getModifiedDescription(), "Short");
-	test_room_1.updateDescription(0);
-	assertCorrect("Updated Desc", test_room_1.getModifiedDescription(), "Short add");
 	assertCorrect("Items in room", test_room_1.getItems(), test_item_list_1);
 	assertCorrect("Features in room", test_room_1.getFeatures(), test_feature_list_2);
 	assertCorrect("Room 1 Visited", test_room_1.getVisited(), True);
@@ -134,7 +132,7 @@ def main():
 	
 	#Test the game manager
 	assertCorrect("GM Turn Count", test_gameManager.getTurnCount(), 50);
-	assertIsCorrect("GM Current Room", test_gameManager.getCurrentRoom(), test_room_2);
+	assertIsCorrect("GM Current Room", test_gameManager.getCurrentRoom().name, test_room_2.name);
 
 	print(str(test_count_pass) + " out of " + str(total_test_count) + " passed");
 	print("------------------------TESTING FINISHED-------------------------------");
