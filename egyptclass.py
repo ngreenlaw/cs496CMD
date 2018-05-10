@@ -21,8 +21,7 @@ class Item:
 		return 0;
 		
 	def displayDescription(self):
-		print(self.getDescription());
-		return 0;
+		return(self.getDescription());
 		
 	#Interaction Functions
 	def useItem(self, works, feature_tried):
@@ -85,11 +84,11 @@ class Feature:
 
 	def displayDescription(self):
 		if self.modified_description_bool == False:
-			print(self.getDescription());
+			return(self.getDescription());
 		else:
-			print(self.getModifiedDescription());
+			return(self.getModifiedDescription());
 		
-	#interaction function, returns 0 if successful and 1 if not successful
+	#interaction function, returns desc if successful and 0 if not successful
 	def interactWith(self, item_tried):
 		able_to_use = False;
 		item_tried_name = item_tried.getName();
@@ -97,11 +96,27 @@ class Feature:
 			able_to_use = True;
 		result = item_tried.useItem(able_to_use, self.getName());
 		if result == 0:
-			print(self.getModifiedDescription());
 			self.modified_description_bool = True;
-			return 0;
-		return 1;
+			return(self.getModifiedDescription());
+		return 0;
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#This is where the touching of features will happen
+	#The feature will have this function called on it so self is the object you are working on
+	def touchFeature(self):
+		name = self.getName() #This returns the name of the object, will be used for the if/elif statements
 		
+		#--------------------------PUZZLE FOR ROOM 2 FEEL FREE TO EDIT ANYTHING HERE
+		if name == "cylinder":
+			if hasattr(self, marking1): #Not sure what exactly the puzzle is but this should give you an idea of how to add attributes to classes
+				self.marking1 +=1;
+			else:
+				self.marking1 = 0;
+	
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 	def __init__(self, na, desc, md, us):
 		self.setDescription(desc);
 		self.setName(na);
@@ -112,9 +127,6 @@ class Feature:
 class Room:
 	long_description = ""; # Long description for when entering the room for the first time
 	short_description = ""; # Short Description for when entering the room every subsequent time
-	modified_description = short_description; # Modified description based on actions
-	additional_descriptions = []; # A list of additional descriptions based on what needs to be added
-	modified_description_bool = False; # Tells whether or not to use the modified description
 	items = []; # List of item objects in the room, ids of the items
 	features = []; # List of feature objects in the room, ids of the features
 	visited = False; # Boolean to determine if the room has been visited
@@ -139,32 +151,27 @@ class Room:
 	def getShortDescription(self):
 		return self.short_description;
 	
-	#Function that returns the modified description of the room
-	def getModifiedDescription(self):
-		return self.modified_description;
-	
-	#Function that updates the modified description based on the location in the list, returns nothing
-	def updateDescription(self, additional_descriptions_number):
-		self.modified_description = self.modified_description + " " + self.additional_descriptions[additional_descriptions_number];
-		self.modified_description_bool = True;
-		return 0;
-	
 	#Function that returns the list of items in the room
 	def getItems(self):
 		return self.items;
 		
+	def setItems(self, i):
+		self.items = i;
+		return 0;
 	#Function that adds an item to the room using its' id, returns nothing
 	def addItemToRoom(self, item_to_add):
-		self.items.append(item_to_add);
+		i = self.getItems()
+		i.append(item_to_add);
+		self.setItems(i);
 		return 0;
 	
 	#Function that removes an item from the room using its' id, returns 0 if fine or 1 if there is no item to remove
 	def removeItemFromRoom(self, item_to_remove):
-		if item_to_remove in self.items:
-			self.items.remove(item_to_remove);
-			return 0;
-		else:
-			return 1;
+		i = self.getItems()
+		i.remove(item_to_remove);
+		self.setItems(i);
+		print(self.getItems());
+		return 0;
 	
 	#Function that returns the features of the room
 	def getFeatures(self):
@@ -247,18 +254,13 @@ class Room:
 		if self.getVisited() == False:
 			return self.getLongDescription();
 		else:
-			if self.modified_description_bool == False:
-				return self.getShortDescription();
-			else:
-				return self.getModifiedDescription();
+			return self.getShortDescription();
 	
 	#Function to initialize a Room object, takes id, long desc, short desc, additional desc, items, and features 
 	def __init__(self, na, ld, sd, it, fe, lk):
 		self.setName(na);
 		self.long_description = ld;
 		self.short_description = sd;
-		self.modified_description = sd;
-		self.modified_description_bool = False;
 		self.items = it;
 		self.features = fe;
 		self.visited = False;
@@ -324,27 +326,29 @@ class Player:
 		return 0;
 		
 	def addToInventory(self, item_to_add):
-		rItems = self.getCurrentRoom().getItems(); 
-		for it in rItems:
-			if item_to_add == it:
-				self.getInventory().append(it);
-				self.getCurrentRoom().removeItemFromRoom(it);
-				return 0;
-		return 1;
+		'''rItems = self.getCurrentRoom().getItems(); 
+		for it in rItems[:]:
+			if item_to_add == it:'''
+		i = self.getInventory()
+		i.append(item_to_add);
+		self.setInventory(i);
+		self.getCurrentRoom().removeItemFromRoom(item_to_add);
+		return 0;
 		
 	def removeFromInventory(self, item_to_remove):
-		inven = self.getInventory();
-		for it in inven:
-			if item_to_remove == it:
-				self.getInventory().remove(it);
-				self.getCurrentRoom().addItemToRoom(it);
-				return 0;
-		return 1;
+		'''inven = self.getInventory();
+		for it in inven[:]:
+			if item_to_remove == it:'''
+		i = self.getInventory()
+		i.remove(item_to_remove);
+		self.setInventory(i);
+		self.getCurrentRoom().addItemToRoom(item_to_remove);
+		return 0;
 		
 	def useItemFromInventory(self, item_to_use):
 		inven = self.getInventory();
-		for it in inven:
-			if item_to_use.getId() == it.getId():
+		for it in inven[:]:
+			if item_to_use == it:
 				#Process item to use using features and items interaction functions
 				return 0;
 		return 1;	
@@ -359,22 +363,22 @@ class Player:
 		is_room = False;
 		room_to_move_to = None;
 		
-		if room_to_move_to_string == "north":
+		if room_to_move_to_string == "go north":
 			if room_to_north != None:
 				is_room = True;
 				room_to_move_to = room_to_north;
 		
-		if room_to_move_to_string == "south":
+		if room_to_move_to_string == "go south":
 			if room_to_south != None:
 				is_room = True;
 				room_to_move_to = room_to_south;
 		
-		if room_to_move_to_string == "east":
+		if room_to_move_to_string == "go east":
 			if room_to_east != None:
 				is_room = True;
 				room_to_move_to = room_to_east;		
 		
-		if room_to_move_to_string == "west":
+		if room_to_move_to_string == "go west":
 			if room_to_west != None:
 				is_room = True;
 				room_to_move_to = room_to_west;		
@@ -383,9 +387,9 @@ class Player:
 			gm = self.getGameManager();
 			gm.setPreviousRoom(cr);
 			self.setCurrentRoom(room_to_move_to);
-			cr = self.getCurrentRoom()
+			'''cr = self.getCurrentRoom()
 			print(cr.displayDescription());
-			cr.setVisited(True);
+			cr.setVisited(True);'''
 			gm.setCurrentRoom(room_to_move_to)
 		
 		else:

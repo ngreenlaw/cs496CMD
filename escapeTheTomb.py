@@ -27,23 +27,23 @@ def mainMenu():
 		return 2;
 
 #these functions get the object from the name, returns 1 if there is an error
-def getItemFromName(list, item):
-	for i in range(0, len(list)):
-		if item == i.name:
-			return i;
+def getItemFromName(list_i, item):
+	for i in range(0, len(list_i)):
+		if item == list_i[i].name:
+			return list_i[i];
 	return 1;
 	
-def getFeatureFromName(list, feature):
-	for i in range(0, len(list)):
-		if feature == i.name:
-			return i;
+def getFeatureFromName(list_f, feature):
+	for i in range(0, len(list_f)):
+		if feature == list_f[i].name:
+			return list_f[i];
 	return 1;
 	
-def getRoomFromName(list, room):
-	for i in range(0, len(list)):
+def getRoomFromName(list_r, room):
+	for i in range(0, len(list_r)):
 		if i != None:
-			if item == i.room:
-				return i;
+			if room == list_r[i].name:
+				return list_r[i];
 	return 1;
 		
 #function to create the items
@@ -196,7 +196,7 @@ def getInput():
 
 #functions to resolve the action and update necessary variables
 #Returns if a turn should be used up is 1, 0 if not
-def processTag(returned_tag, player):
+def processTag(returned_tag, player, ite, fea):
 	
 	nu = "I didn\'t understand. You can try rephrasing.";
 
@@ -207,32 +207,48 @@ def processTag(returned_tag, player):
 	cr = player.getCurrentRoom();
 	
 	#set up the items list
-	items_in_room = cr.getItems();
-	features_in_room = cr.getFeatures();
-	items_in_inventory = player.getInventory();
-	all_items = items_in_room;
+	all_items_look = [];
+	all_items_drop = [];
+	all_items_take = [];
+	features_touch = [];
+
+	items_in_room = cr.getItems()[:];
+	items_to_take = cr.getItems()[:];
+	features_in_room = cr.getFeatures()[:];
+	items_in_inventory = player.getInventory()[:];
+	all_items = items_in_room[:];
+
+	print(cr.getItems());
+	
 	for i in items_in_inventory:
 		all_items.append(i);
-		
+		all_items_drop.append("drop " + i);
 	
+	for j in all_items:
+		all_items_look.append("look at " + j);
+	
+	for k in items_to_take:
+		all_items_take.append("take " + k);
+	
+	for n in features_in_room:
+		features_touch.append("touch " + n);
+
 	#Set up the variables that will execute certain functions
-	direction = ["north", "south", "east", "west"];
+	direction = ["go north", "go south", "go east", "go west"];
 	look = "look";
-	look_at_item = all_items;
-	look_at_feature = features_in_room;
-	help = "help";
-	player_inventory = "inventory";
-	run = "run";
-	listen = "listen"
-	fight_target = "" #FIX BASED ON TAG
-	take_item = items_in_room; #FIX BASED ON TAG
-	throw_item_at_target = ""; #FIX BASED ON TAG
-	drop_item = ""; #FIX BASED ON TAG
-	smell_target = ""; #FIX BASED ON TAG
+	look_at_item = all_items_look;
+	look_at_feature = "look at room" #features_in_room;
+	help_display = "help";
+	player_inventory = "show inventory";
+	take_item = all_items_take; #FIX BASED ON TAG
+	drop_item = all_items_drop; #FIX BASED ON TAG
 	use_item_on_target = ""; #FIX BASED ON TAG
 	hit_target_with_item = ""; #FIX BASED ON TAG
 	touch_target = ""; #FIX BASED ON TAG
-	
+	touch_feature = features_touch;	
+		
+	#use and touch both return touch
+
 	#Process the tag based on what is returned, includes the verbs used in the game
 	
 	#Move Room if the returned Tag is a direction
@@ -250,68 +266,70 @@ def processTag(returned_tag, player):
 		
 	#Display the description if the returned tag is look item
 	#returned_tag == look <item> ex: look torch
-	elif returned_tag[5:] in look_at_item: 
+	elif returned_tag in look_at_item: 
 		#Search through the items list and then compare the name to the returned tag
 		for its in look_at_item:
-			if returned_tag[5:] == its: #Everything after "Look "
-				ret = its.getItemFromName();
-				ret.displayDescription();
+			if returned_tag == its: #Everything after "Look "
+				ret = getItemFromName(ite, its[8:]);
+				print(ret.displayDescription());
 				break;
 		return 0;
 	
 	#Display description for feature
-	elif returned_tag[5:] in look_at_feature: 
+	elif returned_tag in look_at_feature: 
 		#Search through the items list and then compare the name to the returned tag
-		for fea in features_in_room:
-			if returned_tag[5:] == fea: #Everything after "Look "
-				ret = fea.getItemFromName();
-				ret.displayDescription();
-				break;
+		for f in features_in_room:
+			ret = f.getFeatureFromName(f, fea);
+			ret.displayDescription();
+			break;
 		return 0;
 	
 	#Display help function
-	elif returned_tag == help:
+	elif returned_tag == help_display:
 		print("VERBS THAT CAN BE USED") ################################FIX HERE
 		return 0;
 		
 	#Display inventory
 	elif returned_tag == player_inventory:
-		print(player.getInventory);
+		print("In inventory:");
+		for i in player.getInventory():
+			print(i);
 		return 0;
 		
-	elif returned_tag == run:
-		pr = player.getGameManager().getPreviousRoom()
-		if pr != cr:
-			m = player.moveRoom(pr.getName());
-			return 1;
-		else: #Handles the case where run is input at the beginning of the game
-			print("You cannot go to the previous room");
-			return 0;
-			
-	elif returned_tag == listen:
-		cr.displayDescription() #Change to display listening description, i.e. write the listening
-		return 0;
-	
-	elif returned_tag == fight_target:
-		#Fight function
-		return 1;
-		
-	elif returned_tag[5:] in take_item: 
-		#Search through the items list and then compare the name to the returned tag
-		for its in take_item:
-			if returned_tag[5:] == its: #Everything after "Look "
-				ret = its.getItemFromName();
-				ret.displayDescription();
-				print("Added " + its + " to inventory.");
-				player.addToInventory(its);
+	elif returned_tag in drop_item:
+		for its in drop_item:
+			if returned_tag == its: #Everything after "Look "
+				ret = getItemFromName(ite, its[5:]);
+				print("Dropped " + ret.getName() + " on the ground.");
+				player.removeFromInventory(ret.getName());
 				break;
 		return 0;
+			
+	elif returned_tag in take_item: 
+		#Search through the items list and then compare the name to the returned tag
+		for its in take_item:
+			if returned_tag == its: #Everything after "Look "
+				ret = getItemFromName(ite, its[5:]);
+				ret.displayDescription();
+				print("Added " + ret.getName() + " to inventory.");
+				player.addToInventory(ret.getName());
+				break;
+		return 0;
+
+	elif returned_tag in touch_feature:
+		for f in touch_feature:
+			if returned_tag == f:
+				ret = getFeatureFromName(fea, f[6:]);
+				ret.touchFeature();
+				return 1;
 	#...
 	#...
 	#...
 	
-	else:
-		print("You cannot do that");
+	
+	print("You cannot do that");
+	return 0;
+
 def main():
 	
 	#Start Main Menu, until a result of save, load or exit is given, repeat asking for input
@@ -341,7 +359,7 @@ def main():
 		gameManager = createGameManager(90,rooms[0], rooms[0]);
 		
 		#Create player
-		starting_inventory = ["Torch"];
+		starting_inventory = ["torch"];
 		player = createPlayer(gameManager, starting_inventory);
 		player.setCurrentRoom(gameManager.getCurrentRoom());
 		
@@ -367,7 +385,7 @@ def main():
 		input_given = getInput();
 		print(input_given);
 		#Display result / if error then do not print result
-		turn = processTag(input_given, player);
+		turn = processTag(input_given, player, items, features);
 		
 		#Reduce turn count
 		if turn == 1:

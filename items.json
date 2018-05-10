@@ -1,46 +1,46 @@
 [
 	{
-		"name": "Torch",
+		"name": "torch",
 		"desc": "Wooden stick lit on fire used to illuminate an area."
 	},
 	{
-		"name": "Sword",
+		"name": "sword",
 		"desc": "Sharp Weapon that can be used to slash at things."
 	},
 	{
-		"name": "Spear",
+		"name": "spear",
 		"desc": "Long stick with a sharp metal point that can be used to jab things."
 	},
 	{
-		"name": "Scarab Necklace",
+		"name": "necklace",
 		"desc": "A necklace in the shape of a jeweled scarab."
 	},
 	{
-		"name": "Scarab Brooch",
+		"name": "brooch",
 		"desc": "A brooch in the shape of a jeweled scarab."
 	},
 	{
-		"name": "Chamber of Passing Key",
+		"name": "key",
 		"desc": "A key used to open a locked door leading to the Chamber of Passing."
 	},
 	{
-		"name": "Earplugs",
+		"name": "earplugs",
 		"desc": "Small object used to plug ears."
 	},
 	{
-		"name": "Explorer's Journal",
+		"name": "journal",
 		"desc": "A book that can be read to learn more information about the tomb."
 	},
 	{
-		"name": "Elephant Tusk",
+		"name": "tusk",
 		"desc": "A broken off piece of an elephant's tusk."
 	},
 	{
-		"name": "Sculpture of a Cat",
+		"name": "cat",
 		"desc": "A small sculpture of a cat that can be carried."
 	},
 	{
-		"name": "Sculpture of a Scarab",
+		"name": "scarab",
 		"desc": "A small sculpture of a cat that can be carried."
 	}
 ]
