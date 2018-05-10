@@ -108,8 +108,8 @@ class Feature:
             		print(" What would you like to set the cylinder to? 0 to 9 Ox")
 		get_input = raw_input(">> ")
             	if get_input == 5:
-                print("You hear the door to your left start to open")
-                #need to set variable to open door
+                	print("You hear the door to your left start to open")
+               		#need to set variable to open door
             	else:
                 	print("Nothing happens")
         
