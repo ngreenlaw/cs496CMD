@@ -9,5 +9,5 @@ pip install --upgrade pip
 pip install --upgrade watson-developer-cloud
 ```
 
-First run egyptclass.py then run egypttest.py to see the test in action
+First start the virtual environment, then run python escapeTheTomb.py and enter new game
 
