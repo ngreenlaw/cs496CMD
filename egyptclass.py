@@ -138,7 +138,7 @@ class Feature:
             		print("What statue would you like to touch? (Osiris/Horus/Anubis)")
             		get_input = raw_input(">> ")
             		if get_input == "Osiris" or get_input == "Horus":
-                  		print("What part of the statue would you like to press? (head/chest/stomach)"
+                  		print("What part of the statue would you like to press? (head/chest/stomach)")
                   		get_input = raw_input(">> ")
                   		#lose some number of moves
                   		print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
