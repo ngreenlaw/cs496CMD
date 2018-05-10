@@ -143,7 +143,7 @@ class Feature:
                   		#lose some number of moves
                   		print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
             		elif get_input == "Osiris" or get_input == "Horus":
-                  		print("What part of the statue would you like to press? (head/chest/stomach)"
+                  		print("What part of the statue would you like to press? (head/chest/stomach)")
                   		get_input = raw_input(">> ")
                   		if get_input == "chest":
                         		print("The statues hand extends holding a key")
