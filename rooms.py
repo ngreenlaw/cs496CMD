@@ -51,7 +51,7 @@ room3 = {
 	"south_room": "",
 	"east_room": "Main Passage",
 	"west_room": "",
-	"locked": "False"
+	"locked": "True"
 }
 room4 = {
 	"name": "Antechamber 2", 
@@ -82,7 +82,7 @@ room5 = {
 	"locked": "False"
 }
 room6 = {
-	"name": "Treasure Room", 
+	"name": "Pharaoh Mummy Room", 
 	"descL": "Upon entering the room, you notice several sarcophagi that are ornately decorated with jewels and carvings of deities and animals in the stone.  However, time and nature has worn away at the decorations, but you can see that they were once beautiful.  In the corner, strange knocking and scraping noises are coming from one of the sarcophagi.",
 	"descMod": "",
 	"descS": "",

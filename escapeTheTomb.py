@@ -25,7 +25,7 @@ def mainMenu():
 	elif get_input.lower() == "exit":
 		sys.exit();
 	else:
-		print("I am not sure what you mean. Please try again.");
+		print("I am not sure what you mean. Please try again.\n");
 		return 2;
 
 def intro():
@@ -38,7 +38,7 @@ def intro():
     print('         | \__/\ |_| | |\ \ /\__/ / |___| |/ /    | | \ \_/ / |  | || |_/ / ');
     print('          \____/\___/\_| \_|\____/\____/|___/     \_/  \___/\_|  |_/\____/  \n');
                 
-    print("     Egypt 1926, Valley of the kings - Archeologist Charles Carter is on the verge of discovering the tomb of the great sorcerer to Rameses II. On opening the tomb, Charles ventures in alone, not sure of what dangers lie ahead. As soon as he steps foot into the first chamber a pressure lever is triggered sliding a giant stone wheel in front of the opening. \n");
+    print("     Egypt 1926, Valley of the kings - Archeologist Charles Carter is on the verge of discovering the tomb of the great sorcerer to Rameses II. On opening the tomb, Charles ventures in alone, not sure of what dangers lie ahead. As soon as he steps foot into the first chamber a pressure lever is triggered sliding a giant stone wheel in front of the opening. Leaving him trapped in the tomb with only his trusty torch.\n");
           
     return 0;
                 
@@ -214,11 +214,13 @@ def getInput():
 #Returns if a turn should be used up is 1, 0 if not
 def processTag(returned_tag, player, ite, fea):
 	
+	#Check the I didnt understand result and ask to get input again
 	nu = "I didn\'t understand. You can try rephrasing.";
 
 	while(returned_tag == nu):
 		returned_tag = getInput();
-		print(returned_tag);
+		print(returned_tag);#DEBUG PRINT
+	
 	#Set up the needed variables
 	cr = player.getCurrentRoom();
 	
@@ -234,8 +236,6 @@ def processTag(returned_tag, player, ite, fea):
 	items_in_inventory = player.getInventory()[:];
 	all_items = items_in_room[:];
 
-	print(cr.getItems());
-	
 	for i in items_in_inventory:
 		all_items.append(i);
 		all_items_drop.append("drop " + i);
@@ -249,9 +249,18 @@ def processTag(returned_tag, player, ite, fea):
 	for n in features_in_room:
 		features_touch.append("touch " + n);
 
+	#Create ambiguous commands list
+	ww = "What would you like to ";
+	amb_comm = ["look at?", "drop?", "take?", "move?", "hit?", "touch?", "use?"]
+	all_amb = [];
+	for a in amb_comm:
+		all_amb.append(ww+a);
+		#print(ww+a)#DEBUG PRINT
+	all_amb.append("Where would you like to move?");
+
 	#Set up the variables that will execute certain functions
 	direction = ["go north", "go south", "go east", "go west"];
-	look = "look";
+	amb = all_amb[:];
 	look_at_item = all_items_look;
 	look_at_feature = "look at room" #features_in_room;
 	help_display = "help";
@@ -266,6 +275,28 @@ def processTag(returned_tag, player, ite, fea):
 	#use and touch both return touch
 
 	#Process the tag based on what is returned, includes the verbs used in the game
+	#Display the description if the returned tag is look at room but otherwise handle the ambiguous input
+	if returned_tag in amb:
+		print(returned_tag);
+		returned_tag = getInput();
+		#print(returned_tag) #DEBUG PRINT
+		while(returned_tag == nu):
+			returned_tag = getInput();
+			#print(returned_tag);#DEBUG PRINT
+		if returned_tag == "look at room":
+			print(cr.displayDescription());
+			print("\nFeatures of Note:");
+			for f in features_in_room:
+				ret = getFeatureFromName(fea, f);
+				print(ret.displayDescription());
+			if len(items_in_room) != 0:
+				print("\nItems in room:");
+				for i in items_in_room:
+					print(i);
+				print("");
+			else:
+				print("\nThere are no items in this room to be picked up.");	
+			return 0;
 	
 	#Move Room if the returned Tag is a direction
 	if returned_tag in direction:
@@ -273,13 +304,29 @@ def processTag(returned_tag, player, ite, fea):
 		if m == 1: #If there is no room
 			return 0; #return no turn taken up
 		else:
+			print("");
+			print(player.getCurrentRoom().displayDescription());
+			print("");
+			player.getCurrentRoom().setVisited(True);
 			return 1; #return turn taken up
-		
-	#Display the description if the returned tag is look
-	elif returned_tag == look:
-		cr.displayDescription();
+	
+	#Look at room
+	elif returned_tag == "look at room":
+		print(cr.displayDescription());
+		print("\nFeatures of Note:");
+		for f in features_in_room:
+			ret = getFeatureFromName(fea, f);
+			print(ret.displayDescription());
+		print;
+		if len(items_in_room) != 0:
+			print("\nItems in room:");
+			for i in items_in_room:
+				print(i);
+			print("");
+		else:
+			print("\nThere are no items in this room to be picked up.\n");	
 		return 0;
-		
+	
 	#Display the description if the returned tag is look item
 	#returned_tag == look <item> ex: look torch
 	elif returned_tag in look_at_item: 
@@ -288,6 +335,7 @@ def processTag(returned_tag, player, ite, fea):
 			if returned_tag == its: #Everything after "Look "
 				ret = getItemFromName(ite, its[8:]);
 				print(ret.displayDescription());
+				print("");
 				break;
 		return 0;
 	
@@ -295,28 +343,33 @@ def processTag(returned_tag, player, ite, fea):
 	elif returned_tag in look_at_feature: 
 		#Search through the items list and then compare the name to the returned tag
 		for f in features_in_room:
-			ret = f.getFeatureFromName(f, fea);
-			ret.displayDescription();
+			ret = f.getFeatureFromName(fea, f);
+			print(ret.displayDescription());
 			break;
 		return 0;
 	
 	#Display help function
 	elif returned_tag == help_display:
 		print("VERBS THAT CAN BE USED") ################################FIX HERE
+		print("");
 		return 0;
 		
 	#Display inventory
 	elif returned_tag == player_inventory:
-		print("In inventory:");
-		for i in player.getInventory():
-			print(i);
+		if len(player.getInventory()) != 0:
+			print("In inventory:");
+			for i in player.getInventory():
+				print(i);
+			print("");
+		else:
+			print("No Items in inventory\n");
 		return 0;
 		
 	elif returned_tag in drop_item:
 		for its in drop_item:
 			if returned_tag == its: #Everything after "Look "
 				ret = getItemFromName(ite, its[5:]);
-				print("Dropped " + ret.getName() + " on the ground.");
+				print("Dropped " + ret.getName() + " on the ground.\n");
 				player.removeFromInventory(ret.getName());
 				break;
 		return 0;
@@ -326,8 +379,9 @@ def processTag(returned_tag, player, ite, fea):
 		for its in take_item:
 			if returned_tag == its: #Everything after "Look "
 				ret = getItemFromName(ite, its[5:]);
-				ret.displayDescription();
-				print("Added " + ret.getName() + " to inventory.");
+				print(ret.getName());
+				print(ret.displayDescription());
+				print("Added " + ret.getName() + " to inventory.\n");
 				player.addToInventory(ret.getName());
 				break;
 		return 0;
@@ -336,27 +390,27 @@ def processTag(returned_tag, player, ite, fea):
 		for f in touch_feature:
 			if returned_tag == f:
 				ret = getFeatureFromName(fea, f[6:]);
-				ret.touchFeature();
+				ret.touchFeature(player);
 				return 1;
 	#...
 	#...
 	#...
 	
 	
-	print("You cannot do that");
+	print("You cannot do that\n");
 	return 0;
 
 def main():
-    # Display's intro
-    intro()
+	# Display's intro
+	intro()
 	#Start Main Menu, until a result of save, load or exit is given, repeat asking for input
-    get_main_menu_result = 2;
-    while get_main_menu_result == 2:
+	get_main_menu_result = 2;
+	while get_main_menu_result == 2:
 		get_main_menu_result = mainMenu();
 		
 	#Process command from main menu
 	#new game issued
-    if get_main_menu_result == 0:
+	if get_main_menu_result == 0:
 		#Begin creating game
 		
 		#Create items for the whole game
@@ -381,33 +435,40 @@ def main():
 		player.setCurrentRoom(gameManager.getCurrentRoom());
 		
 	#Load game
-    elif get_main_menu_result == 1:
+	elif get_main_menu_result == 1:
 		#BEGIN GAME LOADING
-		print("Loading Game");
+		print("Loading Game Doesnt work yet");
+		exit();
 
-    else:
+	else:
 		print("DEBUG - SOMETHING WENT WRONG IN THE MAIN MENU, THIS SHOULD NOT HAPPEN");
 	
 	#Begin Game
 	#While the turn count is > 0
-    turns_left = gameManager.getTurnCount();
-    while turns_left > 0:
+	turns_left = gameManager.getTurnCount();
+	cr = player.getCurrentRoom();
+	print("");
+	print(cr.displayDescription());
+	print("");
+	cr.setVisited(True);	
+	
+	while turns_left > 0:
 		turn = 0;
 	
 		#Display description
 		cr = player.getCurrentRoom();
-		print(cr.displayDescription());
+		#print(cr.displayDescription());
 		
 		#Get input and resolve actions
 		input_given = getInput();
-		print(input_given);
+		#print(input_given);#DEBUG PRINT
+
 		#Display result / if error then do not print result
 		turn = processTag(input_given, player, items, features);
 		
 		#Reduce turn count
-		if turn == 1:
-			gameManager.setTurnCount(turns_left-1);
-			turns_left = gameManager.getTurnCount();
+		gameManager.setTurnCount(turns_left-turn);
+		turns_left = gameManager.getTurnCount();
 		
 #run the program
 if __name__ == "__main__":

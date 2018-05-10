@@ -102,16 +102,21 @@ class Feature:
 
 #This is where the touching of features will happen
 	#The feature will have this function called on it so self is the object you are working on
-	def touchFeature(self):
+	def touchFeature(self, player):
 		name = self.getName() #This returns the name of the object, will be used for the if/elif statements
+		cr = player.getCurrentRoom();
 		if name == "cylinder":
-            		print(" What would you like to set the cylinder to? 0 to 9 Ox")
+            		print("What would you like to set the cylinder to? 0 to 9 Ox")
 		get_input = raw_input(">> ")
-            	if get_input == 5:
+            	if get_input == "5":
                 	print("You hear the door to your left start to open")
                		#need to set variable to open door
+			wr = cr.getWestRoom();#Get the room to the east of the current room (room 3)
+			wr.setLocked(False); #Set the rooms locked to false meaning that it can be entered
+			return 1; #Return the number of turns used up
             	else:
-                	print("Nothing happens")
+                	print("Nothing happens");
+			return 1;
         
         	if name == "switch":
                 # need to have the "use torch" function in this room
@@ -208,7 +213,6 @@ class Room:
 		i = self.getItems()
 		i.remove(item_to_remove);
 		self.setItems(i);
-		print(self.getItems());
 		return 0;
 	
 	#Function that returns the features of the room
@@ -308,7 +312,6 @@ class Room:
 class GameManager:
 	turn_count = -1; # turn count remaining
 	current_room = None; # current room the game is in
-	previous_room = None; # Previous room
 		
 	def getTurnCount(self):
 		return self.turn_count;
@@ -324,17 +327,9 @@ class GameManager:
 		self.current_room = current_room_value;
 		return 0;
 		
-	def getPreviousRoom(self):
-		return self.current_room;
-	
-	def setPreviousRoom(self, current_room_value):
-		self.current_room = current_room_value;
-		return 0;
-	
 	def __init__(self, tc, cr, pr):
 		self.turn_count = tc;
 		self.current_room = cr;
-		self.previous_room = pr;
 		
 #This is the player class in the game
 class Player:
@@ -364,9 +359,6 @@ class Player:
 		return 0;
 		
 	def addToInventory(self, item_to_add):
-		'''rItems = self.getCurrentRoom().getItems(); 
-		for it in rItems[:]:
-			if item_to_add == it:'''
 		i = self.getInventory()
 		i.append(item_to_add);
 		self.setInventory(i);
@@ -374,9 +366,6 @@ class Player:
 		return 0;
 		
 	def removeFromInventory(self, item_to_remove):
-		'''inven = self.getInventory();
-		for it in inven[:]:
-			if item_to_remove == it:'''
 		i = self.getInventory()
 		i.remove(item_to_remove);
 		self.setInventory(i);
@@ -403,31 +392,43 @@ class Player:
 		
 		if room_to_move_to_string == "go north":
 			if room_to_north != None:
-				is_room = True;
-				room_to_move_to = room_to_north;
-		
+				if room_to_north.getLocked() == False:
+					is_room = True;
+					room_to_move_to = room_to_north;
+				else:
+					print("You tried to enter the " + room_to_north.getName() + " but it appears to be locked somehow.")
+					return 1;		
+
 		if room_to_move_to_string == "go south":
 			if room_to_south != None:
-				is_room = True;
-				room_to_move_to = room_to_south;
-		
+				if room_to_south.getLocked() == False:
+					is_room = True;
+					room_to_move_to = room_to_south;
+				else:
+					print("You tried to enter the " + room_to_south.getName() + " but it appears to be locked somehow.")
+					return 1;
+
 		if room_to_move_to_string == "go east":
 			if room_to_east != None:
-				is_room = True;
-				room_to_move_to = room_to_east;		
+				if room_to_east.getLocked() == False:
+					is_room = True;
+					room_to_move_to = room_to_east;		
+				else:
+					print("You tried to enter the " + room_to_east.getName() + " but it appears to be locked somehow.")
+					return 1;
 		
 		if room_to_move_to_string == "go west":
 			if room_to_west != None:
-				is_room = True;
-				room_to_move_to = room_to_west;		
-		
+				if room_to_west.getLocked() == False:
+					is_room = True;
+					room_to_move_to = room_to_west;		
+				else:
+					print("You tried to enter the " + room_to_west.getName() + " but it appears to be locked somehow.")
+					return 1;
+					
 		if is_room == True:
 			gm = self.getGameManager();
-			gm.setPreviousRoom(cr);
 			self.setCurrentRoom(room_to_move_to);
-			'''cr = self.getCurrentRoom()
-			print(cr.displayDescription());
-			cr.setVisited(True);'''
 			gm.setCurrentRoom(room_to_move_to)
 		
 		else:
