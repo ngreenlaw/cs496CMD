@@ -4,6 +4,7 @@ import json
 import watson_developer_cloud
 import sys
 import egyptclass as ec
+import os
 #import simplejson
 
 #Variables to hold things such that they are easier to edit
@@ -15,6 +16,7 @@ ROOM_FILES_VAR = ["room1.json", "room2.json", "room3.json", "room4.json", "room5
 
 #function for main menu, returns 0 if new game and 1 if load game, exits if exit is entered or returns 2 if it doesn't understand
 def mainMenu():
+    
 	get_input = raw_input("Please enter if you would like to start a new game, load a game or exit: ");
 	if get_input.lower() == "new game":
 		return 0;
@@ -26,6 +28,20 @@ def mainMenu():
 		print("I am not sure what you mean. Please try again.");
 		return 2;
 
+def intro():
+    
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('          _____ _   _______  _____ ___________   _____ ________  _________  ');
+    print('         /  __ \ | | | ___ \/  ___|  ___|  _  \ |_   _|  _  |  \/  || ___ \ ');
+    print('         | /  \/ | | | |_/ /\ `--.| |__ | | | |   | | | | | | .  . || |_/ / ');
+    print('         | |   | | | |    /  `--. \  __|| | | |   | | | | | | |\/| || ___ \ ');
+    print('         | \__/\ |_| | |\ \ /\__/ / |___| |/ /    | | \ \_/ / |  | || |_/ / ');
+    print('          \____/\___/\_| \_|\____/\____/|___/     \_/  \___/\_|  |_/\____/  \n');
+                
+    print("     Egypt 1926, Valley of the kings - Archeologist Charles Carter is on the verge of discovering the tomb of the great sorcerer to Rameses II. On opening the tomb, Charles ventures in alone, not sure of what dangers lie ahead. As soon as he steps foot into the first chamber a pressure lever is triggered sliding a giant stone wheel in front of the opening. \n");
+          
+    return 0;
+                
 #these functions get the object from the name, returns 1 if there is an error
 def getItemFromName(list_i, item):
 	for i in range(0, len(list_i)):
@@ -331,15 +347,16 @@ def processTag(returned_tag, player, ite, fea):
 	return 0;
 
 def main():
-	
+    # Display's intro
+    intro()
 	#Start Main Menu, until a result of save, load or exit is given, repeat asking for input
-	get_main_menu_result = 2;
-	while get_main_menu_result == 2:
+    get_main_menu_result = 2;
+    while get_main_menu_result == 2:
 		get_main_menu_result = mainMenu();
 		
 	#Process command from main menu
-	#new game issued	
-	if get_main_menu_result == 0:
+	#new game issued
+    if get_main_menu_result == 0:
 		#Begin creating game
 		
 		#Create items for the whole game
@@ -363,18 +380,18 @@ def main():
 		player = createPlayer(gameManager, starting_inventory);
 		player.setCurrentRoom(gameManager.getCurrentRoom());
 		
-	#Load game	
-	elif get_main_menu_result == 1:
+	#Load game
+    elif get_main_menu_result == 1:
 		#BEGIN GAME LOADING
 		print("Loading Game");
-                
-	else:
+
+    else:
 		print("DEBUG - SOMETHING WENT WRONG IN THE MAIN MENU, THIS SHOULD NOT HAPPEN");
 	
 	#Begin Game
 	#While the turn count is > 0
-	turns_left = gameManager.getTurnCount();
-	while turns_left > 0:
+    turns_left = gameManager.getTurnCount();
+    while turns_left > 0:
 		turn = 0;
 	
 		#Display description
