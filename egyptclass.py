@@ -100,23 +100,62 @@ class Feature:
 			return(self.getModifiedDescription());
 		return 0;
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #This is where the touching of features will happen
 	#The feature will have this function called on it so self is the object you are working on
 	def touchFeature(self):
 		name = self.getName() #This returns the name of the object, will be used for the if/elif statements
 		
-		#--------------------------PUZZLE FOR ROOM 2 FEEL FREE TO EDIT ANYTHING HERE
 		if name == "cylinder":
-			if hasattr(self, marking1): #Not sure what exactly the puzzle is but this should give you an idea of how to add attributes to classes
-				self.marking1 +=1;
-			else:
-				self.marking1 = 0;
-	
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
+            print(" What would you like to set the cylinder to? 0 to 9 Ox)
+            get_input = raw_input(">> ")
+            if get_input == 5:
+                print("You hear the door to your left start to open")
+                #need to set variable to open door
+            else:
+                print("Nothing happens")
+        
+        if name == "switch":
+                  # need to have the "use torch" function in this room
+            print("What would you like to set the first switch to up/down")
+            get_input = raw_input(">> ")
+            switch_array.append(get_input)
+            print("What would you like to set the second switch to up/down")
+            get_input = raw_input(">> ")
+            switch_array.append(get_input)
+            print("What would you like to set the third switch to up/down")
+            get_input = raw_input(">> ")
+            switch_array.append(get_input)
+            print("What would you like to set the fourth switch to up/down")
+            get_input = raw_input(">> ")
+            switch_array.append(get_input)
+                  
+            if switch_array[0] == up and switch_array[0] == down and switch_array[0] == down and switch_array[0] == up:
+                  print("The door in front of you starts to open")
+                  #need to set variable to open door
+            else:
+                  print("Nothing happens")
+                  
+        if name == "statue":
+            print("What statue would you like to touch? (Osiris/Horus/Anubis)")
+            get_input = raw_input(">> ")
+            if get_input == "Osiris" or get_input == "Horus":
+                  print("What part of the statue would you like to press? (head/chest/stomach)"
+                  get_input = raw_input(">> ")
+                  #lose some number of moves
+                  print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+            elif get_input == "Osiris" or get_input == "Horus":
+                  print("What part of the statue would you like to press? (head/chest/stomach)"
+                  get_input = raw_input(">> ")
+                  if get_input == "chest":
+                        print("The statues hand extends holding a key")
+                        #need to add it to inventory
+                  else:
+                        print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+                        #lose some number of moves
+            else:
+                #lose some number of moves
+                print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+                        
 	def __init__(self, na, desc, md, us):
 		self.setDescription(desc);
 		self.setName(na);
