@@ -29,7 +29,7 @@ room2 =	{
 	"descL": "As you move into the main passageway you notice that the air is a little thinner in here, might be a good idea to find an exit before the air in the tomb runs out. On the wall in front of you there is what looks like a large cylinder with different markings on it.",
 	"descMod": "",
 	"descS": "On the wall in front of you there is what looks like a large cylinder with different markings on it.",
-	"features": [],
+	"features": ["cylinder"],
 	"items": [],
 	"visited": "False",
 	"north_room": "",
