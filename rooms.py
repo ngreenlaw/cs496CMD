@@ -77,7 +77,7 @@ room5 = {
 	"visited": "False",
 	"north_room": "",
 	"south_room": "",
-	"east_room": "Treasure Room",
+	"east_room": "Antechamber 2",
 	"west_room": "",
 	"locked": "False"
 }
