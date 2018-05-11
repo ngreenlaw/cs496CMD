@@ -229,12 +229,16 @@ def processTag(returned_tag, player, ite, fea):
 	all_items_drop = [];
 	all_items_take = [];
 	features_touch = [];
+	features_look = [];
 
 	items_in_room = cr.getItems()[:];
 	items_to_take = cr.getItems()[:];
 	features_in_room = cr.getFeatures()[:];
 	items_in_inventory = player.getInventory()[:];
 	all_items = items_in_room[:];
+	
+	for y in features_in_room:
+		features_look.append("look at " + y);
 
 	for i in items_in_inventory:
 		all_items.append(i);
@@ -262,7 +266,7 @@ def processTag(returned_tag, player, ite, fea):
 	direction = ["go north", "go south", "go east", "go west"];
 	amb = all_amb[:];
 	look_at_item = all_items_look;
-	look_at_feature = "look at room" #features_in_room;
+	look_at_feature = features_look; #features_in_room;
 	help_display = "help";
 	player_inventory = "show inventory";
 	take_item = all_items_take; #FIX BASED ON TAG
@@ -328,11 +332,11 @@ def processTag(returned_tag, player, ite, fea):
 		return 0;
 	
 	#Display the description if the returned tag is look item
-	#returned_tag == look <item> ex: look torch
+	#returned_tag == look at <item> ex: look at torch
 	elif returned_tag in look_at_item: 
 		#Search through the items list and then compare the name to the returned tag
 		for its in look_at_item:
-			if returned_tag == its: #Everything after "Look "
+			if returned_tag == its: #Everything after "Look at"
 				ret = getItemFromName(ite, its[8:]);
 				print(ret.displayDescription());
 				print("");
@@ -342,10 +346,12 @@ def processTag(returned_tag, player, ite, fea):
 	#Display description for feature
 	elif returned_tag in look_at_feature: 
 		#Search through the items list and then compare the name to the returned tag
-		for f in features_in_room:
-			ret = f.getFeatureFromName(fea, f);
-			print(ret.displayDescription());
-			break;
+		for f in look_at_feature:
+			if returned_tag == f:
+				ret = getFeatureFromName(fea, f[8:]);
+				print(ret.displayDescription());
+				print("")
+				break;
 		return 0;
 	
 	#Display help function
