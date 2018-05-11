@@ -117,6 +117,7 @@ class Feature:
 			else:
 				print("Nothing happens");
 			return 1;
+
 		if name == "switch":
 			print("What would you like to set the first switch to up/down")
 			get_input = raw_input(">> ")
@@ -135,24 +136,30 @@ class Feature:
 				print("The door in front of you starts to open")
 			else:
 				print("Nothing happens")
+			return 1;
 
-		if name == "statue":
-			print("What statue would you like to touch? (Osiris/Horus/Anubis)")
+		if name == "statue of osiris":
+			print("What part of the statue would you like to press? (head/chest/stomach)")
 			get_input = raw_input(">> ")
-			if get_input == "Osiris" or get_input == "Horus":
-				print("What part of the statue would you like to press? (head/chest/stomach)")
-				get_input = raw_input(">> ")
-				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
-			elif get_input == "Osiris" or get_input == "Horus":
-				print("What part of the statue would you like to press? (head/chest/stomach)")
-				get_input = raw_input(">> ")
-				if get_input == "chest":
-					print("The statues hand extends holding a key")
-				else:
-					print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+			return 1;
+
+		if name == "statue of horus":
+			print("What part of the statue would you like to press? (head/chest/stomach)")
+			get_input = raw_input(">> ")
+			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+			return 1;
+
+		if name == "statue of anubus":
+			print("What part of the statue would you like to press? (head/chest/stomach)")
+			get_input = raw_input(">> ")
+			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+			if get_input == "chest":
+				print("The statues hand extends holding a key")
 			else:
 				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
-                        
+			return 1;
+
 	def __init__(self, na, desc, md, us):
 		self.setDescription(desc);
 		self.setName(na);
