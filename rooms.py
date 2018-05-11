@@ -55,7 +55,7 @@ room3 = {
 }
 room4 = {
 	"name": "Antechamber 2", 
-	"descL":"As you enter the antechamber you notice that the door behind you starts to close, it must have been something you stepped on. Along the wall the hieroglyphs seem to keep saying the same thing. 'Believe in me as all are descendants from me.'",
+	"descL":"As you enter the antechamber you notice the hieroglyphs on the wall seem to keep saying the same thing. 'The key is in the heart of the underworld.'",
 	"descMod": "",
 	"descS":"",
 	"features": ["falcon carving", "lettered floor"],
