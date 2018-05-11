@@ -104,61 +104,54 @@ class Feature:
 	#The feature will have this function called on it so self is the object you are working on
 	def touchFeature(self, player):
 		name = self.getName() #This returns the name of the object, will be used for the if/elif statements
+		print(name)
 		cr = player.getCurrentRoom();
 		if name == "cylinder":
-            		print("What would you like to set the cylinder to? 0 to 9 Ox")
-		get_input = raw_input(">> ")
-            	if get_input == "5":
-                	print("You hear the door to your left start to open")
-               		#need to set variable to open door
-			wr = cr.getWestRoom();#Get the room to the east of the current room (room 3)
-			wr.setLocked(False); #Set the rooms locked to false meaning that it can be entered
-			return 1; #Return the number of turns used up
-            	else:
-                	print("Nothing happens");
+			print("What would you like to set the cylinder to? 0 to 9 Ox")
+			get_input = raw_input(">> ")
+			if get_input == "5":
+				print("You hear the door to your left start to open") #need to set variable to open door
+				wr = cr.getWestRoom();#Get the room to the east of the current room (room 3)
+				wr.setLocked(False); #Set the rooms locked to false meaning that it can be entered
+				return 1; #Return the number of turns used up
+			else:
+				print("Nothing happens");
 			return 1;
-        
-        	if name == "switch":
-                # need to have the "use torch" function in this room
-            		print("What would you like to set the first switch to up/down")
-            		get_input = raw_input(">> ")
-            		switch_array.append(get_input)
-            		print("What would you like to set the second switch to up/down")
-           		get_input = raw_input(">> ")
-            		switch_array.append(get_input)
-            		print("What would you like to set the third switch to up/down")
-            		get_input = raw_input(">> ")
-            		switch_array.append(get_input)
-            		print("What would you like to set the fourth switch to up/down")
-            		get_input = raw_input(">> ")
-            		switch_array.append(get_input)
-                  
-            		if switch_array[0] == up and switch_array[0] == down and switch_array[0] == down and switch_array[0] == up:
-                  		print("The door in front of you starts to open")
-                  		#need to set variable to open door
-            		else:
-                  		print("Nothing happens")
-                  
-        	if name == "statue":
-            		print("What statue would you like to touch? (Osiris/Horus/Anubis)")
-            		get_input = raw_input(">> ")
-            		if get_input == "Osiris" or get_input == "Horus":
-                  		print("What part of the statue would you like to press? (head/chest/stomach)")
-                  		get_input = raw_input(">> ")
-                  		#lose some number of moves
-                  		print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
-            		elif get_input == "Osiris" or get_input == "Horus":
-                  		print("What part of the statue would you like to press? (head/chest/stomach)")
-                  		get_input = raw_input(">> ")
-                  		if get_input == "chest":
-                        		print("The statues hand extends holding a key")
-                        		#need to add it to inventory
-                  		else:
-                        		print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
-                        		#lose some number of moves
-            		else:
-                		#lose some number of moves
-                		print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+		if name == "switch":
+			print("What would you like to set the first switch to up/down")
+			get_input = raw_input(">> ")
+			switch_array.append(get_input)
+			print("What would you like to set the second switch to up/down")
+			get_input = raw_input(">> ")
+			switch_array.append(get_input)
+			print("What would you like to set the third switch to up/down")
+			get_input = raw_input(">> ")
+			switch_array.append(get_input)
+			print("What would you like to set the fourth switch to up/down")
+			get_input = raw_input(">> ")
+			switch_array.append(get_input)
+
+			if switch_array[0] == up and switch_array[0] == down and switch_array[0] == down and switch_array[0] == up:
+				print("The door in front of you starts to open")
+			else:
+				print("Nothing happens")
+
+		if name == "statue":
+			print("What statue would you like to touch? (Osiris/Horus/Anubis)")
+			get_input = raw_input(">> ")
+			if get_input == "Osiris" or get_input == "Horus":
+				print("What part of the statue would you like to press? (head/chest/stomach)")
+				get_input = raw_input(">> ")
+				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+			elif get_input == "Osiris" or get_input == "Horus":
+				print("What part of the statue would you like to press? (head/chest/stomach)")
+				get_input = raw_input(">> ")
+				if get_input == "chest":
+					print("The statues hand extends holding a key")
+				else:
+					print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+			else:
+				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
                         
 	def __init__(self, na, desc, md, us):
 		self.setDescription(desc);
