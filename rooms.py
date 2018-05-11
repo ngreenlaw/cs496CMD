@@ -93,7 +93,7 @@ room6 = {
 	"south_room": "",
 	"east_room": "",
 	"west_room": "Main Passage",
-	"locked": "False"
+	"locked": "True"
 }	
 room7 = {
 	"name": "Mirror Room", 
