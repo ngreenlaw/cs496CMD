@@ -69,7 +69,7 @@ room4 = {
 }
 room5 = {
 	"name": "Treasure Room", 
-	"descL": "As you enter the room you notice that this should be the treasury room. A room that was once full of gold to make sure the sorcerer could pay his way into the afterlife. However, this room must have been raided millenia ago, all that remains are that of bones around three large statues. I might want to be careful I don't meet the same fate as the rest of these men.",
+	"descL": "As you enter the room you notice that this should be the treasury room. A room that was once full of gold to make sure the sorcerer could pay his way into the afterlife. However, this room must have been raided millenia ago, all that remains are that of bones around three large statues of horus, osiris, and anubis. I might want to be careful I don't meet the same fate as the rest of these men.",
 	"descMod": "",
 	"descS": "A room that was once full of gold to make sure the sorcerer could pay his way into the afterlife. However, this room must have been raided millenia ago, all that remains are that of bones around three large statues.",
 	"features": ["statue of osiris", "statue of horus", "statue of anubis"],
