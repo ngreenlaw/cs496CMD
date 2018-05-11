@@ -150,7 +150,7 @@ class Feature:
 			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
 			return 1;
 
-		if name == "statue of anubus":
+		if name == "statue of anubis":
 			print("What part of the statue would you like to press? (head/chest/stomach)")
 			get_input = raw_input(">> ")
 			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
