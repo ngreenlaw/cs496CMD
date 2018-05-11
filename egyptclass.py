@@ -119,6 +119,7 @@ class Feature:
 			return 1;
 
 		if name == "switch":
+			switch_array =[]
 			print("What would you like to set the first switch to up/down")
 			get_input = raw_input(">> ")
 			switch_array.append(get_input)
@@ -132,7 +133,7 @@ class Feature:
 			get_input = raw_input(">> ")
 			switch_array.append(get_input)
 
-			if switch_array[0] == up and switch_array[0] == down and switch_array[0] == down and switch_array[0] == up:
+			if switch_array[0] == 'up' and switch_array[1] == 'down' and switch_array[2] == 'down' and switch_array[3] == 'up':
 				print("The door in front of you starts to open")
 			else:
 				print("Nothing happens")
@@ -156,6 +157,8 @@ class Feature:
 			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
 			if get_input == "chest":
 				print("The statues hand extends holding a key")
+				print("Congrats on completing the demo. Come back when the game is finished!!")
+				exit()
 			else:
 				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
 			return 1;
