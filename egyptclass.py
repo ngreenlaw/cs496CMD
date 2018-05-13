@@ -104,63 +104,119 @@ class Feature:
 	#The feature will have this function called on it so self is the object you are working on
 	def touchFeature(self, player):
 		name = self.getName() #This returns the name of the object, will be used for the if/elif statements
-		print(name)
 		cr = player.getCurrentRoom();
 		if name == "cylinder":
 			print("What would you like to set the cylinder to? 0 to 9 Ox")
+			
+			#accepted input, will loop until an accepted value is put in
+			av_array = ["1","2","3","4","5","6","7","8","9","0"]; 
+			
 			get_input = raw_input(">> ")
+			while get_input not in av_array:
+				print("Input a number 0 to 9.");
+				get_input = raw_input(">> ");
+			
 			if get_input == "5":
-				print("You hear the door to your left start to open") #need to set variable to open door
+				print("You hear the door on the west wall start to open.\n") #need to set variable to open door
 				wr = cr.getWestRoom();#Get the room to the east of the current room (room 3)
 				wr.setLocked(False); #Set the rooms locked to false meaning that it can be entered
 				return 1; #Return the number of turns used up
 			else:
-				print("Nothing happens");
+				print("Nothing happens.\n");
 			return 1;
 
 		if name == "switch":
 			switch_array =[]
-			print("What would you like to set the first switch to up/down")
+			#accepted input, will loop until an accepted value is put in
+			av_array = ["up","down"]; 
+			
+			print("What would you like to set the first switch to up or down?")
 			get_input = raw_input(">> ")
+			while get_input.lower() not in av_array:
+				print("Input Up or down please.");
+				get_input = raw_input(">> ");
+
 			switch_array.append(get_input)
-			print("What would you like to set the second switch to up/down")
+			
+			print("What would you like to set the second switch to up or down?")
 			get_input = raw_input(">> ")
+			while get_input.lower() not in av_array:
+				print("Input Up or down please.");
+				get_input = raw_input(">> ");
+
 			switch_array.append(get_input)
-			print("What would you like to set the third switch to up/down")
+			
+
+			print("What would you like to set the third switch to up or down?")
 			get_input = raw_input(">> ")
+			while get_input.lower() not in av_array:
+				print("Input Up or down please.");
+				get_input = raw_input(">> ");
+
+
 			switch_array.append(get_input)
-			print("What would you like to set the fourth switch to up/down")
+			
+
+			print("What would you like to set the fourth switch to up or down?")
 			get_input = raw_input(">> ")
+			while get_input.lower() not in av_array:
+				print("Input Up or down please.");
+				get_input = raw_input(">> ");
+
+
 			switch_array.append(get_input)
 
 			if switch_array[0] == 'up' and switch_array[1] == 'down' and switch_array[2] == 'down' and switch_array[3] == 'up':
-				print("The door in front of you starts to open")
+				print("The door on the north wall starts to open.\n")
 			else:
-				print("Nothing happens")
+				print("Nothing happens.\n")
 			return 1;
+
+		#accepted input, will loop until an accepted value is put in
+		av_array = ["head","chest", "stomach"]; 
 
 		if name == "statue of osiris":
 			print("What part of the statue would you like to press? (head/chest/stomach)")
 			get_input = raw_input(">> ")
-			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+			while get_input.lower() not in av_array:
+				print("Input head, chest or stomach please.");
+				get_input = raw_input(">> ");
+
+			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas.\n")
 			return 1;
 
 		if name == "statue of horus":
 			print("What part of the statue would you like to press? (head/chest/stomach)")
 			get_input = raw_input(">> ")
-			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+			while get_input.lower() not in av_array:
+				print("Input head, chest or stomach please.");
+				get_input = raw_input(">> ");
+
+			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas.\n")
 			return 1;
 
 		if name == "statue of anubis":
 			print("What part of the statue would you like to press? (head/chest/stomach)")
 			get_input = raw_input(">> ")
-			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+
+			while get_input.lower() not in av_array:
+				print("Input head, chest or stomach please.");
+				get_input = raw_input(">> ");
+
+			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas.\n")
 			if get_input == "chest":
-				print("The statues hand extends holding a key")
-				print("Congrats on completing the demo. Come back when the game is finished!!")
+				print("The statues hand extends holding a key.\n")
+				
+				##Adding the key to the players inventory
+				player.getInventory().append("key");
+				print("key: A key used to open a locked door leading to the Chamber of Passing.")
+				print("Added key to inventory.\n");
+				###
+
+				print("Congrats on completing the demo. Come back when the game is finished!!\n")
 				exit()
 			else:
-				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas")
+				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas.\n")
 			return 1;
 
 	def __init__(self, na, desc, md, us):
@@ -399,7 +455,7 @@ class Player:
 					is_room = True;
 					room_to_move_to = room_to_north;
 				else:
-					print("You tried to enter the " + room_to_north.getName() + " but it appears to be locked somehow.")
+					print("You tried to enter the " + room_to_north.getName() + " but it appears to be locked somehow.\n")
 					return 1;		
 
 		if room_to_move_to_string == "go south":
@@ -408,7 +464,7 @@ class Player:
 					is_room = True;
 					room_to_move_to = room_to_south;
 				else:
-					print("You tried to enter the " + room_to_south.getName() + " but it appears to be locked somehow.")
+					print("You tried to enter the " + room_to_south.getName() + " but it appears to be locked somehow.\n")
 					return 1;
 
 		if room_to_move_to_string == "go east":
@@ -417,7 +473,7 @@ class Player:
 					is_room = True;
 					room_to_move_to = room_to_east;		
 				else:
-					print("You tried to enter the " + room_to_east.getName() + " but it appears to be locked somehow.")
+					print("You tried to enter the " + room_to_east.getName() + " but it appears to be locked somehow.\n")
 					return 1;
 		
 		if room_to_move_to_string == "go west":
@@ -426,7 +482,7 @@ class Player:
 					is_room = True;
 					room_to_move_to = room_to_west;		
 				else:
-					print("You tried to enter the " + room_to_west.getName() + " but it appears to be locked somehow.")
+					print("You tried to enter the " + room_to_west.getName() + " but it appears to be locked somehow.\n")
 					return 1;
 					
 		if is_room == True:
@@ -435,7 +491,7 @@ class Player:
 			gm.setCurrentRoom(room_to_move_to)
 		
 		else:
-			print("There is no room in that direction");
+			print("There is no room in that direction\n");
 			return 1; #Not able to move
 		return 0; #Able to move
 	

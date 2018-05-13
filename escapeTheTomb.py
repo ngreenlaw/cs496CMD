@@ -288,18 +288,33 @@ def processTag(returned_tag, player, ite, fea):
 			returned_tag = getInput();
 			#print(returned_tag);#DEBUG PRINT
 		if returned_tag == "look at room":
-			print(cr.displayDescription());
+			print(cr.getName() + ": " + cr.displayDescription());
+			nsew_rooms = [cr.getNorthRoom(), cr.getSouthRoom(), cr.getEastRoom(), cr.getWestRoom()];
+			
+			ro = 0;
+			for r in nsew_rooms:
+				if r != None:
+					if ro == 0:
+						print("There appears to be an entrance to another room on the north wall");
+					elif ro == 1:
+						print("There appears to be an entrance to another room on the south wall");
+					elif ro == 2:
+						print("There appears to be an entrance to another room on the east wall");
+					elif ro == 3:
+						print("There appears to be an entrance to another room on the west wall");
+				ro+=1;
+
 			print("\nFeatures of Note:");
 			for f in features_in_room:
 				ret = getFeatureFromName(fea, f);
-				print(ret.displayDescription());
+				print(ret.getName() + ": " + ret.displayDescription());
 			if len(items_in_room) != 0:
 				print("\nItems in room:");
 				for i in items_in_room:
 					print(i);
 				print("");
 			else:
-				print("\nThere are no items in this room to be picked up.");	
+				print("\nThere are no items in this room to be picked up\n.");	
 			return 0;
 	
 	#Move Room if the returned Tag is a direction
@@ -316,12 +331,26 @@ def processTag(returned_tag, player, ite, fea):
 	
 	#Look at room
 	elif returned_tag == "look at room":
-		print(cr.displayDescription());
+		print(cr.getName() + ": " + cr.displayDescription());
+		nsew_rooms = [cr.getNorthRoom(), cr.getSouthRoom(), cr.getEastRoom(), cr.getWestRoom()];
+		
+		ro = 0;
+		for r in nsew_rooms:
+			if r != None:
+				if ro == 0:
+					print("There appears to be an entrance to another room on the north wall");
+				elif ro == 1:
+					print("There appears to be an entrance to another room on the south wall");
+				elif ro == 2:
+					print("There appears to be an entrance to another room on the east wall");
+				elif ro == 3:
+					print("There appears to be an entrance to another room on the west wall");
+			ro+=1;
+
 		print("\nFeatures of Note:");
 		for f in features_in_room:
 			ret = getFeatureFromName(fea, f);
-			print(ret.displayDescription());
-		print;
+			print(ret.getName() + ": " + ret.displayDescription());
 		if len(items_in_room) != 0:
 			print("\nItems in room:");
 			for i in items_in_room:
@@ -330,7 +359,8 @@ def processTag(returned_tag, player, ite, fea):
 		else:
 			print("\nThere are no items in this room to be picked up.\n");	
 		return 0;
-	
+
+
 	#Display the description if the returned tag is look item
 	#returned_tag == look at <item> ex: look at torch
 	elif returned_tag in look_at_item: 
@@ -373,7 +403,16 @@ def processTag(returned_tag, player, ite, fea):
 		
 	elif returned_tag in drop_item:
 		for its in drop_item:
-			if returned_tag == its: #Everything after "Look "
+			#TORCH DROPPING FOR ROOM 3
+			if returned_tag == its and cr.getName() == "Antechamber 1":
+				ret = getItemFromName(ite, its[5:]);
+				print("Dropped " + ret.getName() + " on the ground.\n");
+				player.removeFromInventory(ret.getName());
+				print("When the torch hits the ground you notice on the wall the holes repeat the pattern: up, down, down, up.\n");
+				break;
+
+			#EVERYTHING ELSE 
+			elif returned_tag == its: #Everything after "Look "
 				ret = getItemFromName(ite, its[5:]);
 				print("Dropped " + ret.getName() + " on the ground.\n");
 				player.removeFromInventory(ret.getName());
@@ -385,8 +424,7 @@ def processTag(returned_tag, player, ite, fea):
 		for its in take_item:
 			if returned_tag == its: #Everything after "Look "
 				ret = getItemFromName(ite, its[5:]);
-				print(ret.getName());
-				print(ret.displayDescription());
+				print(ret.getName() + ": " + ret.displayDescription());
 				print("Added " + ret.getName() + " to inventory.\n");
 				player.addToInventory(ret.getName());
 				break;
@@ -475,6 +513,10 @@ def main():
 		#Reduce turn count
 		gameManager.setTurnCount(turns_left-turn);
 		turns_left = gameManager.getTurnCount();
+
+	if turns_left <= 0:
+		print("You have unfortunately ran out of air.");
+		print("GAME OVER");
 		
 #run the program
 if __name__ == "__main__":
