@@ -15,7 +15,7 @@ room1 = {
 	"descL": "The large entry way into the tomb, there are hieroglyphs on each of the walls. There is a large doorway in front of you that looks like it leads to a larger space.",
 	"descMod": "",
 	"descS": "You are in the entry of the tomb. There is a doorway in front of you.",
-	"features": ["left, hieroglyphs", "right hieroglyphs"],
+	"features": ["left hieroglyphs", "right hieroglyphs"],
 	"items": [],
 	"visited": "False",
 	"north_room": "Main Passage",
@@ -62,7 +62,7 @@ room4 = {
 	"items": [],
 	"visited": "False",
 	"north_room": "",
-	"south_room": "Antechamber 2",
+	"south_room": "Antechamber 1",
 	"east_room": "",
 	"west_room": "Treasure Room",
 	"locked": "False"
@@ -182,4 +182,4 @@ with open("room8.json","w+") as f:
 with open("room9.json","w+") as f:
 	f.write(a)
 with open("room10.json","w+") as f:
-f.write(b)
+	f.write(b)
