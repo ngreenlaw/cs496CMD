@@ -404,12 +404,18 @@ def processTag(returned_tag, player, ite, fea):
 	elif returned_tag in drop_item:
 		for its in drop_item:
 			#TORCH DROPPING FOR ROOM 3
-			if returned_tag == its and cr.getName() == "Antechamber 1":
+			if returned_tag == its and returned_tag == "drop torch" and cr.getName() == "Antechamber 1":
 				ret = getItemFromName(ite, its[5:]);
 				print("Dropped " + ret.getName() + " on the ground.\n");
 				player.removeFromInventory(ret.getName());
 				print("When the torch hits the ground you notice on the wall the holes repeat the pattern: up, down, down, up.\n");
 				break;
+				
+			########################URN DROPPING HERE
+			
+			
+			
+			########################################################
 
 			#EVERYTHING ELSE 
 			elif returned_tag == its: #Everything after "Look "
