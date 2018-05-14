@@ -102,6 +102,7 @@ class Feature:
 
 #This is where the touching of features will happen
 	#The feature will have this function called on it so self is the object you are working on
+	########################----------------------------------THIS FUNCTION IS WHERE INTERACTIONS GO
 	def touchFeature(self, player):
 		name = self.getName() #This returns the name of the object, will be used for the if/elif statements
 		cr = player.getCurrentRoom();
@@ -218,6 +219,13 @@ class Feature:
 			else:
 				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas.\n")
 			return 1;
+		
+		################Starting here follow the format of above
+		##Return the number of turns lost by touching the feature
+		
+		
+		
+		########################################################################################################
 
 	def __init__(self, na, desc, md, us):
 		self.setDescription(desc);
