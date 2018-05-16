@@ -394,7 +394,7 @@ class GameManager:
 		self.current_room = current_room_value;
 		return 0;
 		
-	def __init__(self, tc, cr, pr):
+	def __init__(self, tc, cr):
 		self.turn_count = tc;
 		self.current_room = cr;
 		

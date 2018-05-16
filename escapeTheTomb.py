@@ -5,12 +5,14 @@ import watson_developer_cloud
 import sys
 import egyptclass as ec
 import os
+import os.path
 #import simplejson
 
 #Variables to hold things such that they are easier to edit
 ITEM_FILES_VAR = ["items.json"]; #would like to change this to reading off of a file that contains the names of all the files
 FEATURE_FILES_VAR = ["features.json"];
 ROOM_FILES_VAR = ["room1.json", "room2.json", "room3.json", "room4.json", "room5.json", "room6.json", "room7.json", "room8.json", "room9.json", "room10.json"];
+r_a = ['room1','room2','room3','room4','room5','room6','room7','room8','room9','room10']
 #GAME_MANAGER_FILE_VAR = "gm.json";
 #PLAYER_FILE_VAR = "player.json";
 
@@ -72,6 +74,7 @@ def createItem(files_list):
 		f = open(fi, "r");
 		rf = f.read();
 		fj = json.loads(rf);
+		f.close()
 		
 		#create the object HERE IS WHERE TO EDIT
 	for f_item in fj:
@@ -91,6 +94,7 @@ def createFeature(files_list):
 		f = open(fi, "r");
 		rf = f.read();
 		fj = json.loads(rf);
+		f.close()
 		
 	#create the object HERE IS WHERE TO EDIT
 	for f_feature in fj:
@@ -99,6 +103,24 @@ def createFeature(files_list):
 		
 	return list_of_objects;
 
+def createFeatureLoad(name):
+	#FIX BASED ON WHAT THE JSON FILE IS
+	object_created = None;
+	list_of_objects = [];
+	
+	list_of_objects = [];
+	f = open(name, "r");
+	rf = f.read();
+	fj = json.loads(rf)[3];
+	f.close()
+
+	fj_f = fj['feature']
+	#create the object HERE IS WHERE TO EDIT
+	for f_feature in fj_f:
+		object_created = ec.Feature(fj_f[f_feature]['name'], fj_f[f_feature]['desc'], fj_f[f_feature]['descMod'], fj_f[f_feature]['usage']);
+		list_of_objects.append(object_created);
+	return list_of_objects;
+	
 #function to set the north, south, east and west rooms after the create function to replace the names with the room object itself
 def createRoomNSEW(roomList):
 	for r in roomList:
@@ -144,6 +166,7 @@ def createRoom(files_list):
 		f = open(fi, "r");
 		rf = f.read();
 		fj = json.loads(rf);
+		f.close();
 		
 		tf_lock = True;
 		#create the object HERE IS WHERE TO EDIT
@@ -157,17 +180,168 @@ def createRoom(files_list):
 		list_of_objects.append(object_created);
 	return list_of_objects;
 	
+def createRoomLoad(fname):
+	list_of_objects = [];
+	f = open(fname, "r");
+	rf = f.read();
+	fj = json.loads(rf)[2];
+	f.close()
+	
+
+	global r_a;
+	
+	for i in range(0, len(r_a)):
+		tf_lock = True;
+		if fj['rooms'][r_a[i]]['locked'] == "False":
+			tf_lock = False;
+		
+		tf_visit = True;
+		if fj['rooms'][r_a[i]]['visited'] == "False":
+			tf_visit = False;
+			
+		object_created = ec.Room(fj['rooms'][r_a[i]]['name'], fj['rooms'][r_a[i]]['descL'], fj['rooms'][r_a[i]]['descS'], fj['rooms'][r_a[i]]['items'], fj['rooms'][r_a[i]]['features'], tf_lock);
+		object_created.setNorthRoom(fj['rooms'][r_a[i]]['north_room']);
+		object_created.setSouthRoom(fj['rooms'][r_a[i]]['south_room']);
+		object_created.setEastRoom(fj['rooms'][r_a[i]]['east_room']);
+		object_created.setWestRoom(fj['rooms'][r_a[i]]['west_room']);
+		object_created.setVisited(tf_visit);
+		list_of_objects.append(object_created);
+	return list_of_objects;
+	
 #function to create the game manager
-def createGameManager(tc, room, pr):
-	gm = ec.GameManager(tc, room, pr);
+def createGameManager(tc, room):
+	gm = ec.GameManager(tc, room);
 	return gm;
 
+def createGameManagerLoad(name, rooms):
+	f = open(name, "r");
+	rf = f.read();
+	fj = json.loads(rf)[0];
+	f.close()
+
+	cr = fj['game_manager']['current_room']
+
+	cr_o = getRoomFromName(rooms,cr);
+	gm = ec.GameManager(int(fj['game_manager']['turn_count']), cr_o);
+	
+	return gm;
+	
 #function to create the player
 def createPlayer(gm, items):
 	p = ec.Player(items, gm);
 	return p;
+
+#function to create the player
+def createPlayerLoad(gm, name):
+	f = open(name, "r");
+	rf = f.read();
+	fj = json.loads(rf)[1];
+	f.close()
 	
-#Separate load file that will take all of the saved data and read it in.
+	p = ec.Player(fj['player']['inventory'], gm);
+	return p;
+	
+#function to save the game
+
+def saveGame(gm, player, feat, rooms):
+	name = raw_input("What would you like to call the save file?\n");
+	data = []
+	#Game manager data
+	gm_data = {
+		'game_manager': {
+			'turn_count': str(gm.getTurnCount()),
+			'current_room': gm.getCurrentRoom().getName(),
+			}
+		}
+	data.append(gm_data);
+	
+	#Player data
+	player_data = {
+		'player': {
+			'inventory': player.getInventory()
+			}
+		}
+	data.append(player_data);
+	
+	#Room data
+	room_data = {
+		'rooms':{
+			}
+		}
+		
+	global r_a;
+		
+	for i in range(0, len(r_a)):
+		room_data['rooms'].update({r_a[i]:{}})
+
+	for i in range(0,len(r_a)):
+		room_data['rooms'][r_a[i]]['name'] = rooms[i].getName()
+		room_data['rooms'][r_a[i]]['descL'] = rooms[i].getLongDescription()
+		room_data['rooms'][r_a[i]]['descS'] = rooms[i].getShortDescription()
+		room_data['rooms'][r_a[i]]['items'] = rooms[i].getItems()
+		room_data['rooms'][r_a[i]]['features'] = rooms[i].getFeatures()
+		room_data['rooms'][r_a[i]]['visited'] = str(rooms[i].getVisited())
+		room_data['rooms'][r_a[i]]['locked'] = str(rooms[i].getLocked())
+		
+		nr = rooms[i].getNorthRoom();
+		sr = rooms[i].getSouthRoom();
+		er = rooms[i].getEastRoom();
+		wr = rooms[i].getWestRoom();
+		
+		if nr == None:
+			nr = "";
+		else:
+			nr = nr.getName();
+			
+		if sr == None:
+			sr = "";
+		else:
+			sr = sr.getName();
+			
+		if er == None:
+			er = "";
+		else:
+			er = er.getName();
+			
+		if wr == None or r_a[i] == 'room7': #edit this when all rooms are created
+			wr = "";
+		else:
+			wr = wr.getName();
+		
+		room_data['rooms'][r_a[i]]['north_room'] = nr
+		room_data['rooms'][r_a[i]]['south_room'] = sr
+		room_data['rooms'][r_a[i]]['east_room'] = er
+		room_data['rooms'][r_a[i]]['west_room'] = wr		
+	
+	data.append(room_data);
+	
+	#Feature data
+	feature_data = {
+		'feature':{
+			}
+		}
+	for i in range(0,len(feat)):
+		feature_data['feature'].update({str(i):{}})
+		m_b = "True"
+		if feat[i].modified_description_bool == False:
+			m_b = "False"
+	
+		feature_data['feature'][str(i)]['name'] = feat[i].getName();
+		feature_data['feature'][str(i)]['desc'] = feat[i].getDescription();
+		feature_data['feature'][str(i)]['descMod'] = feat[i].getModifiedDescription();
+		feature_data['feature'][str(i)]['usage'] = feat[i].getUsage();
+		feature_data['feature'][str(i)]['descModBool'] = m_b;
+	
+	data.append(feature_data);
+	
+	name = name + '.json'
+	with open(name, 'w') as outfile:
+		json.dump(data, outfile)
+		outfile.close()
+	
+	print("Game successfully saved to " + name +"\n");
+	
+	return 0;
 
 #functions to get the input and parse it
 class DictQuery(dict):
@@ -212,7 +386,7 @@ def getInput():
 
 #functions to resolve the action and update necessary variables
 #Returns if a turn should be used up is 1, 0 if not
-def processTag(returned_tag, player, ite, fea):
+def processTag(returned_tag, player, ite, fea, rooms):
 	
 	#Check the I didnt understand result and ask to get input again
 	nu = "I didn\'t understand. You can try rephrasing.";
@@ -275,6 +449,8 @@ def processTag(returned_tag, player, ite, fea):
 	hit_target_with_item = ""; #FIX BASED ON TAG
 	touch_target = ""; #FIX BASED ON TAG
 	touch_feature = features_touch;	
+	save_game = "save game"
+	load_game = "load game"
 		
 	#use and touch both return touch
 
@@ -442,7 +618,13 @@ def processTag(returned_tag, player, ite, fea):
 				ret = getFeatureFromName(fea, f[6:]);
 				ret.touchFeature(player);
 				return 1;
-	#...
+	
+	elif returned_tag == save_game:
+		saveGame(player.getGameManager(), player, fea, rooms);
+		return 0;
+	
+	elif returned_tag == load_game:
+		return -1;
 	#...
 	#...
 	
@@ -450,21 +632,15 @@ def processTag(returned_tag, player, ite, fea):
 	print("You cannot do that\n");
 	return 0;
 
-def main():
-	# Display's intro
-	intro()
-	#Start Main Menu, until a result of save, load or exit is given, repeat asking for input
-	get_main_menu_result = 2;
-	while get_main_menu_result == 2:
-		get_main_menu_result = mainMenu();
-		
-	#Process command from main menu
+#CONVERT THE MAIN FUNCTION TO THIS AND RETURN -1 FOR PROCESS TAG IN 	
+def playGame(get_main_menu_result):
+#Process command from main menu
 	#new game issued
+	global ITEM_FILES_VAR;
 	if get_main_menu_result == 0:
 		#Begin creating game
 		
 		#Create items for the whole game
-		global ITEM_FILES_VAR;
 		items = createItem(ITEM_FILES_VAR);
 		
 		#Create items for the whole game
@@ -477,7 +653,7 @@ def main():
 		createRoomNSEW(rooms);
 		
 		#Create game manager
-		gameManager = createGameManager(90,rooms[0], rooms[0]);
+		gameManager = createGameManager(90,rooms[0]);
 		
 		#Create player
 		starting_inventory = ["torch"];
@@ -487,8 +663,41 @@ def main():
 	#Load game
 	elif get_main_menu_result == 1:
 		#BEGIN GAME LOADING
-		print("Loading Game Doesnt work yet");
-		exit();
+		name = raw_input("What is the name of the file to load? (Without the extension)\n")
+		if name.lower() == "quit":
+			exit()
+		name = name +'.json'
+		contin = 0;
+		if os.path.isfile(name):
+			contin = 1;
+		while contin == 0:
+			print("There is no file by that name. Try again. Or type quit to exit.\n")
+			name = raw_input("What is the name of the file to load? (Without the extension)\n")
+			if name.lower() == "quit":
+				exit()
+			name = name +'.json'
+			if os.path.isfile(name):
+				contin = 1;
+		
+		#DO THINGS WITH LOADING
+		#Begin creating game
+		
+		#Create items for the whole game
+		items = createItem(ITEM_FILES_VAR);
+		
+		#Create items for the whole game
+		features = createFeatureLoad(name);
+		
+		#Create rooms for the whole game
+		rooms = createRoomLoad(name);
+		createRoomNSEW(rooms);
+		
+		#Create game manager
+		gameManager = createGameManagerLoad(name, rooms);
+		
+		#Create player
+		player = createPlayerLoad(gameManager, name);
+		player.setCurrentRoom(gameManager.getCurrentRoom());
 
 	else:
 		print("DEBUG - SOMETHING WENT WRONG IN THE MAIN MENU, THIS SHOULD NOT HAPPEN");
@@ -514,7 +723,10 @@ def main():
 		#print(input_given);#DEBUG PRINT
 
 		#Display result / if error then do not print result
-		turn = processTag(input_given, player, items, features);
+		turn = processTag(input_given, player, items, features, rooms);
+		if turn == -1:
+			print("Entered load game")
+			return -1;
 		
 		#Reduce turn count
 		gameManager.setTurnCount(turns_left-turn);
@@ -523,7 +735,25 @@ def main():
 	if turns_left <= 0:
 		print("You have unfortunately ran out of air.");
 		print("GAME OVER");
+		return 1;
+
+def main():
+	# Display's intro
+	intro()
+	#Start Main Menu, until a result of save, load or exit is given, repeat asking for input
+	get_main_menu_result = 2;
+	while get_main_menu_result == 2:
+		get_main_menu_result = mainMenu();
 		
+	g = 0;
+	while g <= 0:
+		if g == -1:
+			g = playGame(1);
+		else:
+			g = playGame(get_main_menu_result)
+	return 0;
+	
+			
 #run the program
 if __name__ == "__main__":
 	main();
