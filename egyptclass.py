@@ -222,7 +222,17 @@ class Feature:
 		
 		################Starting here follow the format of above
 		##Return the number of turns lost by touching the feature
-		
+		if name == "urn":
+			print("What part of the urn would you like to press? (top/side)")
+			get_input = raw_input(">> ")
+			while get_input.lower() not in av_array:
+				print("Input top or side please.");
+				get_input = raw_input(">> ");
+			if get_input == "top":
+				print("Pressing down on the urn reveals its hard, cold, and study structure.\n")
+			else: 
+				print("The urn falls over on its side with a light thud.\n")
+			return 1;
 		
 		
 		########################################################################################################
