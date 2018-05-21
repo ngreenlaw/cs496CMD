@@ -223,6 +223,7 @@ class Feature:
 		################Starting here follow the format of above
 		##Return the number of turns lost by touching the feature
 		if name == "urn":
+			av_array = ["top","side"]
 			print("What part of the urn would you like to press? (top/side)")
 			get_input = raw_input(">> ")
 			while get_input.lower() not in av_array:
