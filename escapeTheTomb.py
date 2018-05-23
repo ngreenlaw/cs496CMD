@@ -593,7 +593,8 @@ def processTag(returned_tag, player, ite, fea, rooms):
 				ret = getItemFromName(ite, its[5:]);
 				print("Dropped " + ret.getName() + " on the ground.\n");
 				player.removeFromInventory(ret.getName());
-				print("Upon dropping the urn, it lands on the ground with a soft thud.\n");
+				print("Upon dropping the urn, it lands on the ground and breaks open revealing a shiny brooch. You decide to pick it up and add it to your inventory.\n");
+				cr.items.append("brooch") 
 				break;
 			
 			
