@@ -232,7 +232,8 @@ class Feature:
 			if get_input == "top":
 				print("Pressing down on the urn reveals its hard, cold, and study structure.\n")
 			else: 
-				print("The urn falls over on its side with a light thud.\n")
+				print("The urn falls over on its side, and it breaks open and reveals a shiny brooch. So you decide to pick up the brooch, and add it to your inventory.\n")
+				cr.items.append("brooch") 
 			return 1;
 		
 		
