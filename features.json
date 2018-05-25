@@ -144,5 +144,29 @@
 		"desc": "Upon closer inspection, the hieroglyphs say, 'Here lies the end of this branch of the tomb. You must turn around.'",
 		"descMod": "",
 		"usage": ""
-	}
+	},
+	{
+		"name": "tapestry of set", 
+		"desc": "A tapestry with an image of the god Set pointing a sword to the right.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "tapestry of ra", 
+		"desc": "A tapestry with an image of the god Ra sitting on a throne.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "tapestry of isis", 
+		"desc": "A tapestry with an image of the goddess Isis kneeling.",
+		"descMod": "",
+		"usage": ""
+	},
+	{
+		"name": "weapons rack", 
+		"desc": "A rack filled with rusty weapons that are no longer useful in a fight but maybe useful for general utility.",
+		"descMod": "",
+		"usage": ""
+	},
 ]
