@@ -171,61 +171,61 @@
 	},
 	{
 		"name": "wooden door", 
-		"desc": "A locked wooden door. There is a keyhole that appears to unlock it." 
+		"desc": "A locked wooden door. There is a keyhole that appears to unlock it.", 
 		"descMod": "An unlocked wooden door.",
 		"usage": ""
 	},
 	{
 		"name": "siren statue", 
-		"desc": "A statue of a mermaid looking creature, it seems like a song is coming from it that makes it difficult to think." 
+		"desc": "A statue of a mermaid looking creature, it seems like a song is coming from it that makes it difficult to think.", 
 		"descMod": "",
 		"usage": ""
 	},
 	{
 		"name": "jackal statue", 
-		"desc": "A statue of a dog-like human known as a Jackal, it is holding a spear and wearing what appears to be a necklace of a scarab." 
+		"desc": "A statue of a dog-like human known as a Jackal, it is holding a spear and wearing what appears to be a necklace of a scarab.", 
 		"descMod": "A statue of a dog-like human known as a Jackal, it is holding a spear.",
 		"usage": ""
 	},
 	{
 		"name": "chimera statue", 
-		"desc": "A statue of a monster that has the head of a lion, the body of a goat and the tail of a serpent. It appears to be holding a brooch shaped like a scarab." 
+		"desc": "A statue of a monster that has the head of a lion, the body of a goat and the tail of a serpent. It appears to be holding a brooch shaped like a scarab.", 
 		"descMod": "A statue of a monster that has the head of a lion, the body of a goat and the tail of a serpent.",
 		"usage": ""
 	},
 	{
 		"name": "hieroglyphs", 
-		"desc": "Reading the hieroglyphs tells you the story of the jackal that bested the chimera in battle." 
+		"desc": "Reading the hieroglyphs tells you the story of the jackal that bested the chimera in battle.", 
 		"descMod": "",
 		"usage": ""
 	},
 	{
 		"name": "sphinx", 
-		"desc": "A giant statue of sphinx holding a slab that reads: There are two sisters: one gives birth to the other and she, in turn, gives birth to the first. What are they?" 
+		"desc": "A giant statue of sphinx holding a slab that reads: There are two sisters: one gives birth to the other and she, in turn, gives birth to the first. What are they?", 
 		"descMod": "After solving the puzzle the sphinx statue has revealed a spot to insert an item.",
 		"usage": ""
 	},
 	{
 		"name": "jeweled beetles", 
-		"desc": "Tons of gold beetles litter the floor, it would be best to just leave them be." 
+		"desc": "Tons of gold beetles litter the floor, it would be best to just leave them be.", 
 		"descMod": "",
 		"usage": ""
 	},
 	{
 		"name": "large tomb", 
-		"desc": "A large tomb with a mummified pharaoh holding what appears to be a very valuable artifact." 
+		"desc": "A large tomb with a mummified pharaoh holding what appears to be a very valuable artifact.", 
 		"descMod": "A large tomb with a mummified pharaoh.",
 		"usage": ""
 	},
 	{
 		"name": "griffin statue", 
-		"desc": "A giant stone statue of a griffin, it looks like it’s beak could be pulled." 
+		"desc": "A giant stone statue of a griffin, it looks like it’s beak could be pulled.", 
 		"descMod": "",
 		"usage": ""
 	},
 	{
 		"name": "eagle statue", 
-		"desc": "A giant stone statue of an eagle, it looks like it’s beak could be pulled." 
+		"desc": "A giant stone statue of an eagle, it looks like it’s beak could be pulled.", 
 		"descMod": "",
 		"usage": ""
 	},
