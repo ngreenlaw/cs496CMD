@@ -204,7 +204,8 @@ class Feature:
 				print("Input head, chest or stomach please.");
 				get_input = raw_input(">> ");
 
-			print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas.\n")
+			#print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas.\n")
+			
 			if get_input == "chest":
 				print("The statues hand extends holding a key.\n")
 				
@@ -214,8 +215,6 @@ class Feature:
 				print("Added key to inventory.\n");
 				###
 
-				print("Congrats on completing the demo. Come back when the game is finished!!\n")
-				exit()
 			else:
 				print("A thick cloud of smoke starts coming from the statue, you turn to run but are overwhelmed by the gas.\n")
 			return 1;
@@ -232,13 +231,144 @@ class Feature:
 			if get_input == "top":
 				print("Pressing down on the urn reveals its hard, cold, and study structure.\n")
 			else: 
-				print("The urn falls over on its side, and it breaks open and reveals a shiny brooch. So you decide to pick up the brooch, and add it to your inventory.\n")
-				cr.items.append("brooch") 
+				player.removeFromInventory("urn");
+				cr.items.remove("urn")
+				print("Upon dropping the urn, it lands on the ground and breaks open revealing a shiny brooch. You decide to pick it up and add it to your inventory.\n");
+				cr.items.append("brooch")
+				player.addToInventory("brooch")
 			return 1;
 		
 		
 		########################################################################################################
+		
+		if name == "ra":
+			if "sword" in player.getInventory():
+				print("Upon touching the tapestry it appears thin enough to cut through it with your sword, would you like to? (yes/no)")
+				av_array = ["yes", "no"]
+				get_input = raw_input(">> ")
+				while get_input.lower() not in av_array:
+					print("Input yes or no please.");
+					get_input = raw_input(">> ");
+				if get_input == "yes":
+					print("With a slash of the sword the tapestry falls apart revealing a staircase behind it.\n")
+					cr.getNorthRoom().setLocked(False) #allow moving into the next room
+					self.modified_description = "The tapestry previously of Ra is now in tatters.";
+					self.modified_description_bool = True;
+					return 1;
+				else: 
+					print("The tapestry is left untouched.\n")
+					return 0;
+			else:
+				print("Upon touching the tapestry it appears thin enough to cut through it with something. You also feel a breeze coming from behind it.")
+			return 0;
+		
+		if name == "set":
+			if "sword" in player.getInventory():
+				print("Upon touching the tapestry it appears thin enough to cut through it with your sword, would you like to? (yes/no)")
+				av_array = ["yes", "no"]
+				get_input = raw_input(">> ")
+				while get_input.lower() not in av_array:
+					print("Input yes or no please.");
+					get_input = raw_input(">> ");
+				if get_input == "yes":
+					print("With a slash of the sword the tapestry falls apart revealing the wall behind it.\n")
+					self.modified_description = "The tapestry previously of Set is now in tatters.";
+					self.modified_description_bool = True;
+					return 1;
+				else: 
+					print("The tapestry is left untouched.\n")
+					return 0;
+			else:
+				print("Upon touching the tapestry it appears thin enough to cut through it with something.")
+			return 0;
 
+		if name == "isis":
+			if "sword" in player.getInventory():
+				print("Upon touching the tapestry it appears thin enough to cut through it with your sword, would you like to? (yes/no)")
+				av_array = ["yes", "no"]
+				get_input = raw_input(">> ")
+				while get_input.lower() not in av_array:
+					print("Input yes or no please.");
+					get_input = raw_input(">> ");
+				if get_input == "yes":
+					self.modified_description = "The tapestry previously of Isis is now in tatters.";
+					self.modified_description_bool = True;
+					return 1;
+				else: 
+					print("The tapestry is left untouched.\n")
+					return 0;
+			else:
+				print("Upon touching the tapestry it appears thin enough to cut through it with something.")
+			return 0;
+
+		if name == "door":
+			if "key" in player.getInventory():
+				cr.getNorthRoom().setLocked(False);
+				self.modified_description_bool = True;
+				print("You put the key in the lock and turn it and with a click the door swings open.\n");
+				return 1;
+			else:
+				print("It looks like there is a spot to put a key in the door.\n")
+				return 0;
+
+		if name == "sphinx":
+			if self.modified_description_bool == True:
+				print("There is a scarab shaped hole that has appeared in the sphinx, it appears that you can put something in it. Would you like to? (yes/no)?")
+				av_array = ["yes", "no"]
+				get_input = raw_input(">> ")
+				while get_input.lower() not in av_array:
+					print("Input yes or no please.");
+					get_input = raw_input(">> ");
+				if get_input == "yes":
+					print("What item from your inventory would you like to try?")
+					for i in player.getInventory():
+						print(i);
+					get_input = raw_input(">> ");
+					if get_input.lower() == "necklace" and "necklace" in player.getInventory():
+						print("You insert the necklace into the hole and you hear a click. The sphinx statue then slides to reveal a staircase heading down.\n")
+						cr.getWestRoom().setLocked(False);
+						self.modified_description = "The sphinx statue has slid revealing a staircase";	
+					return 1;
+				else: 
+					print("The hole in the sphinx is left untouched.\n")
+					return 0;
+
+		if name == "griffin":
+			av_array = ["yes", "no"]
+			print("Upon further inspection it appears the beak can be pulled like a lever. Would you like to? (yes/no)");
+			get_input = raw_input(">> ")
+			while get_input.lower() not in av_array:
+				print("Input yes or no please.");
+				get_input = raw_input(">> ");
+			if get_input == "yes":
+				print("\nYou hear a click as you pull down the lever and then you hear a loud resonding thud from the entrance of the tomb.")
+				print("Looking around you see a system of pulleys that you could not see before, it appears that this was the way to unbloack the entrance.")
+				print("You take a deep breath feeling the air come back into the tomb.\n")
+				print("Congratulations! You have assisted in successfully helping Carter complete his expedition! Thank you for playing!")
+				exit() #GAME ENDS
+				return 1;
+			else: 
+				print("You decide to leave the statue alone.\n")
+				return 0;
+
+		if name == "eagle":
+			av_array = ["yes", "no"]
+			print("Upon further inspection it appears the beak can be pulled like a lever. Would you like to? (yes/no)");
+			get_input = raw_input(">> ")
+			while get_input.lower() not in av_array:
+				print("Input yes or no please.");
+				get_input = raw_input(">> ");
+			if get_input == "yes":
+				print("You pull the beak down and a cloud of gas spits out at you. This causes you to gasp for air, using up precious amounts of the little air you have.\n")
+				return 5;
+			else: 
+				print("You decide to leave the statue alone.\n")
+				return 0;
+	
+		else:
+			print("You touch the " + self.getName() + " and nothing happens.\n")
+			return 0;
+		
 	def __init__(self, na, desc, md, us):
 		self.setDescription(desc);
 		self.setName(na);
@@ -415,7 +545,8 @@ class Player:
 	current_room = None;
 	inventory = [];
 	game_manager = None;
-		
+	ears = "no";	
+	
 	def getCurrentRoom(self):
 		return self.current_room;
 	
@@ -475,7 +606,7 @@ class Player:
 					is_room = True;
 					room_to_move_to = room_to_north;
 				else:
-					print("You tried to enter the " + room_to_north.getName() + " but it appears to be locked somehow.\n")
+					print("You tried to enter the " + room_to_north.getName() + " but it appears to be blocked somehow.\n")
 					return 1;		
 
 		if room_to_move_to_string == "go south":
@@ -484,7 +615,7 @@ class Player:
 					is_room = True;
 					room_to_move_to = room_to_south;
 				else:
-					print("You tried to enter the " + room_to_south.getName() + " but it appears to be locked somehow.\n")
+					print("You tried to enter the " + room_to_south.getName() + " but it appears to be blocked somehow.\n")
 					return 1;
 
 		if room_to_move_to_string == "go east":
@@ -493,7 +624,7 @@ class Player:
 					is_room = True;
 					room_to_move_to = room_to_east;		
 				else:
-					print("You tried to enter the " + room_to_east.getName() + " but it appears to be locked somehow.\n")
+					print("You tried to enter the " + room_to_east.getName() + " but it appears to be blocked somehow.\n")
 					return 1;
 		
 		if room_to_move_to_string == "go west":
@@ -502,7 +633,7 @@ class Player:
 					is_room = True;
 					room_to_move_to = room_to_west;		
 				else:
-					print("You tried to enter the " + room_to_west.getName() + " but it appears to be locked somehow.\n")
+					print("You tried to enter the " + room_to_west.getName() + " but it appears to be blocked somehow.\n")
 					return 1;
 					
 		if is_room == True:

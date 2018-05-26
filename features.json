@@ -146,19 +146,25 @@
 		"usage": ""
 	},
 	{
-		"name": "tapestry of set", 
+		"name": "set", 
 		"desc": "A tapestry with an image of the god Set pointing a sword to the right.",
 		"descMod": "",
 		"usage": ""
 	},
 	{
-		"name": "tapestry of ra", 
+		"name": "adventurer", 
+		"desc": "An adventurer lies dead with his pack. There does not appear to be anything of much use except maybe some earplugs.",
+		"descMod": "An adventurer lies dead with his pack. There does not appear to be anything of much use.",
+		"usage": ""
+	},
+	{
+		"name": "ra", 
 		"desc": "A tapestry with an image of the god Ra sitting on a throne.",
 		"descMod": "",
 		"usage": ""
 	},
 	{
-		"name": "tapestry of isis", 
+		"name": "isis", 
 		"desc": "A tapestry with an image of the goddess Isis kneeling.",
 		"descMod": "",
 		"usage": ""
@@ -170,7 +176,7 @@
 		"usage": ""
 	},
 	{
-		"name": "wooden door", 
+		"name": "door", 
 		"desc": "A locked wooden door. There is a keyhole that appears to unlock it.", 
 		"descMod": "An unlocked wooden door.",
 		"usage": ""
@@ -182,20 +188,20 @@
 		"usage": ""
 	},
 	{
-		"name": "jackal statue", 
+		"name": "jackal", 
 		"desc": "A statue of a dog-like human known as a Jackal, it is holding a spear and wearing what appears to be a necklace of a scarab.", 
 		"descMod": "A statue of a dog-like human known as a Jackal, it is holding a spear.",
 		"usage": ""
 	},
 	{
-		"name": "chimera statue", 
+		"name": "chimera", 
 		"desc": "A statue of a monster that has the head of a lion, the body of a goat and the tail of a serpent. It appears to be holding a brooch shaped like a scarab.", 
 		"descMod": "A statue of a monster that has the head of a lion, the body of a goat and the tail of a serpent.",
 		"usage": ""
 	},
 	{
-		"name": "hieroglyphs", 
-		"desc": "Reading the hieroglyphs tells you the story of the jackal that bested the chimera in battle.", 
+		"name": "writings", 
+		"desc": "Reading the writings tells you the story of the jackal that bested the chimera in battle.", 
 		"descMod": "",
 		"usage": ""
 	},
@@ -212,21 +218,21 @@
 		"usage": ""
 	},
 	{
-		"name": "large tomb", 
+		"name": "tomb", 
 		"desc": "A large tomb with a mummified pharaoh holding what appears to be a very valuable artifact.", 
 		"descMod": "A large tomb with a mummified pharaoh.",
 		"usage": ""
 	},
 	{
-		"name": "griffin statue", 
+		"name": "griffin", 
 		"desc": "A giant stone statue of a griffin, it looks like it’s beak could be pulled.", 
 		"descMod": "",
 		"usage": ""
 	},
 	{
-		"name": "eagle statue", 
+		"name": "eagle", 
 		"desc": "A giant stone statue of an eagle, it looks like it’s beak could be pulled.", 
 		"descMod": "",
 		"usage": ""
-	},
+	}
 ]
