@@ -642,8 +642,7 @@ def processTag(returned_tag, player, ite, fea, rooms):
 				break;
 				
 			########################URN DROPPING HERE
-			if returned_tag == its and returned_tag == "drop urn" and cr.getName() == "Pharaoh Mummy Room":
-				#Not sure if urn is in its[5] or where the urn is in that list
+			if returned_tag == its and returned_tag == "drop urn" and cr.getName() == "Pharaoh Mummy Room":				
 				ret = getItemFromName(ite, its[5:]);
 				print("Dropped " + ret.getName() + " on the ground.\n");
 				player.removeFromInventory(ret.getName());
