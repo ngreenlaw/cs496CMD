@@ -28,7 +28,8 @@ def mainMenu():
 		return 2;
 
 def intro():
-    
+    sys.stdout.write("\x1b[8;25;90t")
+    os.system('cls' if os.name == 'nt' else 'clear')
     os.system('cls' if os.name == 'nt' else 'clear')
     print('          _____ _   _______  _____ ___________   _____ ________  _________  ');
     print('         /  __ \ | | | ___ \/  ___|  ___|  _  \ |_   _|  _  |  \/  || ___ \ ');
