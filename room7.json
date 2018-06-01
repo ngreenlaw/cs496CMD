@@ -1,1 +1,18 @@
-{"features": ["Sculpture of Cat", "Spider"], "descS": "", "south_room": "Pharaoh Mummy Room", "north_room": "", "descMod": "", "descL": "Upon entering the room, you notice several polished copper mirrors along the walls.  There are bats and insects flying and crawling around and the mirrors amplify their numbers.  It is also hard to tell where everything is because of them. ", "west_room": "Guard's Room", "locked": "False", "name": "Mirror Room", "east_room": "Skeleton Room", "items": ["Sculpture of Cat"], "visited": "False"}
+{
+    "features": [
+        "Mirror Spider"
+    ], 
+    "descS": "", 
+    "south_room": "Pharaoh Mummy Room", 
+    "north_room": "", 
+    "descMod": "", 
+    "descL": "Upon entering the room, you notice several polished copper mirrors along the walls. There are bats and insects flying and crawling around and the mirrors amplify their numbers. It is also hard to tell where everything is because of them.", 
+    "west_room": "Guard's Room", 
+    "locked": "False", 
+    "name": "Mirror Room", 
+    "east_room": "Skeleton Room", 
+    "items": [
+        "Sculpture of a Cat"
+    ], 
+    "visited": "False"
+}

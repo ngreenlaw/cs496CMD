@@ -1,1 +1,21 @@
-{"features": ["writings", "jackal", "chimera"], "descS": "You are in a completely pitch black room. You cannot see anything.", "south_room": "Nile River", "north_room": "", "descMod": "", "descL": "You walk into the room and it is completely pitch black. You cannot see anything.", "west_room": "Sphinx's Room", "locked": "True", "name": "Chamber of Passing", "east_room": "", "items": ["necklace", "brooch"], "visited": "False"}
+{
+    "features": [
+        "Writings", 
+        "Statue of Jackal", 
+        "Statue of Chimera"
+    ], 
+    "descS": "You are in a completely pitch black room. You cannot see anything.", 
+    "south_room": "Nile River", 
+    "north_room": "", 
+    "descMod": "", 
+    "descL": "You walk into the room and it is completely pitch black. You cannot see anything.", 
+    "west_room": "Sphinx's Room", 
+    "locked": "True", 
+    "name": "Chamber of Passing", 
+    "east_room": "", 
+    "items": [
+        "Scarab Necklace", 
+        "Scarab Brooch"
+    ], 
+    "visited": "False"
+}

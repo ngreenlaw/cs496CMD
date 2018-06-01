@@ -1,238 +1,188 @@
 [
 	{
-		"name": "left hieroglyphs", 
-		"desc": "On the left side of the room the hieroglyphs says, 'Intruders beware crushing death and grief, soaked with blood of the trespassing thief'",
+		"name": "Left and Right Hieroglyphs", 
+		"desc": "On the left side of the room the hieroglyphs says, 'Intruders beware crushing death and grief, soaked with blood of the trespassing thief' and on the right side of the room the hieroglyphs says 'The key to my return lies within the heart of the underworld'",
 		"descMod": "",
-		"usage": ""
+		"parser": "hieroglyphs"
 	},
 	{
-		"name": "right hieroglyphs", 
-		"desc": "On the right side of the room the hieroglyphs says 'The key to my return lies within the heart of the underworld'",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "stone wheel", 
+		"name": "Stone Wheel", 
 		"desc": "There is a large stone wheel blocking the exit.",
 		"descMod": "The large stone wheel seems to be moved out of the way.",
-		"usage": ""
+		"parser": "wheel"
 	},
 	{
-		"name": "cylinder", 
+		"name": "Cylinder", 
 		"desc": "Upon further investigation of the wall you notice that it's a sequence of pictures that proceed a recessed cylinder in the wall. The sequence is 3 Bulls, 1 Eagle, 4 Lions, 1 Sun.", 
 		"descMod": "The cylinder - consists of 0 to 9 Ox",
-		"usage": ""
+		"parser": "cylinder"
 	},
 	{
-		"name": "stone door", 
-		"desc": "A small stone door that is set in the middle of the wall.",
-		"descMod": "The small stone door seems to be open now.",
-		"usage": ""
+		"name": "Stone Doors", 
+		"desc": "Two small stone doors that are blocking the way to the East and West.",
+		"descMod": "Both of the small stone doors seems to be open now.",
+		"parser": "door"
 	},
 	{
-		"name": "door 1",
-		"desc": "The giant stone door to your left is closed." ,
-		"descMod":  "The giant stone door to your left is open.",
-		"closed": "False",
-		"usage": ""
-	},
-	{
-		"name": "door 2",
-		"desc": "The giant stone door to your right is closed.",
-		"descMod": "The giant stone door to your right is open.",
-		"closed": "False",
-		"usage": ""
-	},
-	{
-		"name": "odd hole", 
-		"desc": "As you look at the wall more closely, you notice the odd placement of the holes on the wall",
+		"name": "Odd Hole", 
+		"desc": "When you look at the hole it seems to fluoresce when you hold the torch away from it. Maybe something would happen if the room was dark.",
 		"descMod": "",
-		"usage": ""
+		"parser": "hole"
 	},
 	{
-		"name": "switch", 
+		"name": "Switch", 
 		"desc": "The door has 4 switches located on it, all set in the up position.",
 		"descMod": "",
-		"usage": ""
+		"parser": "switch"
 	},
 	{
-		"name": "falcon carving", 
-		"desc": "An ornate wall with the carving of a falcon on it.",
+		"name": "Falcon Carving", 
+		"desc": "The large falcon carving has a giant scratch over it's right eye.",
 		"descMod": "",
-		"usage": ""
+		"parser": "falcon"
 	},
 	{
-		"name": "lettered floor", 
-		"desc": "A floor layed out in a grid like pattern with different letters on it. ",
+		"name": "Statue of Osiris", 
+		"desc": "Statue of Osiris that has like small pressure plates on the head, chest and stomach of the statue.",
 		"descMod": "",
-		"usage": ""
+		"parser": "statue of osiris"
 	},
 	{
-		"name": "statue of osiris", 
-		"desc": "Statue of Osiris that has like small pressure plates on the head, chest and stomach of the statue..",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "statue of horus", 
+		"name": "Statue of Horus", 
 		"desc": "Statue of Horus that has like small pressure plates on the head, chest and stomach of the statue.",
 		"descMod": "",
-		"usage": ""
+		"parser": "statue of horus"
 	},
 	{
-		"name": "statue of anubis", 
-		"desc": "Statue of Anubis that has like small pressure plates on the head, chest and stomach of the statue..",
+		"name": "Statue of Anubis", 
+		"desc": "Statue of Anubis that has like small pressure plates on the head, chest and stomach of the statue.",
 		"descMod": "",
-		"usage": ""
+		"parser": "statue of anubis"
 	},
 	{
-		"name": "noisy sarcophagus", 
+		"name": "Noisy Sarcophagus", 
 		"desc": "Upon closer inspection, the strange noises coming from the sarcophagus get louder and louder",
-		"descMod": "Upon opening the sarcophagus, a mythical pharaoh mummy jumps out, makes a loud screech, and then kills you",
-		"usage": "Kills the player"
+		"descMod": "An empty Sarcophagus that a mythical pharaoh jumped out of and hurt you before running away.",
+		"parser": "sarcophagus"
 	},
 	{
-		"name": "urn", 
-		"desc": "There is a plain looking urn in the corner of the room.",
-		"descMod": "Upon breaking open the urn, you see that it contains a yellow jeweled scarab necklace",
-		"usage": ""
-	},
-	{
-		"name": "sculpture of cat", 
-		"desc": "There is a small stone sculpture of an egyptian cat next to a mirror in the corner.",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "mirror spider", 
+		"name": "Mirror Spider", 
 		"desc": "There is something rustling around in the room by one of the mirrors.",
-		"descMod": "The rustling turns out to be a gigantic spider.  The spider bites you and causes pain and injury.  Lose 1 turn.",
-		"usage": ""
+		"descMod": "The gigantic spider has scampered off.",
+		"parser": "spider"
 	},
 	{
-		"name": "food spider", 
+		"name": "Food Spider", 
 		"desc": "There is something rustling around in the room by one of the sacks of food.",
-		"descMod": "The rustling turns out to be a gigantic spider.  The spider bites you and causes pain and injury.  Lose 1 turn.",
-		"usage": ""
+		"descMod": "The gigantic spider has scampered off.",
+		"parser": "spider"
 	},
 	{
-		"name": "sculpture of scarab", 
-		"desc": "There is a small stone sculpture of a scarab that looks like it was left as a gift for the great dead Pharaohs",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "book", 
+		"name": "Explorer's Journal", 
 		"desc": "There is a book laying next to a skull in the room, and it appears to be a previous explorer's journal.",
 		"descMod": "",
-		"usage": ""
+		"parser": "journal"
 	},
 	{
-		"name": "elephant tusk", 
-		"desc": "There is an elephant tusk in the corner that looks untouched by time and geology",
-		"descMod": "",
-		"usage": ""
-	},
-	{
-		"name": "shaky mummy", 
+		"name": "Shaky Mummy", 
 		"desc": "As you walk toward the shaking mummy, the shaking gets stronger and it appears that the mummy might still be alive.",
-		"descMod": "Upon closer inspection, the mummy turns out to be a mythical crocodile. It bites your arm causing great pain before scampering off into the dark. Lose 1 turn.",
-		"usage": ""
+		"descMod": "The Mythical Crocodile Mummy has scampered into the dark.",
+		"parser": "mummy"
 	},
 	{
-		"name": "hieroglyphs", 
+		"name": "Hieroglyphs", 
 		"desc": "Upon closer inspection, the hieroglyphs say, 'Here lies the end of this branch of the tomb. You must turn around.'",
 		"descMod": "",
-		"usage": ""
+		"parser": "hieroglyphs"
 	},
 	{
-		"name": "set", 
+		"name": "Tapestry of Set", 
 		"desc": "A tapestry with an image of the god Set pointing a sword to the right.",
 		"descMod": "",
-		"usage": ""
+		"parser": "set"
 	},
 	{
-		"name": "adventurer", 
+		"name": "Adventurer", 
 		"desc": "An adventurer lies dead with his pack. There does not appear to be anything of much use except maybe some earplugs.",
 		"descMod": "An adventurer lies dead with his pack. There does not appear to be anything of much use.",
-		"usage": ""
+		"parser": "adventurer"
 	},
 	{
-		"name": "ra", 
+		"name": "Tapestry of Ra", 
 		"desc": "A tapestry with an image of the god Ra sitting on a throne.",
 		"descMod": "",
-		"usage": ""
+		"parser": "ra"
 	},
 	{
-		"name": "isis", 
+		"name": "Tapestry of Isis", 
 		"desc": "A tapestry with an image of the goddess Isis kneeling.",
 		"descMod": "",
-		"usage": ""
+		"parser": "isis"
 	},
 	{
-		"name": "weapons rack", 
+		"name": "Weapon's Rack", 
 		"desc": "A rack filled with rusty weapons that are no longer useful in a fight but maybe useful for general utility.",
 		"descMod": "",
-		"usage": ""
+		"parser": "weapons rack"
 	},
 	{
-		"name": "door", 
+		"name": "Wooden Door", 
 		"desc": "A locked wooden door. There is a keyhole that appears to unlock it.", 
 		"descMod": "An unlocked wooden door.",
-		"usage": ""
+		"parser": "door"
 	},
 	{
-		"name": "siren statue", 
+		"name": "Siren Statue", 
 		"desc": "A statue of a mermaid looking creature, it seems like a song is coming from it that makes it difficult to think.", 
 		"descMod": "",
-		"usage": ""
+		"parser": "siren statue"
 	},
 	{
-		"name": "jackal", 
+		"name": "Statue of Jackal", 
 		"desc": "A statue of a dog-like human known as a Jackal, it is holding a spear and wearing what appears to be a necklace of a scarab.", 
 		"descMod": "A statue of a dog-like human known as a Jackal, it is holding a spear.",
-		"usage": ""
+		"parser": "jackal"
 	},
 	{
-		"name": "chimera", 
+		"name": "Statue of Chimera", 
 		"desc": "A statue of a monster that has the head of a lion, the body of a goat and the tail of a serpent. It appears to be holding a brooch shaped like a scarab.", 
 		"descMod": "A statue of a monster that has the head of a lion, the body of a goat and the tail of a serpent.",
-		"usage": ""
+		"parser": "chimera"
 	},
 	{
-		"name": "writings", 
+		"name": "Writings", 
 		"desc": "Reading the writings tells you the story of the jackal that bested the chimera in battle.", 
 		"descMod": "",
-		"usage": ""
+		"parser": "writings"
 	},
 	{
-		"name": "sphinx", 
+		"name": "Statue of Sphinx", 
 		"desc": "A giant statue of sphinx holding a slab that reads: There are two sisters: one gives birth to the other and she, in turn, gives birth to the first. What are they?", 
 		"descMod": "After solving the puzzle the sphinx statue has revealed a spot to insert an item.",
-		"usage": ""
+		"parser": "sphinx"
 	},
 	{
-		"name": "jeweled beetles", 
+		"name": "Jeweled Beetles", 
 		"desc": "Tons of gold beetles litter the floor, it would be best to just leave them be.", 
 		"descMod": "",
-		"usage": ""
+		"parser": "jeweled beetles"
 	},
 	{
-		"name": "tomb", 
+		"name": "Large Tomb", 
 		"desc": "A large tomb with a mummified pharaoh holding what appears to be a very valuable artifact.", 
 		"descMod": "A large tomb with a mummified pharaoh.",
-		"usage": ""
+		"parser": "large tomb"
 	},
 	{
-		"name": "griffin", 
+		"name": "Statue of Griffin", 
 		"desc": "A giant stone statue of a griffin, it looks like it’s beak could be pulled.", 
 		"descMod": "",
-		"usage": ""
+		"parser": "griffin"
 	},
 	{
-		"name": "eagle", 
+		"name": "Statue of Eagle", 
 		"desc": "A giant stone statue of an eagle, it looks like it’s beak could be pulled.", 
 		"descMod": "",
-		"usage": ""
+		"parser": "eagle"
 	}
 ]

@@ -1,1 +1,23 @@
-{"features": ["set", "ra", "isis", "adventurer", "weapons rack"], "descS": "You are in what appears to be a Guard's Room. There are 3 tapestries along the north wall, one of Set, one of Ra, and one of Isis. Along the south wall is a weapons rack with a sword and a spear and along the west wall is a dead adventurer.", "south_room": "", "north_room": "Nile River", "descMod": "", "descL": "You enter a large room. Along the stone wall at the north side of the room are 3 tapestries, the one on the left has an image of the god Set pointing a sword to the right, the one in the middle has an image of the god Ra sitting on a throne and the one on the right has an image of the goddess Isis kneeling. Along the west wall there are 3 small empty tombs with their lids already open and along the south wall is a weapons rack that has a few spears and swords. The room has a stench of death and laying by one of the tombs is a recently deceased adventurer with his pack still on his back.", "west_room": "", "locked": "False", "name": "Guard's Room", "east_room": "Mirror Room", "items": ["sword", "spear"], "visited": "False"}
+{
+    "features": [
+        "Tapestry of Set", 
+        "Tapestry of Ra", 
+        "Tapestry of Isis", 
+        "Adventurer", 
+        "Weapon's Rack"
+    ], 
+    "descS": "You are in what appears to be a Guard's Room. There are 3 tapestries along the north wall, one of Set, one of Ra, and one of Isis. Along the south wall is a weapons rack with a sword and a spear and along the west wall is a dead adventurer.", 
+    "south_room": "", 
+    "north_room": "Nile River", 
+    "descMod": "", 
+    "descL": "You enter a large room. Along the stone wall at the north side of the room are 3 tapestries, the one on the left has an image of the god Set pointing a sword to the right, the one in the middle has an image of the god Ra sitting on a throne and the one on the right has an image of the goddess Isis kneeling. Along the west wall there are 3 small empty tombs with their lids already open and along the south wall is a weapons rack that has a few spears and swords. The room has a stench of death and laying by one of the tombs is a recently deceased adventurer with his pack still on his back.", 
+    "west_room": "", 
+    "locked": "False", 
+    "name": "Guard's Room", 
+    "east_room": "Mirror Room", 
+    "items": [
+        "Sword", 
+        "Spear"
+    ], 
+    "visited": "False"
+}

@@ -1,1 +1,16 @@
-{"features": ["left hieroglyphs", "right hieroglyphs"], "descS": "You are in the entry of the tomb. There is a doorway in front of you.", "south_room": "", "north_room": "Main Passage", "descMod": "", "descL": "The large entry way into the tomb, there are hieroglyphs on each of the walls. There is a large doorway in front of you that looks like it leads to a larger space.", "west_room": "", "locked": "False", "name": "Entry", "east_room": "", "items": [], "visited": "False"}
+{
+    "features": [
+        "Left and Right Hieroglyphs"
+    ], 
+    "descS": "You are in the entry of the tomb. There is a doorway in front of you.", 
+    "south_room": "", 
+    "north_room": "Main Passage", 
+    "descMod": "", 
+    "descL": "The large entry way into the tomb, there are hieroglyphs on each of the walls. There is a large doorway in front of you that looks like it leads to a larger space.", 
+    "west_room": "", 
+    "locked": "False", 
+    "name": "Entry", 
+    "east_room": "", 
+    "items": [], 
+    "visited": "False"
+}

@@ -1,1 +1,19 @@
-{"features": ["Noisy Sarcophagus", "Urn"], "descS": "", "south_room": "", "north_room": "Mirror Room", "descMod": "", "descL": "Upon entering the room, you notice several sarcophagi that are ornately decorated with jewels and carvings of deities and animals in the stone.  However, time and nature has worn away at the decorations, but you can see that they were once beautiful.  In the corner, strange knocking and scraping noises are coming from one of the sarcophagi.", "west_room": "Main Passage", "locked": "False", "name": "Pharaoh Mummy Room", "east_room": "", "items": ["urn", "scarab brooch"], "visited": "False"}
+{
+    "features": [
+        "Noisy Sarcophagus"
+    ], 
+    "descS": "", 
+    "south_room": "", 
+    "north_room": "Mirror Room", 
+    "descMod": "", 
+    "descL": "Upon entering the room, you notice several sarcophagi that are ornately decorated with jewels and carvings of deities and animals in the stone. However, time and nature has worn away at the decorations, but you can see that they were once beautiful.  In the corner, strange knocking and scraping noises are coming from one of the sarcophagi.", 
+    "west_room": "Main Passage", 
+    "locked": "True", 
+    "name": "Pharaoh Mummy Room", 
+    "east_room": "", 
+    "items": [
+        "Urn", 
+        "Scarab Brooch"
+    ], 
+    "visited": "False"
+}

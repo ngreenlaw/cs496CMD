@@ -1,1 +1,20 @@
-{"features": ["large tomb", "griffin", "eagle"], "descS": "In the large room there is a giant unopened tomb in between a large Griffin statue and an Eagle statue. There are no other exits, this appears to be the end.", "south_room": "", "north_room": "", "descMod": "", "descL": "You carefully walk down the stairs and enter a large room. On the east wall in front of you is a giant unopened tomb in between a large Griffin statue and an Eagle statue. Although the room is massive it is otherwise empty. There are no other doors you see and thus appears to be a dead-end.", "west_room": "", "locked": "True", "name": "Burial Chamber", "east_room": "Sphinx's Room", "items": ["ancient artifact"], "visited": "False"}
+{
+    "features": [
+        "Large Tomb", 
+        "Statue of Griffin", 
+        "Statue of Eagle"
+    ], 
+    "descS": "In the large room there is a giant unopened tomb in between a large Griffin statue and an Eagle statue. There are no other exits, this appears to be the end.", 
+    "south_room": "", 
+    "north_room": "", 
+    "descMod": "", 
+    "descL": "You carefully walk down the stairs and enter a large room. On the east wall in front of you is a giant unopened tomb in between a large Griffin statue and an Eagle statue. Although the room is massive it is otherwise empty. There are no other doors you see and thus appears to be a dead-end.", 
+    "west_room": "", 
+    "locked": "True", 
+    "name": "Burial Chamber", 
+    "east_room": "Sphinx's Room", 
+    "items": [
+        "Ancient Artifact"
+    ], 
+    "visited": "False"
+}

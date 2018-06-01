@@ -1,1 +1,17 @@
-{"features": ["door", "siren statue"], "descS": "You are in a small room with a river flowing through the middle from west to east. On the north side of the river is a door and on opposite sides of the river are mermaid statues. You can hear beautiful singing.", "south_room": "Guard's Room", "north_room": "Chamber of Passing", "descMod": "", "descL": "You descend down the stairs to find a small room with what looks like a river flowing through the middle of it from west to east. To the north across the small river is a closed door. On the east and west walls on the opposite side of the river as you are two statues of creatures that look like mermaids. As you approach the river you start to hear the sound of beautiful singing which distracts you from what you are doing.", "west_room": "", "locked": "True", "name": "Nile River", "east_room": "", "items": [], "visited": "False"}
+{
+    "features": [
+        "Wooden Door", 
+        "Siren Statue"
+    ], 
+    "descS": "You are in a small room with a river flowing through the middle from west to east. On the north side of the river is a door and on opposite sides of the river are mermaid statues. You can hear beautiful singing.", 
+    "south_room": "Guard's Room", 
+    "north_room": "Chamber of Passing", 
+    "descMod": "", 
+    "descL": "You descend down the stairs to find a small room with what looks like a river flowing through the middle of it from west to east. To the north across the small river is a closed door. On the east and west walls on the opposite side of the river as you are two statues of creatures that look like mermaids. As you approach the river you start to hear the sound of beautiful singing which distracts you from what you are doing.", 
+    "west_room": "", 
+    "locked": "True", 
+    "name": "Nile River", 
+    "east_room": "", 
+    "items": [], 
+    "visited": "False"
+}

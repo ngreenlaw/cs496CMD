@@ -1,50 +1,62 @@
 [
 	{
-		"name": "torch",
-		"desc": "Wooden stick lit on fire used to illuminate an area."
+		"name": "Torch",
+		"desc": "Wooden stick lit on fire used to illuminate an area.",
+		"parser": "torch"
 	},
 	{
-		"name": "sword",
-		"desc": "Sharp Weapon that can be used to slash at things."
+		"name": "Sword",
+		"desc": "Sharp Weapon that can be used to slash at things.",
+		"parser": "sword"
 	},
 	{
-		"name": "spear",
-		"desc": "Long stick with a sharp metal point that can be used to jab things."
+		"name": "Spear",
+		"desc": "Long stick with a sharp metal point that can be used to jab things.",
+		"parser": "spear"
 	},
 	{
-		"name": "necklace",
-		"desc": "A necklace in the shape of a jeweled scarab."
+		"name": "Scarab Necklace",
+		"desc": "A necklace in the shape of a jeweled scarab.",
+		"parser": "necklace"
 	},
 	{
-		"name": "brooch",
-		"desc": "A brooch in the shape of a jeweled scarab."
+		"name": "Scarab Brooch",
+		"desc": "A brooch in the shape of a jeweled scarab.",
+		"parser": "brooch"
 	},
 	{
-		"name": "key",
-		"desc": "A key used to open a locked door leading to the Chamber of Passing."
+		"name": "Chamber of Passing Key",
+		"desc": "A key used to open a locked door leading to the Chamber of Passing.",
+		"parser": "key"
 	},
 	{
-		"name": "earplugs",
-		"desc": "Small object used to plug ears."
+		"name": "Earplugs",
+		"desc": "Small object used to plug ears.",
+		"parser": "earplugs"
 	},
 	{
-		"name": "journal",
-		"desc": "A book that can be read to learn more information about the tomb."
+		"name": "Elephant's Tusk",
+		"desc": "A broken off piece of an elephant's tusk.",
+		"parser": "tusk"
 	},
 	{
-		"name": "tusk",
-		"desc": "A broken off piece of an elephant's tusk."
+		"name": "Sculpture of a Cat",
+		"desc": "A small sculpture of a cat that can be carried.",
+		"parser": "cat"
 	},
 	{
-		"name": "cat",
-		"desc": "A small sculpture of a cat that can be carried."
+		"name": "Sculpture of a Scarab",
+		"desc": "A small sculpture of a scarab that can be carried.",
+		"parser": "scarab"
 	},
 	{
-		"name": "scarab",
-		"desc": "A small sculpture of a scarab that can be carried."
+		"name": "Urn",
+		"desc": "A plain looking urn, sturdy but may be able to be broken.",
+		"parser": "urn"
 	},
 	{
-		"name": "artifact",
-		"desc": "This appears to be very valuable, you are unsure what it is at the moment but it’s clearly what was worth the trip."
+		"name": "Ancient Artifact",
+		"desc": "This appears to be very valuable, you are unsure what it is at the moment but it’s clearly what was worth the trip.",
+		"parser": "artifact"
 	}
 ]

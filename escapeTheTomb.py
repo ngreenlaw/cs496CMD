@@ -8,20 +8,20 @@ import os
 import os.path
 
 #Variables to hold things such that they are easier to edit
-ITEM_FILES_VAR = ["items.json"];
-FEATURE_FILES_VAR = ["features.json"];
+ITEM_FILES_VAR = "items.json";
+FEATURE_FILES_VAR = "features.json";
 ROOM_FILES_VAR = ["room1.json", "room2.json", "room3.json", "room4.json", "room5.json", "room6.json", "room7.json", "room8.json", "room9.json", "room10.json", "room11.json", "room12.json", "room13.json", "room14.json", "room15.json"];
 r_a = ['room1','room2','room3','room4','room5','room6','room7','room8','room9','room10', 'room11','room12', 'room13', 'room14', 'room15']
 
 #function for main menu, returns 0 if new game and 1 if load game, exits if exit is entered or returns 2 if it doesn't understand
 def mainMenu():
     
-	get_input = raw_input("Please enter if you would like to start a new game, load a game or exit: ");
+	get_input = raw_input("Please enter if you would like to start a new game, load a game or quit: ");
 	if get_input.lower() == "new game":
 		return 0;
 	elif get_input.lower() == "load game":
 		return 1;
-	elif get_input.lower() == "exit":
+	elif get_input.lower() == "quit":
 		sys.exit();
 	else:
 		print("I am not sure what you mean. Please try again.\n");
@@ -38,7 +38,7 @@ def intro():
     print('         | \__/\ |_| | |\ \ /\__/ / |___| |/ /    | | \ \_/ / |  | || |_/ / ');
     print('          \____/\___/\_| \_|\____/\____/|___/     \_/  \___/\_|  |_/\____/  \n');
                 
-    print("     Egypt 1926, Valley of the kings - Archeologist Charles Carter is on the verge of discovering the tomb of the great sorcerer to Rameses II. On opening the tomb, Charles ventures in alone, not sure of what dangers lie ahead. As soon as he steps foot into the first chamber a pressure lever is triggered sliding a giant stone wheel in front of the opening. Leaving him trapped in the tomb with only his trusty torch.\n");
+    print("     Egypt 1926, Valley of the kings - Archeologist Charles Carter is on the verge of discovering the tomb of the great sorcerer to Rameses II. On opening the tomb, Charles ventures in alone, not sure of what dangers lie ahead. As soon as he steps foot into the first chamber a pressure lever is triggered sliding a giant stone wheel in front of the opening. Leaving him trapped in the tomb with only his trusty torch. You must help Carter complete his expedition and escape!\n");
           
     return 0;
                 
@@ -61,104 +61,111 @@ def getRoomFromName(list_r, room):
 			if room == list_r[i].name:
 				return list_r[i];
 	return 1;
-		
+
+def getItemFromParser(list_i, item):
+	for i in range(0, len(list_i)):
+		if item == list_i[i].parser:
+			return list_i[i];
+	return 1;
+	
+def getFeatureFromParser(list_f, feature):
+	for i in range(0, len(list_f)):
+		if feature == list_f[i].parser:
+			return list_f[i];
+	return 1;
+	
 #function to create the items
 def createItem(files_list):
-	#FIX BASED ON WHAT THE JSON FILE IS
-	object_created = None;
 	list_of_objects = [];
-	#read the files
-	for fi in files_list:
-		f = open(fi, "r");
-		rf = f.read();
-		fj = json.loads(rf);
-		f.close()
-		
-		#create the object HERE IS WHERE TO EDIT
+
+	f = open(files_list, "r");
+	rf = f.read();
+	fj = json.loads(rf);
+	f.close()
+
 	for f_item in fj:
-		object_created = ec.Item(f_item['name'], f_item['desc']);
+		i = f_item['name']
+		j = f_item['desc']
+		k = f_item['parser']
+		object_created = ec.Item(i,j,k);
 		list_of_objects.append(object_created);
 		
 	return list_of_objects;
 
 #function to create the features
 def createFeature(files_list):
-	#FIX BASED ON WHAT THE JSON FILE IS
-	object_created = None;
 	list_of_objects = [];
 	
-	#read the files
-	for fi in files_list:
-		f = open(fi, "r");
-		rf = f.read();
-		fj = json.loads(rf);
-		f.close()
-		
-	#create the object HERE IS WHERE TO EDIT
+	f = open(files_list, "r");
+	rf = f.read();
+	fj = json.loads(rf);
+	f.close()
+
 	for f_feature in fj:
-		object_created = ec.Feature(f_feature['name'], f_feature['desc'], f_feature['descMod'], f_feature['usage']);
+		i = f_feature['name']
+		j = f_feature['desc']
+		k = f_feature['descMod']
+		x = f_feature['parser']
+		object_created = ec.Feature(i,j,k,x);
 		list_of_objects.append(object_created);
 		
 	return list_of_objects;
 
 def createFeatureLoad(name):
-	#FIX BASED ON WHAT THE JSON FILE IS
-	object_created = None;
-	list_of_objects = [];
-	
 	list_of_objects = [];
 	f = open(name, "r");
 	rf = f.read();
-	fj = json.loads(rf)[3];
+	fj = json.loads(rf)[2];
 	f.close()
 
 	fj_f = fj['feature']
-	#create the object HERE IS WHERE TO EDIT
+
 	for f_feature in fj_f:
-		object_created = ec.Feature(fj_f[f_feature]['name'], fj_f[f_feature]['desc'], fj_f[f_feature]['descMod'], fj_f[f_feature]['usage']);
+		object_created = ec.Feature(fj_f[f_feature]['name'], fj_f[f_feature]['desc'], fj_f[f_feature]['descMod'], fj_f[f_feature]['parser']);
+		object_created.modified_description_bool = fj_f[f_feature]['descModBool'];
 		list_of_objects.append(object_created);
 	return list_of_objects;
 	
 #function to set the north, south, east and west rooms after the create function to replace the names with the room object itself
 def createRoomNSEW(roomList):
 	for r in roomList:
-		if r.getNorthRoom() == "":
-			r.setNorthRoom(None);
+		if r.north_room == "":
+			r.north_room = None;
 		else:
 			for ro in roomList:
-				if ro.getName() == r.getNorthRoom():
-					r.setNorthRoom(ro);
+				if ro.name == r.north_room:
+					r.north_room = ro;
 					break;
 
-		if r.getSouthRoom() == "":
-			r.setSouthRoom(None);
+		if r.south_room == "":
+			r.south_room = None;
 		else:
 			for ro in roomList:
-				if ro.getName() == r.getSouthRoom():
-					r.setSouthRoom(ro);
+				if ro.name == r.south_room:
+					r.south_room = ro;
 					break;
 					
-		if r.getEastRoom() == "":
-			r.setEastRoom(None);
+		if r.east_room == "":
+			r.east_room = None;
 		else:
 			for ro in roomList:
-				if ro.getName() == r.getEastRoom():
-					r.setEastRoom(ro);
+				if ro.name == r.east_room:
+					r.east_room = ro;
 					break;
 					
-		if r.getWestRoom() == "":
-			r.setWestRoom(None);
+		if r.west_room == "":
+			r.west_room = None;
 		else:
 			for ro in roomList:
-				if ro.getName() == r.getWestRoom():
-					r.setWestRoom(ro);
+				if ro.name == r.west_room:
+					r.west_room = ro;
 					break;
 					
 #function to create the rooms
 def createRoom(files_list):
-	#FIX BASED ON WHAT THE JSON FILE IS
-	object_created = None;
+
 	list_of_objects = [];
+	
 	#read the files
 	for fi in files_list:
 		f = open(fi, "r");
@@ -167,14 +174,11 @@ def createRoom(files_list):
 		f.close();
 		
 		tf_lock = True;
-		#create the object HERE IS WHERE TO EDIT
 		if fj['locked'] == "False":
 			tf_lock = False;
-		object_created = ec.Room(fj['name'], fj['descL'], fj['descS'], fj['items'], fj['features'], tf_lock);
-		object_created.setNorthRoom(fj['north_room']);
-		object_created.setSouthRoom(fj['south_room']);
-		object_created.setEastRoom(fj['east_room']);
-		object_created.setWestRoom(fj['west_room']);
+
+		object_created = ec.Room(fj['name'], fj['descL'], fj['descS'], fj['items'], fj['features'], tf_lock,fj['north_room'],fj['south_room'],fj['east_room'],fj['west_room']);
+		
 		list_of_objects.append(object_created);
 	return list_of_objects;
 	
@@ -182,7 +186,7 @@ def createRoomLoad(fname):
 	list_of_objects = [];
 	f = open(fname, "r");
 	rf = f.read();
-	fj = json.loads(rf)[2];
+	fj = json.loads(rf)[1];
 	f.close()
 	
 
@@ -197,68 +201,46 @@ def createRoomLoad(fname):
 		if fj['rooms'][r_a[i]]['visited'] == "False":
 			tf_visit = False;
 			
-		object_created = ec.Room(fj['rooms'][r_a[i]]['name'], fj['rooms'][r_a[i]]['descL'], fj['rooms'][r_a[i]]['descS'], fj['rooms'][r_a[i]]['items'], fj['rooms'][r_a[i]]['features'], tf_lock);
-		object_created.setNorthRoom(fj['rooms'][r_a[i]]['north_room']);
-		object_created.setSouthRoom(fj['rooms'][r_a[i]]['south_room']);
-		object_created.setEastRoom(fj['rooms'][r_a[i]]['east_room']);
-		object_created.setWestRoom(fj['rooms'][r_a[i]]['west_room']);
-		object_created.setVisited(tf_visit);
+		object_created = ec.Room(fj['rooms'][r_a[i]]['name'], fj['rooms'][r_a[i]]['descL'], fj['rooms'][r_a[i]]['descS'], fj['rooms'][r_a[i]]['items'], fj['rooms'][r_a[i]]['features'], tf_lock, fj['rooms'][r_a[i]]['north_room'], fj['rooms'][r_a[i]]['south_room'], fj['rooms'][r_a[i]]['east_room'], fj['rooms'][r_a[i]]['west_room']);
+		object_created.visited = tf_visit;
 		list_of_objects.append(object_created);
 	return list_of_objects;
 	
-#function to create the game manager
-def createGameManager(tc, room):
-	gm = ec.GameManager(tc, room);
-	return gm;
+	
+#function to create the player
+def createPlayer(items, tc, cr):
+	p = ec.Player(items, tc, cr);
+	return p;
 
-def createGameManagerLoad(name, rooms):
+#function to create the player
+def createPlayerLoad(name, rooms):
 	f = open(name, "r");
 	rf = f.read();
 	fj = json.loads(rf)[0];
 	f.close()
-
-	cr = fj['game_manager']['current_room']
-
-	cr_o = getRoomFromName(rooms,cr);
-	gm = ec.GameManager(int(fj['game_manager']['turn_count']), cr_o);
 	
-	return gm;
-	
-#function to create the player
-def createPlayer(gm, items):
-	p = ec.Player(items, gm);
-	return p;
+	for r in rooms:
+		if r.name == fj['player']['current_room']:
+			ro = r
+			break;
 
-#function to create the player
-def createPlayerLoad(gm, name):
-	f = open(name, "r");
-	rf = f.read();
-	fj = json.loads(rf)[1];
-	f.close()
-	
-	p = ec.Player(fj['player']['inventory'], gm);
+	p = ec.Player(fj['player']['inventory'], fj['player']['turn_count'], ro);
 	p.ears = fj['player']['ears']
 	return p;
 	
 #function to save the game
 
-def saveGame(gm, player, feat, rooms):
+def saveGame(player, feat, rooms):
 	name = raw_input("What would you like to call the save file?\n");
 	data = []
-	#Game manager data
-	gm_data = {
-		'game_manager': {
-			'turn_count': str(gm.getTurnCount()),
-			'current_room': gm.getCurrentRoom().getName(),
-			}
-		}
-	data.append(gm_data);
 	
 	#Player data
 	player_data = {
 		'player': {
-			'inventory': player.getInventory(),
-			'ears': player.ears
+			'inventory': player.inventory,
+			'ears': player.ears,
+			'turn_count': player.turn_count,
+			'current_room': player.current_room.name
 			}
 		}
 	data.append(player_data);
@@ -275,44 +257,61 @@ def saveGame(gm, player, feat, rooms):
 		room_data['rooms'].update({r_a[i]:{}})
 
 	for i in range(0,len(r_a)):
-		room_data['rooms'][r_a[i]]['name'] = rooms[i].getName()
-		room_data['rooms'][r_a[i]]['descL'] = rooms[i].getLongDescription()
-		room_data['rooms'][r_a[i]]['descS'] = rooms[i].getShortDescription()
-		room_data['rooms'][r_a[i]]['items'] = rooms[i].getItems()
-		room_data['rooms'][r_a[i]]['features'] = rooms[i].getFeatures()
-		room_data['rooms'][r_a[i]]['visited'] = str(rooms[i].getVisited())
-		room_data['rooms'][r_a[i]]['locked'] = str(rooms[i].getLocked())
+		print(str(rooms[i].locked))
+
+		room_data['rooms'][r_a[i]]['name'] = rooms[i].name
+		room_data['rooms'][r_a[i]]['descL'] = rooms[i].long_description
+		room_data['rooms'][r_a[i]]['descS'] = rooms[i].short_description
+		room_data['rooms'][r_a[i]]['items'] = rooms[i].items
+		room_data['rooms'][r_a[i]]['features'] = rooms[i].features
+
+		true_false = "";
+
+		if rooms[i].visited == True:
+			true_false = "True"
+		else:
+			true_false = "False"
+
+		room_data['rooms'][r_a[i]]['visited'] = true_false;
+
+		if rooms[i].locked == True:
+			true_false = "True"
+		else:
+			true_false = "False"
+
+
+		room_data['rooms'][r_a[i]]['locked'] = true_false;
 		
-		nr = rooms[i].getNorthRoom();
-		sr = rooms[i].getSouthRoom();
-		er = rooms[i].getEastRoom();
-		wr = rooms[i].getWestRoom();
+		nr = rooms[i].north_room;
+		sr = rooms[i].south_room;
+		er = rooms[i].east_room;
+		wr = rooms[i].west_room;
 		
 		if nr == None:
 			nr = "";
 		else:
-			nr = nr.getName();
+			nr = nr.name;
 			
 		if sr == None:
 			sr = "";
 		else:
-			sr = sr.getName();
+			sr = sr.name;
 			
 		if er == None:
 			er = "";
 		else:
-			er = er.getName();
+			er = er.name;
 			
 		if wr == None:
 			wr = "";
 		else:
-			wr = wr.getName();
+			wr = wr.name;
 		
 		room_data['rooms'][r_a[i]]['north_room'] = nr
 		room_data['rooms'][r_a[i]]['south_room'] = sr
 		room_data['rooms'][r_a[i]]['east_room'] = er
 		room_data['rooms'][r_a[i]]['west_room'] = wr		
-	
+
 	data.append(room_data);
 	
 	#Feature data
@@ -326,17 +325,20 @@ def saveGame(gm, player, feat, rooms):
 		if feat[i].modified_description_bool == False:
 			m_b = "False"
 	
-		feature_data['feature'][str(i)]['name'] = feat[i].getName();
-		feature_data['feature'][str(i)]['desc'] = feat[i].getDescription();
-		feature_data['feature'][str(i)]['descMod'] = feat[i].getModifiedDescription();
-		feature_data['feature'][str(i)]['usage'] = feat[i].getUsage();
+		feature_data['feature'][str(i)]['name'] = feat[i].name;
+		feature_data['feature'][str(i)]['desc'] = feat[i].description;
+		feature_data['feature'][str(i)]['descMod'] = feat[i].modified_description;
+		feature_data['feature'][str(i)]['parser'] = feat[i].parser;
 		feature_data['feature'][str(i)]['descModBool'] = m_b;
 	
 	data.append(feature_data);
+
+	print(data)
 	
 	name = name + '.json'
 	with open(name, 'w') as outfile:
-		json.dump(data, outfile)
+		j = json.dumps(data, indent=4)
+		outfile.write(j)
 		outfile.close()
 	
 	print("Game successfully saved to " + name +"\n");
@@ -394,10 +396,9 @@ def processTag(returned_tag, player, ite, fea, rooms):
 	while(returned_tag == nu):
 		print(nu);
 		returned_tag = getInput();
-		print(returned_tag);#DEBUG PRINT
 	
 	#Set up the needed variables
-	cr = player.getCurrentRoom();
+	cr = player.current_room;
 	
 	#set up the items list
 	all_items_look = [];
@@ -406,33 +407,46 @@ def processTag(returned_tag, player, ite, fea, rooms):
 	features_touch = [];
 	features_look = [];
 	all_items_use = [];
+	all_items_hit = [];
+	
+	#list of objects
+	features_objects = [];
+	items_objects = [];
 
-	items_in_room = cr.getItems()[:];
-	items_to_take = cr.getItems()[:];
-	features_in_room = cr.getFeatures()[:];
-	items_in_inventory = player.getInventory()[:];
+	items_in_room = cr.items[:];
+	items_to_take = cr.items[:];
+	features_in_room = cr.features[:];
+	items_in_inventory = player.inventory[:];
 	all_items = items_in_room[:];
 	
 	for y in features_in_room:
-		features_look.append("look at " + y);
+		x = getFeatureFromName(fea, y);
+		features_objects.append(x)
+		features_look.append("look at " + x.parser);
 
-	for i in items_in_inventory:
-		all_items.append(i);
-		all_items_drop.append("drop " + i);
-		all_items_use.append("use " + i);
+	for y in items_in_inventory:
+		i = getItemFromName(ite, y)
+		all_items.append(i.name);
+		all_items_drop.append("drop " + i.parser);
+		all_items_use.append("use " + i.parser);
 	
-	for j in all_items:
-		all_items_look.append("look at " + j);
+	for y in all_items:
+		j = getItemFromName(ite, y)
+		items_objects.append(j)
+		all_items_look.append("look at " + j.parser);
+		all_items_hit.append("hit " + j.parser);
 	
-	for k in items_to_take:
-		all_items_take.append("take " + k);
+	for y in items_to_take:
+		k = getItemFromName(ite, y)
+		all_items_take.append("take " + k.parser);
 	
-	for n in features_in_room:
-		features_touch.append("touch " + n);
+	for y in features_in_room:
+		n = getFeatureFromName(fea, y)
+		features_touch.append("touch " + n.parser);
 
 	#Create ambiguous commands list
 	ww = "What would you like to ";
-	amb_comm = ["look at?", "drop?", "take?", "move?", "hit?", "touch?", "use?"]
+	amb_comm = ["look at?", "drop?", "take?", "hit?", "touch?", "use?"]
 	all_amb = [];
 	for a in amb_comm:
 		all_amb.append(ww+a);
@@ -443,14 +457,13 @@ def processTag(returned_tag, player, ite, fea, rooms):
 	direction = ["go north", "go south", "go east", "go west"];
 	amb = all_amb[:];
 	look_at_item = all_items_look;
-	look_at_feature = features_look; #features_in_room;
+	look_at_feature = features_look;
 	help_display = "help";
 	player_inventory = "show inventory";
-	take_item = all_items_take; #FIX BASED ON TAG
-	drop_item = all_items_drop; #FIX BASED ON TAG
-	use_item = all_items_use; #FIX BASED ON TAG
-	hit_target = ""; #FIX BASED ON TAG
-	touch_target = ""; #FIX BASED ON TAG
+	take_item = all_items_take;
+	drop_item = all_items_drop;
+	use_item = all_items_use;
+	hit_target = all_items_hit; #DO THIS FUNCTION
 	touch_feature = features_touch;	
 	save_game = "save game"
 	load_game = "load game"
@@ -460,20 +473,80 @@ def processTag(returned_tag, player, ite, fea, rooms):
 	#Process the tag based on what is returned, includes the verbs used in the game
 	#Display the description if the returned tag is look at room but otherwise handle the ambiguous input
 	if returned_tag in amb:
-		print(returned_tag);
-		returned_tag = getInput();
-		#print(returned_tag) #DEBUG PRINT
-		while(returned_tag == nu):
-			returned_tag = getInput();
-			#print(returned_tag);#DEBUG PRINT
+		print (returned_tag)
+		com_given = raw_input("Enter name or direction(north/south/east/west)>> ")
+		
+		av_array = look_at_feature[:]
+		for i in look_at_item:
+			av_array.append(i)
+		for i in take_item:
+			av_array.append(i)
+		for i in drop_item:
+			av_array.append(i)
+		for i in use_item:
+			av_array.append(i)
+		for i in hit_target:
+			av_array.append(i)
+		for i in touch_feature:
+			av_array.append(i)
+		av_array.append("quit")
+		av_array.append("look at room")
+
+		if returned_tag == "Where would you like to move?":
+			if com_given.lower() == north:
+				com_given = "go " + north;
+			if com_given.lower() == south:
+				com_given = "go " + south;
+			if com_given.lower() == east:
+				com_given = "go " + east;
+			if com_given.lower() == west:
+				com_given = "go " + west;
+
+		elif returned_tag == "What would you like to look at?":
+			both_objects = features_objects[:]
+			both_objects.append(items_objects)
+			x = getFeatureFromName(features_objects, com_given)
+			if x != 1:
+				com_given = "look at " + x.parser
+			
+		elif returned_tag == "What would you like to drop?":
+			x = getItemFromName(items_objects, com_given)
+			if x != 1:
+				com_given = "drop " + x.parser;
+			
+		elif returned_tag == "What would you like to take?":
+			x = getItemFromName(items_objects, com_given)
+			if x != 1:
+				com_given = "take " + x.parser;
+					
+		elif returned_tag == "What would you like to hit?":
+			x = getItemFromName(items_objects, com_given)
+			if x != 1:
+				com_given = "hit " + x.parser;
+					
+		elif returned_tag == "What would you like to touch?":
+			x = getFeatureFromName(features_objects, com_given)
+			if x != 1:
+				com_given = "touch " + x.parser;
+					
+		elif returned_tag == "What would you like to use?":
+			x = getItemFromName(items_objects, com_given)
+			if x != 1:
+				com_given = "use " + x.parser;
+		
+		returned_tag = com_given;
+				
+		while(returned_tag not in av_array):
+			print("That is not a valid item/feature/direction/command.")
+			return 0;
 		
 		if returned_tag == "quit":
 			print("Exiting game.")
 			exit()			
 
 		if returned_tag == "look at room":
-			print(cr.getName() + ": " + cr.displayDescription());
-			nsew_rooms = [cr.getNorthRoom(), cr.getSouthRoom(), cr.getEastRoom(), cr.getWestRoom()];
+			print(cr.name + ": " + cr.displayDescription());
+			nsew_rooms = [cr.north_room, cr.south_room, cr.east_room, cr.west_room];
 			
 			ro = 0;
 			for r in nsew_rooms:
@@ -489,16 +562,15 @@ def processTag(returned_tag, player, ite, fea, rooms):
 				ro+=1;
 
 			print("\nFeatures of Note:");
-			for f in features_in_room:
-				ret = getFeatureFromName(fea, f);
-				print(ret.getName() + ": " + ret.displayDescription());
+			for f in features_objects:
+				print(f.name + ": " + f.displayDescription());
 			if len(items_in_room) != 0:
 				print("\nItems in room:");
 				for i in items_in_room:
 					print(i);
 				print("");
 			else:
-				print("\nThere are no items in this room to be picked up\n.");	
+				print("\nThere are no items in this room to be picked up.\n");	
 			return 0;
 
 	if returned_tag == "quit":
@@ -507,27 +579,34 @@ def processTag(returned_tag, player, ite, fea, rooms):
 
 	
 	#Move Room if the returned Tag is a direction
-	if returned_tag in direction:
+	elif returned_tag in direction:
 		#crossing the river
-		if cr.getName() == "Nile River" and returned_tag == "go north":
+		d = "You are in a small room with a river flowing through the middle from west to east. On the north side of the river is a door and on opposite sides of the river are mermaid statues. You can hear beautiful singing."
+		if cr.name == "Nile River" and returned_tag == "go north" and cr.short_description == d:
 			if player.ears != "plugged":
 				print("You attempt to cross the river and the siren's song keeps you from concentrating as you stumble and begin to drown.")
-				print("You manage to cross the river but you have to take many deep breaths using up what precious little air you have left.\n")
+				print("You stumble back out of the river taking many deep breaths using up what precious little air you have left. There has to be a way to block the Siren's Song from your ears.\n")
+				return 5;
 
+			else:
+				print("You successfully cross the river. And the Siren's Song stops.\n")
+				cr.short_description = "You are in a small room with a river flowing through the middle from west to east. On the north side of the river is a door and on opposite sides of the river are mermaid statues."
+				return 1;
+				
 		m = player.moveRoom(returned_tag);
 		if m == 1: #If there is no room
 			return 0; #return no turn taken up
 		else:
 			print("");
-			print(player.getCurrentRoom().displayDescription());
+			print(player.current_room.displayDescription());
 			print("");
-			player.getCurrentRoom().setVisited(True);
+			player.current_room.visited = True;
 			return 1; #return turn taken up
 	
 	#Look at room
 	elif returned_tag == "look at room":
-		print(cr.getName() + ": " + cr.displayDescription());
-		nsew_rooms = [cr.getNorthRoom(), cr.getSouthRoom(), cr.getEastRoom(), cr.getWestRoom()];
+		print(cr.name + ": " + cr.displayDescription());
+		nsew_rooms = [cr.north_room, cr.south_room, cr.east_room, cr.west_room];
 		
 		ro = 0;
 		for r in nsew_rooms:
@@ -543,9 +622,8 @@ def processTag(returned_tag, player, ite, fea, rooms):
 			ro+=1;
 
 		print("\nFeatures of Note:");
-		for f in features_in_room:
-			ret = getFeatureFromName(fea, f);
-			print(ret.getName() + ": " + ret.displayDescription());
+		for f in features_objects:
+			print(f.name + ": " + f.displayDescription());
 		if len(items_in_room) != 0:
 			print("\nItems in room:");
 			for i in items_in_room:
@@ -558,25 +636,23 @@ def processTag(returned_tag, player, ite, fea, rooms):
 
 	#Display the description if the returned tag is look item
 	#returned_tag == look at <item> ex: look at torch
-	elif returned_tag in look_at_item: 
-		#Search through the items list and then compare the name to the returned tag
-		for its in look_at_item:
-			if returned_tag == its: #Everything after "Look at"
-				ret = getItemFromName(ite, its[8:]);
-				print(ret.displayDescription());
-				print("");
-				break;
+	elif returned_tag in look_at_item:
+		ret = getItemFromParser(items_objects, returned_tag[8:])
+		print(ret.displayDescription());
+		print("");
 		return 0;
 	
 	#Display description for feature
 	elif returned_tag in look_at_feature: 
+		d = "You are in a small room with a river flowing through the middle from west to east. On the north side of the river is a door and on opposite sides of the river are mermaid statues. You can hear beautiful singing."
+		ret = getFeatureFromParser(features_objects, returned_tag[8:]);
 		#Search through the items list and then compare the name to the returned tag
-		for f in look_at_feature:
-			if returned_tag == f and returned_tag == "look at sphinx" and cr.getName() == "Sphinx's Room":
-				ret = getFeatureFromName(fea, f[8:]);
-				print(ret.displayDescription());
-				print("")
+		if returned_tag == "look at sphinx":
+			#ret = getFeatureFromParser(features_objects, returned_tag[8:]);
+			print(ret.displayDescription());
+			print("")
 
+			if ret.modified_description_bool == False:
 				print("Would you like to solve the puzzle? (yes/no)")
 				get_input = raw_input(">> ")
 				while get_input.lower() != "yes" and get_input.lower() != "no":
@@ -587,35 +663,48 @@ def processTag(returned_tag, player, ite, fea, rooms):
 					get_input = raw_input(">> ")
 					if get_input.lower() == "day and night" or get_input.lower() == "night and day":
 						print("A loud sound of \"Correct!\" bursts out from the sphinx as a scarab like hole in it's chest appears.\n")
-						f = getFeatureFromName(fea, "sphinx");
-						f.modified_description_bool = True;
+						ret.modified_description_bool = True;
 					else:
 						print("You hear the sphinx chortle a little. It seems you were incorrect.\n")
 						return 0;
 				else:
 					print("You hear the sphinx chortle a little.\n")
 					return 0;
+			else:
+				return 0;
 
-			if returned_tag == f and returned_tag == "look at adventurer" and cr.getName() == "Guard's Room" and getFeatureFromName(fea, "adventurer").modified_description_bool == False:
-				print(getFeatureFromName(fea, "adventurer").displayDescription())
+		elif returned_tag == "look at adventurer":
+			#ret = getFeatureFromParser(features_objects, "adventurer")
+			if ret.modified_description_bool == False:
+				print(ret.displayDescription())
 				print("You decide to take the earplugs.\n");
-				getFeatureFromName(fea, "adventurer").modified_description_bool = True;
-				i = getItemFromName(ite, "earplugs");
-				print(i.getName() + ":" + i.description)
-				print("Added earplugs to your inventory.\n")
-				player.inventory.append("earplugs");
+				ret.modified_description_bool = True;
+				i = getItemFromName(ite, "Earplugs");
+				print(i.name + ":" + i.description)
+				print("Added Earplugs to your inventory.\n")
+				player.inventory.append("Earplugs");
+				return 0;
+					
+		elif returned_tag == "look at door" and cr.name == "Nile River" and cr.short_description == d:
+			print("You cannot see it well across the river.\n")
+			return 0;
+			
+		elif returned_tag == "look at journal":
+			print("You read the journal and it says:")
+			print(ret.modified_description)
+			print("")
+			return 1;		
 
-			if returned_tag == f:
-				ret = getFeatureFromName(fea, f[8:]);
-				print(ret.displayDescription());
-				print("")
-				break;
+		else:
+			#ret = getFeatureFromParser(features_objects, returned_tag[8:])
+			print(ret.displayDescription());
+			print("");
 		return 0;
 	
 	#Display help function
 	elif returned_tag == help_display:
 		print("Verbs that can be used:") 
-		verbs = ["help", "look at", "inventory", "quit", "save game", "load game", "use", "touch", "hit", "take", "drop", "move", "go"]
+		verbs = ["help", "look at", "look at room", "inventory", "quit", "save game", "load game", "use", "touch", "hit", "take", "drop", "move", "go"]
 		for i in verbs:
 			print(i);
 		print("");
@@ -623,9 +712,9 @@ def processTag(returned_tag, player, ite, fea, rooms):
 		
 	#Display inventory
 	elif returned_tag == player_inventory:
-		if len(player.getInventory()) != 0:
+		if len(player.inventory) != 0:
 			print("In inventory:");
-			for i in player.getInventory():
+			for i in player.inventory:
 				print(i);
 			print("");
 		else:
@@ -633,87 +722,86 @@ def processTag(returned_tag, player, ite, fea, rooms):
 		return 0;
 		
 	elif returned_tag in drop_item:
-		for its in drop_item:
-			#TORCH DROPPING FOR ROOM 3
-			if returned_tag == its and returned_tag == "drop torch" and cr.getName() == "Antechamber 1":
-				ret = getItemFromName(ite, its[5:]);
-				print("Dropped " + ret.getName() + " on the ground.\n");
-				player.removeFromInventory(ret.getName());
-				print("When the torch hits the ground you notice on the wall the holes repeat the pattern: up, down, down, up.\n");
-				break;
-				
-			########################URN DROPPING HERE
-			if returned_tag == its and returned_tag == "drop urn" and cr.getName() == "Pharaoh Mummy Room":				
-				ret = getItemFromName(ite, its[5:]);
-				print("Dropped " + ret.getName() + " on the ground.\n");
-				player.removeFromInventory(ret.getName());
-				cr.items.remove("urn")
-				print("Upon dropping the urn, it lands on the ground and breaks open revealing a shiny brooch. You decide to pick it up and add it to your inventory.\n");
-				cr.items.append("brooch")
-				player.addToInventory("brooch")
-				break;
+		ret = getItemFromParser(items_objects, returned_tag[5:]);
+		#TORCH DROPPING FOR ROOM 3
+		if returned_tag == "drop torch" and cr.name == "Antechamber 1":
+			#ret = getItemFromParser(items_objects, returned_tag[5:]);
+			print("Dropped " + ret.name + " on the ground.\n");
+			player.removeFromInventory(ret.name);
+			print("When the torch hits the ground you notice on the wall the holes repeat the pattern: up, down, down, up.\n");
+			return 1;
 			
-			
-			########################################################
-
-			#EVERYTHING ELSE 
-			elif returned_tag == its: #Everything after "Look "
-				ret = getItemFromName(ite, its[5:]);
-				print("Dropped " + ret.getName() + " on the ground.\n");
-				player.removeFromInventory(ret.getName());
-				break;
+		########################URN DROPPING HERE
+		elif returned_tag == "drop urn":				
+			#ret = getItemFromParser(items_objects, returned_tag[5:]);
+			print("Dropped " + ret.name + " on the ground.\n");
+			player.removeFromInventory(ret.name);
+			cr.items.remove("Urn")
+			print("Upon dropping the urn, it lands on the ground and breaks open revealing a shiny brooch. You decide to pick it up and add it to your inventory.\n");
+			cr.items.append("Scarab Brooch")
+			player.addToInventory("Scarab Brooch")
+			return 1;
+		
+		########################################################
+		
+		#EVERYTHING ELSE 
+		else:
+			#ret = getItemFromParser(items_objects, returned_tag[5:]);
+			print("Dropped " + ret.name + " on the ground.\n");
+			player.removeFromInventory(ret.name);
 		return 0;
 			
 	elif returned_tag in take_item: 
-		#Search through the items list and then compare the name to the returned tag
-		for its in take_item:
-			#specific thing for taking item
-			if returned_tag == its and returned_tag == "take brooch" and cr.getName() == "Chamber of Passing":
-				f = getFeatureFromName(fea, "chimera");
-				f.modified_description_bool = True;
+		#specific thing for taking item
+		if returned_tag == "take brooch" and cr.name == "Chamber of Passing":
+			f = getFeatureFromParser(features_objects, "chimera");
+			f.modified_description_bool = True;
 
-			if returned_tag == its and returned_tag == "take necklace" and cr.getName() == "Chamber of Passing":
-				f = getFeatureFromName(fea, "jackal");
-				f.modified_description_bool = True;
+		elif returned_tag == "take necklace" and cr.name == "Chamber of Passing":
+			f = getFeatureFromParser(features_objects, "jackal"); #COULD DO SOMETHING HERE WITH DISPLAYING DESC IN IF STATEMENT BASED ON MODBOOL
+			f.modified_description_bool = True;
 
-			if returned_tag == its and returned_tag == "take ancient artifact" and cr.getName() == "Burial Chamber":
-				f = getFeatureFromName(fea, "large tomb");
-				f.modified_description_bool = True;
+		elif returned_tag == "take ancient artifact" and cr.name == "Burial Chamber":
+			f = getFeatureFromParser(features_objects, "large tomb");
+			f.modified_description_bool = True;
 
-			if returned_tag == its: #Everything after "Look "
-				ret = getItemFromName(ite, its[5:]);
-				print(ret.getName() + ": " + ret.displayDescription());
-				print("Added " + ret.getName() + " to inventory.\n");
-				player.addToInventory(ret.getName());
-				break;
-		return 0;
+		
+		ret = getItemFromParser(items_objects, returned_tag[5:]);
+		print(ret.name + ": " + ret.displayDescription());
+		print("Added " + ret.name + " to inventory.\n");
+		player.addToInventory(ret.name);
+		return 1;
 
 	elif returned_tag in touch_feature:
-		for f in touch_feature: #see if there is a way to get something from a list in python
-			if returned_tag == f:
-				ret = getFeatureFromName(fea, f[6:]);
-				turn_x = ret.touchFeature(player);
-				return turn_x;
+		d = "You are in a small room with a river flowing through the middle from west to east. On the north side of the river is a door and on opposite sides of the river are mermaid statues. You can hear beautiful singing."
+		if returned_tag == "touch door" and cr.short_description == d:
+			print("You have to move across the river to touch it first.\n")
+			return 0;
+	
+		else:
+			ret = getFeatureFromParser(features_objects, returned_tag[6:]);
+			turn_x = ret.touchFeature(player);
+			return turn_x;
 	
 	elif returned_tag in use_item:
-		for its in use_item:
-			#This is the code to copy
-			if returned_tag == its and returned_tag == "use earplugs":
-				if cr.getName() == "Nile River":
-					print("You can no longer hear the Siren's Song. You feel more confident crossing the River.\n")
-				else:
-					print("You place the earplugs in your ears. They help to deafen the sounds of the tomb.\n")
-				player.ears = "plugged"
-				return 1;
+		if returned_tag == "use earplugs":
+			if cr.name == "Nile River":
+				print("You can no longer hear the Siren's Song. You feel more confident crossing the River.\n")
+			else:
+				print("You place the earplugs in your ears. They help to deafen the sounds of the tomb.\n")
+			player.ears = "plugged"
+			return 1;
 
-			if returned_tag == its and returned_tag == "use torch" and cr.getName() == "Chamber of Passing":
-				d = "You see writings all across the north wall. On the east wall is a staircase that leads down and on the west wall are a jackal and chimera statue facing the staircase."
-				if cr.short_description != d:
-					print("You light up your torch and next to you is a brazier to light and when you do so you can now see the room.\n");
-					cr.shortdescription = d;
-					return 1;
-				else:
-					print("You tried to use the torch and nothing happens.\n");
+		if returned_tag == "use torch" and cr.name == "Chamber of Passing":
+			d = "You see writings all across the north wall. On the east wall is a staircase that leads down and on the west wall are a jackal and chimera statue facing the staircase."
+			if cr.short_description != d:
+				print("You light up your torch and next to you is a brazier to light and when you do so you can now see the room.\n");
+				print(d)
+				print("")
+				cr.short_description = d;
+				return 1;
+			else:
+				print("You tried to use the Torch and nothing happens.\n");
 
 			###################################HERE IS WHERE ANY ADDITIONAL USE CODE FOR ITEMS GOES
 			#YOU CAN USE THE ABOVE CODE AS A GUIDE
@@ -723,13 +811,30 @@ def processTag(returned_tag, player, ite, fea, rooms):
 
 			####################################################################################
 
-			if returned_tag == its:
-				ret = getItemFromName(ite, its[4:]);
-				print("You tried to use the " + ret.getName() + " and nothing happens.\n");
-				return 0;	
+		else:
+			ret = getItemFromParser(items_objects, returned_tag[4:]);
+			print("You tried to use the " + ret.name + " and nothing happens.\n");
+			return 0;	
 
+	elif returned_tag in hit_target:
+		ret = getItemFromParser(items_objects, returned_tag[4:])
+		
+		if ret.name == "Urn" and "Urn" in cr.items:
+			if "Elephant's Tusk" in player.inventory:
+				print("Upon hitting the urn with the Elephant's Tusk, it breaks open revealing a shiny brooch. You decide to pick it up and add it to your inventory.\n");
+				cr.items.append("Scarab Brooch")
+				player.addToInventory("Scarab Brooch")
+				cr.items.remove("Urn")
+				return 0;
+			else:
+				print("You hit the urn and nothing happens except your hand hurts.")
+				return 0;
+		else:
+			print("You tried to hit the " + ret.name + " and nothing happens.\n")
+			return 0;
+	
 	elif returned_tag == save_game:
-		saveGame(player.getGameManager(), player, fea, rooms);
+		saveGame(player, fea, rooms);
 		return 0;
 	
 	elif returned_tag == load_game:
@@ -738,7 +843,7 @@ def processTag(returned_tag, player, ite, fea, rooms):
 	#...
 	
 	
-	print("You cannot do that\n");
+	print("You cannot do that.\n");
 	return 0;
 
 #CONVERT THE MAIN FUNCTION TO THIS AND RETURN -1 FOR PROCESS TAG IN 	
@@ -761,13 +866,9 @@ def playGame(get_main_menu_result):
 		rooms = createRoom(ROOM_FILES_VAR);
 		createRoomNSEW(rooms);
 		
-		#Create game manager
-		gameManager = createGameManager(90,rooms[0]);
-		
 		#Create player
-		starting_inventory = ["torch", "key"]; ###############CHANGE HERE BEFORE FINALIZING
-		player = createPlayer(gameManager, starting_inventory);
-		player.setCurrentRoom(gameManager.getCurrentRoom());
+		starting_inventory = ["Torch"];
+		player = createPlayer(starting_inventory, 90, rooms[0]);
 		
 	#Load game
 	elif get_main_menu_result == 1:
@@ -801,45 +902,49 @@ def playGame(get_main_menu_result):
 		rooms = createRoomLoad(name);
 		createRoomNSEW(rooms);
 		
-		#Create game manager
-		gameManager = createGameManagerLoad(name, rooms);
-		
 		#Create player
-		player = createPlayerLoad(gameManager, name);
-		player.setCurrentRoom(gameManager.getCurrentRoom());
+		player = createPlayerLoad(name, rooms);
 
 	else:
 		print("DEBUG - SOMETHING WENT WRONG IN THE MAIN MENU, THIS SHOULD NOT HAPPEN");
+		exit()
 	
 	#Begin Game
 	#While the turn count is > 0
-	turns_left = gameManager.getTurnCount();
-	cr = player.getCurrentRoom();
+
+	print("Verbs that may be of help to know:")
+	verbs = ["help", "look at", "look at room", "inventory", "quit", "save game", "load game", "use", "touch", "hit", "take", "drop", "move", "go"]
+	for i in verbs:
+		print(i);
+	print("");
+
+	
+	turns_left = player.turn_count;
+	cr = player.current_room;
 	print("");
 	print(cr.displayDescription());
 	print("");
-	cr.setVisited(True);	
+	cr.visited = True;	
 	
 	while turns_left > 0:
 		turn = 0;
-	
+		print("Amount of air left: " + str(turns_left))
+		print("")
 		#Display description
-		cr = player.getCurrentRoom();
+		cr = player.current_room;
 		#print(cr.displayDescription());
 		
 		#Get input and resolve actions
 		input_given = getInput();
-		#print(input_given);#DEBUG PRINT
 
 		#Display result / if error then do not print result
 		turn = processTag(input_given, player, items, features, rooms);
 		if turn == -1:
-			print("Entered load game")
 			return -1;
 		
 		#Reduce turn count
-		gameManager.setTurnCount(turns_left-turn);
-		turns_left = gameManager.getTurnCount();
+		player.turn_count = turns_left-turn;
+		turns_left = player.turn_count;
 
 	if turns_left <= 0:
 		print("You have unfortunately ran out of air.");
