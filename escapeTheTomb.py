@@ -332,8 +332,6 @@ def saveGame(player, feat, rooms):
 		feature_data['feature'][str(i)]['descModBool'] = m_b;
 	
 	data.append(feature_data);
-
-	print(data)
 	
 	name = name + '.json'
 	with open(name, 'w') as outfile:
