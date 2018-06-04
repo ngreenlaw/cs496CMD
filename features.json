@@ -80,7 +80,7 @@
 	{
 		"name": "Explorer's Journal", 
 		"desc": "There is a book laying next to a skull in the room, and it appears to be a previous explorer's journal.",
-		"descMod": "",
+		"descMod": "After travelling thousands of miles from North America and making it to the inside of this tomb, I am continually amazed at the wonders that I see. This expedition is going well, and I am optimistic that this tomb will eventually reveal all of its secrets and treasures.",
 		"parser": "journal"
 	},
 	{
