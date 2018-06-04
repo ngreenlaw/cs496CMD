@@ -90,7 +90,7 @@ room6 = {
 	"name": "Pharaoh Mummy Room", 
 	"descL": "Upon entering the room, you notice several sarcophagi that are ornately decorated with jewels and carvings of deities and animals in the stone. However, time and nature has worn away at the decorations, but you can see that they were once beautiful.  In the corner, strange knocking and scraping noises are coming from one of the sarcophagi.",
 	"descMod": "",
-	"descS": "",
+	"descS": "Upon entering the room, you notice several sarcophagi that are ornately decorated with jewels and carvings of deities and animals in the stone.",
 	"features": ["Noisy Sarcophagus"],
 	"items": ["Urn", "Scarab Brooch"],
 	"visited": "False",
@@ -104,7 +104,7 @@ room7 = {
 	"name": "Mirror Room", 
 	"descL": "Upon entering the room, you notice several polished copper mirrors along the walls. There are bats and insects flying and crawling around and the mirrors amplify their numbers. It is also hard to tell where everything is because of them.",
 	"descMod": "",
-	"descS": "",
+	"descS": "Upon entering the room, you notice several mirrors along the walls. They make the room and everything in it seem larger and more numerous.",
 	"features": ["Mirror Spider"],
 	"items": ["Sculpture of a Cat"],
 	"visited": "False",
@@ -118,7 +118,7 @@ room8 = {
 	"name": "Skeleton Room", 
 	"descL": "Upon entering the room, you see bones and skulls scattered everywhere. It is hard to tell how old they are or why they are there. Perhaps they are previous explorers? It surprises you that there might be so many.",
 	"descMod": "",
-	"descS": "",
+	"descS": "Upon entering the room, you see bones and skulls scattered everywhere.",
 	"features": ["Explorer's Journal"],
 	"items": ["Elephant's Tusk"],
 	"visited": "False",
@@ -130,9 +130,9 @@ room8 = {
 }
 room9 = {
 	"name": "Food Room", 
-	"descL": "Upon entering the room, you find multiple sources of food. There are sacks of grain and fruits. The smell, however, is putrid and you quickly realize that there is also mummified meat in this room.",
+	"descL": "Upon entering the room, you find multiple sources of food. There are sacks of grain and fruit. The smell, however, is putrid and you quickly realize that there is also mummified meat in this room.",
 	"descMod": "",
-	"descS": "",
+	"descS": "Upon entering the room, you find various sacks of grain and fruit, and the air smells putrid.",
 	"features": ["Food Spider"],
 	"items": ["Sculpture of a Scarab"],
 	"visited": "False",
@@ -144,9 +144,9 @@ room9 = {
 }
 room10 = {
 	"name": "Mummified Animals Room", 
-	"descL": "Upon entering the room, you find that the air is putrid here too and realize that the room is filled with mummified pets.  There are birds, cats, crocodiles, baboons, vultures, and many others.  It's hard to tell, but one of the mummies seems to be shaking very slightly.  There are hieroglyphs on the walls too.",
+	"descL": "Upon entering the room, you find that the air is putrid here too, and realize that the room is filled with mummified pets.  There are birds, cats, crocodiles, baboons, vultures, and many others.  It's hard to tell, but one of the mummies seems to be shaking very slightly.  There are hieroglyphs on the walls too.",
 	"descMod": "",
-	"descS": "",
+	"descS": "Upon entering the room, you find it filled with mummified pets.",
 	"features": ["Shaky Mummy", "Hieroglyphs"],
 	"items": [],
 	"visited": "False",
@@ -272,4 +272,4 @@ with open("room13.json","w+") as f:
 with open("room14.json","w+") as f:
 	f.write(i)
 with open("room15.json","w+") as f:
-	f.write(g)	
+	f.write(g) 
