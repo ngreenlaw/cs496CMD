@@ -122,7 +122,10 @@ def createFeatureLoad(name):
 
 	for f_feature in fj_f:
 		object_created = ec.Feature(fj_f[f_feature]['name'], fj_f[f_feature]['desc'], fj_f[f_feature]['descMod'], fj_f[f_feature]['parser']);
-		object_created.modified_description_bool = fj_f[f_feature]['descModBool'];
+		descMod = True;
+		if fj_f[f_feature]['descModBool'] == "False":
+			descMod = False;
+		object_created.modified_description_bool = descMod;
 		list_of_objects.append(object_created);
 	return list_of_objects;
 	
@@ -257,7 +260,6 @@ def saveGame(player, feat, rooms):
 		room_data['rooms'].update({r_a[i]:{}})
 
 	for i in range(0,len(r_a)):
-		print(str(rooms[i].locked))
 
 		room_data['rooms'][r_a[i]]['name'] = rooms[i].name
 		room_data['rooms'][r_a[i]]['descL'] = rooms[i].long_description
@@ -467,6 +469,10 @@ def processTag(returned_tag, player, ite, fea, rooms):
 	load_game = "load game"
 		
 	#use and touch both return touch
+
+	if returned_tag == "look at room" and cr.name == "Chamber of Passing" and cr.short_description == "You are in a completely pitch black room. You cannot see anything.":
+		print(cr.short_description);
+		return 0;
 
 	#Process the tag based on what is returned, includes the verbs used in the game
 	#Display the description if the returned tag is look at room but otherwise handle the ambiguous input
@@ -887,6 +893,7 @@ def playGame(get_main_menu_result):
 			if os.path.isfile(name):
 				contin = 1;
 		
+    		os.system('cls' if os.name == 'nt' else 'clear')
 		#DO THINGS WITH LOADING
 		#Begin creating game
 		

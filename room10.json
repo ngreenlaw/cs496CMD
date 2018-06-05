@@ -3,11 +3,11 @@
         "Shaky Mummy", 
         "Hieroglyphs"
     ], 
-    "descS": "", 
+    "descS": "Upon entering the room, you find it filled with mummified pets.", 
     "south_room": "", 
     "north_room": "", 
     "descMod": "", 
-    "descL": "Upon entering the room, you find that the air is putrid here too and realize that the room is filled with mummified pets.  There are birds, cats, crocodiles, baboons, vultures, and many others.  It's hard to tell, but one of the mummies seems to be shaking very slightly.  There are hieroglyphs on the walls too.", 
+    "descL": "Upon entering the room, you find that the air is putrid here too, and realize that the room is filled with mummified pets.  There are birds, cats, crocodiles, baboons, vultures, and many others.  It's hard to tell, but one of the mummies seems to be shaking very slightly.  There are hieroglyphs on the walls too.", 
     "west_room": "Food Room", 
     "locked": "False", 
     "name": "Mummified Animals Room", 

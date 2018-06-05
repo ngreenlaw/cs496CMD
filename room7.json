@@ -2,7 +2,7 @@
     "features": [
         "Mirror Spider"
     ], 
-    "descS": "", 
+    "descS": "Upon entering the room, you notice several mirrors along the walls. They make the room and everything in it seem larger and more numerous.", 
     "south_room": "Pharaoh Mummy Room", 
     "north_room": "", 
     "descMod": "", 

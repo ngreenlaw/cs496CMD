@@ -2,11 +2,11 @@
     "features": [
         "Food Spider"
     ], 
-    "descS": "", 
+    "descS": "Upon entering the room, you find various sacks of grain and fruit, and the air smells putrid.", 
     "south_room": "Skeleton Room", 
     "north_room": "", 
     "descMod": "", 
-    "descL": "Upon entering the room, you find multiple sources of food. There are sacks of grain and fruits. The smell, however, is putrid and you quickly realize that there is also mummified meat in this room.", 
+    "descL": "Upon entering the room, you find multiple sources of food. There are sacks of grain and fruit. The smell, however, is putrid and you quickly realize that there is also mummified meat in this room.", 
     "west_room": "", 
     "locked": "False", 
     "name": "Food Room", 

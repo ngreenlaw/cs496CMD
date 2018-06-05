@@ -2,7 +2,7 @@
     "features": [
         "Explorer's Journal"
     ], 
-    "descS": "", 
+    "descS": "Upon entering the room, you see bones and skulls scattered everywhere.", 
     "south_room": "", 
     "north_room": "Food Room", 
     "descMod": "", 

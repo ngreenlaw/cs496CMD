@@ -2,7 +2,7 @@
     "features": [
         "Noisy Sarcophagus"
     ], 
-    "descS": "", 
+    "descS": "Upon entering the room, you notice several sarcophagi that are ornately decorated with jewels and carvings of deities and animals in the stone.", 
     "south_room": "", 
     "north_room": "Mirror Room", 
     "descMod": "", 
