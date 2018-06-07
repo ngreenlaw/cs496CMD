@@ -7,7 +7,7 @@ import egyptclass as ec
 import os
 import os.path
 
-#Variables to hold things such that they are easier to edit
+#Variables to hold things
 ITEM_FILES_VAR = "items.json";
 FEATURE_FILES_VAR = "features.json";
 ROOM_FILES_VAR = ["room1.json", "room2.json", "room3.json", "room4.json", "room5.json", "room6.json", "room7.json", "room8.json", "room9.json", "room10.json", "room11.json", "room12.json", "room13.json", "room14.json", "room15.json"];
