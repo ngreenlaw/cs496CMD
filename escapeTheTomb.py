@@ -7,7 +7,7 @@ import egyptclass as ec
 import os
 import os.path
 
-#Variables to hold things
+#Variables to hold things such that they are easier to edit
 ITEM_FILES_VAR = "items.json";
 FEATURE_FILES_VAR = "features.json";
 ROOM_FILES_VAR = ["room1.json", "room2.json", "room3.json", "room4.json", "room5.json", "room6.json", "room7.json", "room8.json", "room9.json", "room10.json", "room11.json", "room12.json", "room13.json", "room14.json", "room15.json"];
@@ -493,18 +493,20 @@ def processTag(returned_tag, player, ite, fea, rooms):
 			av_array.append(i)
 		for i in touch_feature:
 			av_array.append(i)
+		for i in direction[:]:
+			av_array.append(i)	
 		av_array.append("quit")
 		av_array.append("look at room")
 
 		if returned_tag == "Where would you like to move?":
-			if com_given.lower() == north:
-				com_given = "go " + north;
-			if com_given.lower() == south:
-				com_given = "go " + south;
-			if com_given.lower() == east:
-				com_given = "go " + east;
-			if com_given.lower() == west:
-				com_given = "go " + west;
+			if com_given.lower() == "north":
+				com_given = "go " + "north";
+			if com_given.lower() == "south":
+				com_given = "go " + "south";
+			if com_given.lower() == "east":
+				com_given = "go " + "east";
+			if com_given.lower() == "west":
+				com_given = "go " + "west";
 
 		elif returned_tag == "What would you like to look at?":
 			both_objects = features_objects[:]
