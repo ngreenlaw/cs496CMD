@@ -10,7 +10,7 @@ import os.path
 #Variables to hold things such that they are easier to edit
 ITEM_FILES_VAR = "items.json";
 FEATURE_FILES_VAR = "features.json";
-ROOM_FILES_VAR = ["room1.json", "room2.json", "room3.json", "room4.json", "room5.json", "room6.json", "room7.json", "room8.json", "room9.json", "room10.json", "room11.json", "room12.json", "room13.json", "room14.json", "room15.json"];
+ROOM_FILES_VAR = ["rooms.json"];
 r_a = ['room1','room2','room3','room4','room5','room6','room7','room8','room9','room10', 'room11','room12', 'room13', 'room14', 'room15']
 
 #function for main menu, returns 0 if new game and 1 if load game, exits if exit is entered or returns 2 if it doesn't understand
@@ -173,16 +173,18 @@ def createRoom(files_list):
 	for fi in files_list:
 		f = open(fi, "r");
 		rf = f.read();
-		fj = json.loads(rf);
+		fjr = json.loads(rf);
 		f.close();
 		
-		tf_lock = True;
-		if fj['locked'] == "False":
-			tf_lock = False;
-
-		object_created = ec.Room(fj['name'], fj['descL'], fj['descS'], fj['items'], fj['features'], tf_lock,fj['north_room'],fj['south_room'],fj['east_room'],fj['west_room']);
-		
-		list_of_objects.append(object_created);
+		for room in fjr.keys():
+			fj = fjr[room]
+			tf_lock = True;
+			if fj['locked'] == "False":
+				tf_lock = False;
+			
+			object_created = ec.Room(fj['name'], fj['descL'], fj['descS'], fj['items'], fj['features'], tf_lock,fj['north_room'],fj['south_room'],fj['east_room'],fj['west_room']);
+			
+			list_of_objects.append(object_created);
 	return list_of_objects;
 	
 def createRoomLoad(fname):
